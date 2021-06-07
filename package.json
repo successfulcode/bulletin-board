@@ -49,5 +49,23 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "description": "---",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/successfulcode/bulletin-board.git"
+  },
+  "keywords": [
+    "ad",
+    "ads",
+    "bulletin",
+    "board"
+  ],
+  "author": " <sergej.mickevic@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/successfulcode/bulletin-board/issues"
+  },
+  "homepage": "https://github.com/successfulcode/bulletin-board#readme"
 }
