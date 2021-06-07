@@ -1,5 +1,5 @@
 <template>
-  <div>Login</div>
+  <div>{{ $t('common.login') }}</div>
 </template>
 
 <script>

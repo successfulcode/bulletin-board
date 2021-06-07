@@ -1,5 +1,8 @@
 {
   "lt":{
-    
+    "common": {
+      "login": "Prisijungti",
+      "signUp": "Registruotis"
+    }
   }
 }
