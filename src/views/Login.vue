@@ -47,7 +47,9 @@
         <p class="help is-danger">This email is invalid</p>
       </div>
       <div class="is-flex is-justify-content-center">
-        <button class="button is-info" type="submit" :disabled="isInvalid">Patvirtinti</button>
+        <button class="button is-info" type="submit" :disabled="isInvalid">
+          {{ $t('components.login.confirm') }}
+        </button>
       </div>
     </form>
   </div>

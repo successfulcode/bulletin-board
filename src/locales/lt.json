@@ -5,6 +5,11 @@
       "signUp": "Registruotis",
       "password": "Slaptažodis",
       "email": "El.paštas"
+    },
+    "components": {
+      "login": {
+        "confirm": "Patvirtinti"
+      }
     }
   }
 }
