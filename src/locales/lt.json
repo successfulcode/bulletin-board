@@ -2,7 +2,9 @@
   "lt":{
     "common": {
       "login": "Prisijungti",
-      "signUp": "Registruotis"
+      "signUp": "Registruotis",
+      "password": "Slaptažodis",
+      "email": "El.paštas"
     }
   }
 }
