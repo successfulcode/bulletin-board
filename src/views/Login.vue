@@ -40,7 +40,7 @@
             v-model.trim="$v.password.$model"
             class="input"
             :class="{ 'is-danger': $v.password.$error, 'is-success': !$v.password.$invalid }"
-            type="text"
+            type="password"
             :placeholder="$t('common.password')"
           />
           <span class="icon is-small is-left">

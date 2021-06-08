@@ -12,7 +12,15 @@
         "confirm": "Patvirtinti",
         "invalidEmail": "Patikrinkite el. paštą",
         "checkPassword": "Patikrinkite slaptažodį"
-      }
+      },
+      "signUp": {
+        "firstName": "Vardas",
+        "lastName": "Pavardė",
+        "invalidEmail": "Neteistingas el. paštas",
+        "checkPassword": "Ne mažiau negu 6 simboliai, naudoti mažosios, didžiosios raidės ir simbolį",
+        "password2": "Slaptažodžiai turi sutapti",
+        "confirmPassword": "Patvirtinkite slaptažodį"
+      } 
     }
   }
 }

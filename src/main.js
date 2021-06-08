@@ -8,12 +8,13 @@ import {
   faLock,
   faEnvelope,
   faExclamationTriangle,
-  faCheck
+  faCheck,
+  faUser
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import Vuelidate from 'vuelidate';
 
-library.add(faLock, faEnvelope, faExclamationTriangle, faCheck);
+library.add(faLock, faEnvelope, faExclamationTriangle, faCheck, faUser);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 

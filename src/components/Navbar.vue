@@ -24,7 +24,7 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <router-link to="/signup" class="button is-primary">
+            <router-link to="/signup" class="button is-info">
               <strong>Sign up</strong>
             </router-link>
             <router-link to="/login" class="button is-light"> Log in </router-link>
@@ -38,5 +38,3 @@
 <script>
 export default {};
 </script>
-
-<style></style>

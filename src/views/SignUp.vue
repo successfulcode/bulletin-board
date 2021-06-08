@@ -1,9 +1,226 @@
 <template>
-  <div>{{ $t('common.signUp') }}</div>
+  <div class="columns is-flex is-justify-content-center">
+    <form class="column is-4 mt-5" @submit.prevent="onSubmit">
+      <div class="has-text-centered is-size-3">{{ $t('common.signUp') }}</div>
+      <div class="field mt-5">
+        <div class="control has-icons-left has-icons-right">
+          <input
+            v-model.trim="$v.firstName.$model"
+            class="input"
+            :class="{ 'is-danger': $v.firstName.$error, 'is-success': !$v.firstName.$invalid }"
+            type="text"
+            :placeholder="$t('components.signUp.firstName')"
+          />
+          <span class="icon is-small is-left">
+            <font-awesome-icon :icon="['fa', 'user']" class="mt-3 ml-2" />
+          </span>
+          <span class="icon is-small is-right">
+            <font-awesome-icon
+              v-if="$v.firstName.$error"
+              :icon="['fa', 'exclamation-triangle']"
+              class="mt-3 ml-2"
+            />
+            <font-awesome-icon
+              v-else-if="!$v.firstName.$invalid"
+              :icon="['fa', 'check']"
+              class="mt-3 ml-2"
+            />
+          </span>
+        </div>
+        <p v-if="$v.firstName.$dirty && !$v.firstName.required" class="help is-danger">
+          {{ $t('common.fieldIsrequired') }}
+        </p>
+      </div>
+      <div class="field">
+        <div class="control has-icons-left has-icons-right">
+          <input
+            v-model.trim="$v.lastName.$model"
+            class="input"
+            :class="{ 'is-danger': $v.lastName.$error, 'is-success': !$v.lastName.$invalid }"
+            type="text"
+            :placeholder="$t('components.signUp.lastName')"
+          />
+          <span class="icon is-small is-left">
+            <font-awesome-icon :icon="['fa', 'user']" class="mt-3 ml-2" />
+          </span>
+          <span class="icon is-small is-right">
+            <font-awesome-icon
+              v-if="$v.firstName.$error"
+              :icon="['fa', 'exclamation-triangle']"
+              class="mt-3 ml-2"
+            />
+            <font-awesome-icon
+              v-else-if="!$v.lastName.$invalid"
+              :icon="['fa', 'check']"
+              class="mt-3 ml-2"
+            />
+          </span>
+        </div>
+        <p v-if="$v.lastName.$dirty && !$v.lastName.required" class="help is-danger">
+          {{ $t('common.fieldIsrequired') }}
+        </p>
+      </div>
+      <div class="field">
+        <div class="control has-icons-left has-icons-right">
+          <input
+            v-model.trim="$v.email.$model"
+            class="input"
+            :class="{ 'is-danger': $v.email.$error, 'is-success': !$v.email.$invalid }"
+            type="email"
+            :placeholder="$t('common.email')"
+          />
+          <span class="icon is-small is-left">
+            <font-awesome-icon :icon="['fa', 'envelope']" class="mt-3 ml-2" />
+          </span>
+          <span class="icon is-small is-right">
+            <font-awesome-icon
+              v-if="$v.email.$error"
+              :icon="['fa', 'exclamation-triangle']"
+              class="mt-3 ml-2"
+            />
+            <font-awesome-icon
+              v-else-if="!$v.email.$invalid"
+              :icon="['fa', 'check']"
+              class="mt-3 ml-2"
+            />
+          </span>
+        </div>
+        <p v-if="$v.email.$dirty && !$v.email.required" class="help is-danger">
+          {{ $t('common.fieldIsrequired') }}
+        </p>
+        <p v-else-if="$v.email.$dirty && !$v.email.email" class="help is-danger">
+          {{ $t('components.signUp.invalidEmail') }}
+        </p>
+      </div>
+      <div class="field">
+        <div class="control has-icons-left has-icons-right">
+          <input
+            v-model.trim="$v.password.$model"
+            class="input"
+            :class="{ 'is-danger': $v.password.$error, 'is-success': !$v.password.$invalid }"
+            type="password"
+            :placeholder="$t('common.password')"
+          />
+          <span class="icon is-small is-left">
+            <font-awesome-icon :icon="['fa', 'lock']" class="mt-3 ml-2" />
+          </span>
+          <span class="icon is-small is-right">
+            <font-awesome-icon
+              v-if="$v.password.$error"
+              :icon="['fa', 'exclamation-triangle']"
+              class="mt-3 ml-2"
+            />
+            <font-awesome-icon
+              v-else-if="!$v.password.$invalid"
+              :icon="['fa', 'check']"
+              class="mt-3 ml-2"
+            />
+          </span>
+        </div>
+        <p v-if="$v.password.$dirty && !$v.password.required" class="help is-danger">
+          {{ $t('common.fieldIsrequired') }}
+        </p>
+        <p v-else-if="$v.password.$dirty && !$v.password.minLength" class="help is-danger">
+          {{ $t('components.signUp.checkPassword') }}
+        </p>
+      </div>
+      <div class="field">
+        <div class="control has-icons-left has-icons-right">
+          <input
+            v-model.trim="$v.password2.$model"
+            class="input"
+            :class="{ 'is-danger': $v.password2.$error, 'is-success': !$v.password2.$invalid }"
+            type="password"
+            :placeholder="$t('components.signUp.confirmPassword')"
+          />
+          <span class="icon is-small is-left">
+            <font-awesome-icon :icon="['fa', 'lock']" class="mt-3 ml-2" />
+          </span>
+          <span class="icon is-small is-right">
+            <font-awesome-icon
+              v-if="$v.password2.$error"
+              :icon="['fa', 'exclamation-triangle']"
+              class="mt-3 ml-2"
+            />
+            <font-awesome-icon
+              v-else-if="!$v.password2.$invalid"
+              :icon="['fa', 'check']"
+              class="mt-3 ml-2"
+            />
+          </span>
+        </div>
+        <p v-if="$v.password2.$dirty && !$v.password2.required" class="help is-danger">
+          {{ $t('common.fieldIsrequired') }}
+        </p>
+        <p v-else-if="$v.password2.$dirty && !$v.password2.sameAs" class="help is-danger">
+          {{ $t('components.signUp.password2') }}
+        </p>
+      </div>
+      <div class="is-flex is-justify-content-center">
+        <button class="button is-info" type="submit" :disabled="$v.$invalid">
+          {{ $t('components.login.confirm') }}
+        </button>
+      </div>
+    </form>
+    <pre>{{ $v }}</pre>
+  </div>
 </template>
 
 <script>
-export default {};
-</script>
+import { required, minLength, email, sameAs } from 'vuelidate/lib/validators';
 
-<style></style>
+export default {
+  name: 'SignUp',
+  data() {
+    return {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      password2: ''
+    };
+  },
+  validations: {
+    firstName: {
+      required
+    },
+    lastName: {
+      required
+    },
+    email: {
+      required,
+      email
+    },
+    password: {
+      required,
+      minLength: minLength(6)
+    },
+    password2: {
+      required,
+      sameAs: sameAs('comparePasswords')
+    }
+  },
+  computed: {
+    comparePasswords() {
+      return this.password;
+    }
+  },
+  methods: {
+    onSubmit() {
+      const newUser = {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.email,
+        password: this.password,
+        password2: this.password2
+      };
+      console.log('onSubmit', newUser);
+      this.firstName = '';
+      this.lastName = '';
+      this.email = '';
+      this.password = '';
+      this.password2 = '';
+    }
+  }
+};
+</script>
