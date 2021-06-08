@@ -11,12 +11,15 @@ import {
   faCheck
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import Vuelidate from 'vuelidate';
 
 library.add(faLock, faEnvelope, faExclamationTriangle, faCheck);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.config.productionTip = false;
+
+Vue.use(Vuelidate);
 
 new Vue({
   router,

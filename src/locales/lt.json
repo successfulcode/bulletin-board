@@ -4,11 +4,14 @@
       "login": "Prisijungti",
       "signUp": "Registruotis",
       "password": "Slaptažodis",
-      "email": "El.paštas"
+      "email": "El.paštas",
+      "fieldIsrequired": "Šis laukas privalomas"
     },
     "components": {
       "login": {
-        "confirm": "Patvirtinti"
+        "confirm": "Patvirtinti",
+        "invalidEmail": "Patikrinkite el. paštą",
+        "checkPassword": "Patikrinkite slaptažodį"
       }
     }
   }
