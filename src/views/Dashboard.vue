@@ -14,7 +14,7 @@ export default {
       const test = 'test';
       try {
         const response = await axios.post(process.env.VUE_APP_DATA_URL, { test });
-        console.log('respones', response);
+        console.log('respones', response.data);
       } catch (err) {
         console.log(err);
       }
