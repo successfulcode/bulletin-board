@@ -1,6 +1,12 @@
 <template>
   <div class="columns is-flex is-justify-content-center">
-    <form class="column is-4 mt-5" @submit.prevent="onSubmit">
+    <form
+      class="column is-4 mt-5"
+      @submit.prevent="
+        onSubmit();
+        $v.$reset();
+      "
+    >
       <div class="has-text-centered is-size-3">{{ $t('common.signUp') }}</div>
       <div class="field mt-5">
         <div class="control has-icons-left has-icons-right">
@@ -162,12 +168,12 @@
         </button>
       </div>
     </form>
-    <pre>{{ $v }}</pre>
   </div>
 </template>
 
 <script>
 import { required, minLength, email, sameAs } from 'vuelidate/lib/validators';
+import axios from 'axios';
 
 export default {
   name: 'SignUp',
@@ -206,15 +212,25 @@ export default {
     }
   },
   methods: {
-    onSubmit() {
+    async onSubmit() {
       const newUser = {
-        firstName: this.firstName,
-        lastName: this.lastName,
         email: this.email,
         password: this.password,
-        password2: this.password2
+        displayName: `${this.firstName}${' '}${this.lastName}`,
+        returnSecureToken: true
       };
+
       console.log('onSubmit', newUser);
+      try {
+        const response = await axios.post(
+          `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.VUE_APP_API_KEY}`,
+          newUser
+        );
+        console.log('response', response.data);
+      } catch (err) {
+        console.log(err);
+      }
+
       this.firstName = '';
       this.lastName = '';
       this.email = '';
