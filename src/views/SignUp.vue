@@ -3,7 +3,7 @@
     <form
       class="column is-4 mt-5"
       @submit.prevent="
-        onSubmit();
+        onSubmit(firstName, lastName, email, password);
         $v.$reset();
       "
     >
@@ -173,7 +173,7 @@
 
 <script>
 import { required, minLength, email, sameAs } from 'vuelidate/lib/validators';
-import axios from 'axios';
+import { SIGN_UP } from '@/store/actions.types';
 
 export default {
   name: 'SignUp',
@@ -212,30 +212,10 @@ export default {
     }
   },
   methods: {
-    async onSubmit() {
-      const newUser = {
-        email: this.email,
-        password: this.password,
-        displayName: `${this.firstName}${' '}${this.lastName}`,
-        returnSecureToken: true
-      };
-
-      console.log('onSubmit', newUser);
-      try {
-        const response = await axios.post(
-          `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.VUE_APP_API_KEY}`,
-          newUser
-        );
-        console.log('response', response.data);
-      } catch (err) {
-        console.log(err);
-      }
-
-      this.firstName = '';
-      this.lastName = '';
-      this.email = '';
-      this.password = '';
-      this.password2 = '';
+    onSubmit(firstName, lastName, email, password) {
+      this.$store
+        .dispatch(SIGN_UP, { firstName, lastName, email, password })
+        .then(() => this.$router.push('dashboard'));
     }
   }
 };

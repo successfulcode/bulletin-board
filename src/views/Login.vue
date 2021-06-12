@@ -88,7 +88,7 @@
 import { required, minLength, email } from 'vuelidate/lib/validators';
 import Spinner from '../assets/Spinner.vue';
 import { mapState } from 'vuex';
-import { LOGIN } from '@/store/action.type';
+import { LOGIN } from '@/store/actions.types';
 
 export default {
   name: 'Login',
@@ -112,7 +112,7 @@ export default {
   },
   methods: {
     onSubmit(email, password) {
-      this.$store.dispatch(LOGIN, { email, password }).then(console.log('OK'));
+      this.$store.dispatch(LOGIN, { email, password }).then(() => this.$router.push('dashboard'));
     }
   },
   computed: {
