@@ -3,12 +3,12 @@
     <form
       class="column is-3 mt-5"
       @submit.prevent="
-        onSubmit();
+        onSubmit(email, password);
         $v.$reset();
       "
     >
       <div class="has-text-centered is-size-3">{{ $t('common.login') }}</div>
-      <div class="has-text-centered" v-if="isLoading"><spinner></spinner></div>
+      <div v-if="isLoading" class="has-text-centered"><spinner></spinner></div>
       <div v-else>
         <div class="field mt-5">
           <div class="control has-icons-left has-icons-right">
@@ -86,12 +86,13 @@
 
 <script>
 import { required, minLength, email } from 'vuelidate/lib/validators';
-import axios from 'axios';
 import Spinner from '../assets/Spinner.vue';
+import { mapState } from 'vuex';
+import { LOGIN } from '@/store/action.type';
 
 export default {
-  components: { Spinner },
   name: 'Login',
+  components: { Spinner },
   data() {
     return {
       email: '',
@@ -110,27 +111,14 @@ export default {
     }
   },
   methods: {
-    async onSubmit() {
-      const user = {
-        email: this.email,
-        password: this.password,
-        returnSecureToken: true
-      };
-      this.email = '';
-      this.password = '';
-
-      try {
-        this.isLoading = true;
-        const response = await axios.post(
-          `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.VUE_APP_API_KEY}`,
-          user
-        );
-        console.log('response', response);
-        this.isLoading = false;
-      } catch (err) {
-        console.log(err);
-      }
+    onSubmit(email, password) {
+      this.$store.dispatch(LOGIN, { email, password }).then(console.log('OK'));
     }
+  },
+  computed: {
+    ...mapState({
+      user: (state) => state.auth.user
+    })
   }
 };
 </script>
