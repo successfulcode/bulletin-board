@@ -29,7 +29,7 @@ const actions = {
         password,
         returnSecureToken: true
       };
-      const { data } = await axios.post(
+      const { data, status } = await axios.post(
         `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.VUE_APP_API_KEY}`,
         user
       );
@@ -38,9 +38,13 @@ const actions = {
         email: data.email,
         displayName: data.displayName
       };
-      commit(SET_AUTH, loggedUser, data.idToken, data.refreshToken);
-    } catch (err) {
-      console.log(err);
+      if (status === 200) {
+        return commit(SET_AUTH, loggedUser, data.idToken, data.refreshToken);
+      }
+    } catch (error) {
+      console.log('error_1111', error.message);
+      console.log('err_status_2222', error.errors.code);
+      console.log('err_status_2222', error);
     }
   },
   async [SIGN_UP]({ commit }, { firstName, lastName, email, password }) {
@@ -52,7 +56,7 @@ const actions = {
         displayName: `${firstName}${' '}${lastName}`,
         returnSecureToken: true
       };
-      const { data } = await axios.post(
+      const { data, status } = await axios.post(
         `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.VUE_APP_API_KEY}`,
         newUser
       );
@@ -61,8 +65,9 @@ const actions = {
         email: data.email,
         displayName: data.displayName
       };
-      commit(SET_AUTH, loggedUser, data.idToken, data.refreshToken);
-      console.log('SIGNUP', data, commit);
+      if (status === 200) {
+        commit(SET_AUTH, loggedUser, data.idToken, data.refreshToken);
+      }
     } catch (err) {
       console.log(err);
     }
