@@ -27,7 +27,7 @@
             <strong>{{ currentUser.displayName }}</strong>
             <button class="button is-light" @click="logout">Logout</button>
           </div>
-          <div class="buttons" v-else>
+          <div v-else class="buttons">
             <router-link to="/signup" class="button is-info">
               <strong>Sign Up</strong>
             </router-link>
@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.dispatch(LOGOUT).then(() => this.$router.push('/'));
+      this.$store.dispatch(LOGOUT).then(() => this.$router.push('login'));
     }
   }
 };

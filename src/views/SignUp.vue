@@ -16,6 +16,7 @@
             :class="{ 'is-danger': $v.firstName.$error, 'is-success': !$v.firstName.$invalid }"
             type="text"
             :placeholder="$t('components.signUp.firstName')"
+            :disabled="isLoading"
           />
           <span class="icon is-small is-left">
             <font-awesome-icon :icon="['fa', 'user']" class="mt-3 ml-2" />
@@ -45,6 +46,7 @@
             :class="{ 'is-danger': $v.lastName.$error, 'is-success': !$v.lastName.$invalid }"
             type="text"
             :placeholder="$t('components.signUp.lastName')"
+            :disabled="isLoading"
           />
           <span class="icon is-small is-left">
             <font-awesome-icon :icon="['fa', 'user']" class="mt-3 ml-2" />
@@ -74,6 +76,7 @@
             :class="{ 'is-danger': $v.email.$error, 'is-success': !$v.email.$invalid }"
             type="email"
             :placeholder="$t('common.email')"
+            :disabled="isLoading"
           />
           <span class="icon is-small is-left">
             <font-awesome-icon :icon="['fa', 'envelope']" class="mt-3 ml-2" />
@@ -106,6 +109,7 @@
             :class="{ 'is-danger': $v.password.$error, 'is-success': !$v.password.$invalid }"
             type="password"
             :placeholder="$t('common.password')"
+            :disabled="isLoading"
           />
           <span class="icon is-small is-left">
             <font-awesome-icon :icon="['fa', 'lock']" class="mt-3 ml-2" />
@@ -138,6 +142,7 @@
             :class="{ 'is-danger': $v.password2.$error, 'is-success': !$v.password2.$invalid }"
             type="password"
             :placeholder="$t('components.signUp.confirmPassword')"
+            :disabled="isLoading"
           />
           <span class="icon is-small is-left">
             <font-awesome-icon :icon="['fa', 'lock']" class="mt-3 ml-2" />
@@ -163,7 +168,7 @@
         </p>
       </div>
       <div class="is-flex is-justify-content-center">
-        <button class="button is-info" type="submit" :disabled="$v.$invalid">
+        <button class="button is-info" type="submit" :disabled="$v.$invalid || isLoading">
           {{ $t('components.login.confirm') }}
         </button>
       </div>
@@ -174,6 +179,7 @@
 <script>
 import { required, minLength, email, sameAs } from 'vuelidate/lib/validators';
 import { SIGN_UP } from '@/store/actions.types';
+import { mapState } from 'vuex';
 
 export default {
   name: 'SignUp',
@@ -209,13 +215,16 @@ export default {
   computed: {
     comparePasswords() {
       return this.password;
-    }
+    },
+    ...mapState({
+      isAuthenticated: (state) => state.auth.isAuthenticated,
+      isLoading: (state) => state.auth.isLoading
+    })
   },
   methods: {
     onSubmit(firstName, lastName, email, password) {
-      this.$store
-        .dispatch(SIGN_UP, { firstName, lastName, email, password })
-        .then(() => this.$router.push('dashboard'));
+      this.$store.dispatch(SIGN_UP, { firstName, lastName, email, password });
+      this.isAuthenticated && this.$router.push('dashboard');
     }
   }
 };

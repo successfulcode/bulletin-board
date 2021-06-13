@@ -8,8 +8,7 @@
       "
     >
       <div class="has-text-centered is-size-3">{{ $t('common.login') }}</div>
-      <div v-if="isLoading" class="has-text-centered"><spinner></spinner></div>
-      <div v-else>
+      <div>
         <div class="field mt-5">
           <div class="control has-icons-left has-icons-right">
             <input
@@ -18,6 +17,7 @@
               :class="{ 'is-danger': $v.email.$error, 'is-success': !$v.email.$invalid }"
               type="email"
               :placeholder="$t('common.email')"
+              :disabled="isLoading"
             />
             <span class="icon is-small is-left">
               <font-awesome-icon :icon="['fa', 'envelope']" class="mt-3 ml-2" />
@@ -50,6 +50,7 @@
               :class="{ 'is-danger': $v.password.$error, 'is-success': !$v.password.$invalid }"
               type="password"
               :placeholder="$t('common.password')"
+              :disabled="isLoading"
             />
             <span class="icon is-small is-left">
               <font-awesome-icon :icon="['fa', 'lock']" class="mt-3 ml-2" />
@@ -76,7 +77,12 @@
         </div>
       </div>
       <div class="is-flex is-justify-content-center mt-4">
-        <button class="button is-info" type="submit" :disabled="$v.$invalid">
+        <button
+          class="button is-info"
+          :class="{ 'is-loading': isLoading }"
+          type="submit"
+          :disabled="$v.$invalid || isLoading"
+        >
           {{ $t('components.login.confirm') }}
         </button>
       </div>
@@ -86,18 +92,16 @@
 
 <script>
 import { required, minLength, email } from 'vuelidate/lib/validators';
-import Spinner from '../assets/Spinner.vue';
 import { mapState } from 'vuex';
 import { LOGIN } from '@/store/actions.types';
 
 export default {
   name: 'Login',
-  components: { Spinner },
+
   data() {
     return {
       email: '',
-      password: '',
-      isLoading: false
+      password: ''
     };
   },
   validations: {
@@ -110,15 +114,20 @@ export default {
       minLength: minLength(6)
     }
   },
-  methods: {
-    onSubmit(email, password) {
-      this.$store.dispatch(LOGIN, { email, password }).then(() => this.$router.push('dashboard'));
-    }
-  },
   computed: {
     ...mapState({
-      user: (state) => state.auth.user
+      isAuthenticated: (state) => state.auth.isAuthenticated,
+      isLoading: (state) => state.auth.isLoading,
+      isErrors: (state) => state.auth.errors
     })
+  },
+  methods: {
+    onSubmit(email, password) {
+      this.$store.dispatch(LOGIN, { email, password });
+      this.isAuthenticated && this.$router.push('dashboard');
+      this.email = '';
+      this.password = '';
+    }
   }
 };
 </script>

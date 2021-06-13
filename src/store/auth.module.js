@@ -1,6 +1,7 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { LOGIN, SIGN_UP, LOGOUT } from './actions.types';
-import { SET_AUTH, PURGE_AUTH, SET_ERROR } from './mutations.types';
+import { SET_AUTH, PURGE_AUTH, SET_ERROR, ISLOADING, ISLOADING_FALSE } from './mutations.types';
+import ApiService from '@/api';
 
 const state = {
   errors: null,
@@ -29,35 +30,8 @@ const actions = {
         password,
         returnSecureToken: true
       };
-      const { data, status } = await axios.post(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.VUE_APP_API_KEY}`,
-        user
-      );
-      const loggedUser = {
-        localId: data.localId,
-        email: data.email,
-        displayName: data.displayName
-      };
-      if (status === 200) {
-        return commit(SET_AUTH, loggedUser, data.idToken, data.refreshToken);
-      }
-    } catch (error) {
-      return commit(SET_ERROR, error.message);
-    }
-  },
-  async [SIGN_UP]({ commit }, { firstName, lastName, email, password }) {
-    console.log('SIGN_UP', firstName, lastName, email, password);
-    try {
-      const newUser = {
-        email,
-        password,
-        displayName: `${firstName}${' '}${lastName}`,
-        returnSecureToken: true
-      };
-      const { data, status } = await axios.post(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.VUE_APP_API_KEY}`,
-        newUser
-      );
+      commit(ISLOADING);
+      const { data, status } = await ApiService.loginUser(user);
       const loggedUser = {
         localId: data.localId,
         email: data.email,
@@ -65,9 +39,35 @@ const actions = {
       };
       if (status === 200) {
         commit(SET_AUTH, loggedUser, data.idToken, data.refreshToken);
+        commit(ISLOADING_FALSE);
       }
     } catch (error) {
-      return commit(SET_ERROR, error.message);
+      commit(SET_ERROR, error.message);
+      commit(ISLOADING_FALSE);
+    }
+  },
+  async [SIGN_UP]({ commit }, { firstName, lastName, email, password }) {
+    try {
+      const newUser = {
+        email,
+        password,
+        displayName: `${firstName}${' '}${lastName}`,
+        returnSecureToken: true
+      };
+      commit(ISLOADING);
+      const { data, status } = await ApiService.signUpUser(newUser);
+      const loggedUser = {
+        localId: data.localId,
+        email: data.email,
+        displayName: data.displayName
+      };
+      if (status === 200) {
+        commit(SET_AUTH, loggedUser, data.idToken, data.refreshToken);
+        commit(ISLOADING_FALSE);
+      }
+    } catch (error) {
+      commit(SET_ERROR, error.message);
+      commit(ISLOADING_FALSE);
     }
   },
   [LOGOUT]({ commit }) {
@@ -91,6 +91,15 @@ const mutations = {
   },
   [SET_ERROR](state, error) {
     state.errors = error;
+    setTimeout(() => {
+      state.errors = null;
+    }, 3000);
+  },
+  [ISLOADING](state) {
+    state.isLoading = true;
+  },
+  [ISLOADING_FALSE](state) {
+    state.isLoading = false;
   }
 };
 
