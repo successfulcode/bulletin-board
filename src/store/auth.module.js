@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { LOGIN, SIGN_UP, LOGOUT } from './actions.types';
-import { SET_AUTH, PURGE_AUTH } from './mutations.types';
+import { SET_AUTH, PURGE_AUTH, SET_ERROR } from './mutations.types';
 
 const state = {
   errors: null,
@@ -42,9 +42,7 @@ const actions = {
         return commit(SET_AUTH, loggedUser, data.idToken, data.refreshToken);
       }
     } catch (error) {
-      console.log('error_1111', error.message);
-      console.log('err_status_2222', error.errors.code);
-      console.log('err_status_2222', error);
+      return commit(SET_ERROR, error.message);
     }
   },
   async [SIGN_UP]({ commit }, { firstName, lastName, email, password }) {
@@ -68,8 +66,8 @@ const actions = {
       if (status === 200) {
         commit(SET_AUTH, loggedUser, data.idToken, data.refreshToken);
       }
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      return commit(SET_ERROR, error.message);
     }
   },
   [LOGOUT]({ commit }) {
@@ -90,6 +88,9 @@ const mutations = {
     state.user = {};
     localStorage.removeItem('idToken');
     localStorage.removeItem('refreshToken');
+  },
+  [SET_ERROR](state, error) {
+    state.errors = error;
   }
 };
 
