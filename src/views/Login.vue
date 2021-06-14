@@ -100,8 +100,8 @@ export default {
 
   data() {
     return {
-      email: '',
-      password: ''
+      email: 'test@test.lt',
+      password: '123456'
     };
   },
   validations: {
