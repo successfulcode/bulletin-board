@@ -7,7 +7,7 @@
       "email": "El.paštas",
       "fieldIsrequired": "Šis laukas privalomas",
       "confirm": "Patvirtinti",
-      "cancel": "Atšakti"
+      "cancel": "Atšaukti"
     },
     "components": {
       "login": {
@@ -22,7 +22,19 @@
         "checkPassword": "Ne mažiau negu 6 simboliai, naudoti mažosios, didžiosios raidės ir simbolį",
         "password2": "Slaptažodžiai turi sutapti",
         "confirmPassword": "Patvirtinkite slaptažodį"
-      } 
+      }, 
+      "createAd": {
+        "category": "Katergorija",
+        "selectCategory": "Pasirinkite kategorija",
+        "realEstate": "Nekilnojamasis turtas",
+        "transport":"Transportas",
+        "workBusiness":"Darbas, verslas",
+        "homHousehold": "Namai, buitis",
+        "adText": "Skelbimo tekstas",
+        "ad": "Skelbimas",
+        "iAgreeWhith": "Sutinku su",
+        "rules":"taisyklėmis"
+      }
     }
   }
 }

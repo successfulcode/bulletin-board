@@ -2,24 +2,32 @@
   <div>
     <form @submit.prevent="onSubmit">
       <div class="field">
-        <label class="label">Katergorija</label>
+        <label class="label">{{ $t('components.createAd.category') }}</label>
         <div class="control">
           <div class="select">
             <select v-model="adCategory">
-              <option value="" disabled>---Pasirinkite kategorija---</option>
-              <option value="Nekilnojamasis turta">Nekilnojamasis turtas</option>
-              <option value="Transportas">Transportas</option>
-              <option value="Darbas, verslas">Darbas, verslas</option>
-              <option value="Namai, buitis">Namai, buitis</option>
+              <option value="" disabled>
+                ---{{ $t('components.createAd.selectCategory') }}---
+              </option>
+              <option value="Nekilnojamasis turta">
+                {{ $t('components.createAd.realEstate') }}
+              </option>
+              <option value="Transportas">{{ $t('components.createAd.transport') }}</option>
+              <option value="Darbas, verslas">{{ $t('components.createAd.workBusiness') }}</option>
+              <option value="Namai, buitis">{{ $t('components.createAd.homHousehold') }}</option>
             </select>
           </div>
         </div>
       </div>
 
       <div class="field">
-        <label class="label">Skelbimas</label>
+        <label class="label">{{ $t('components.createAd.ad') }}</label>
         <div class="control">
-          <textarea v-model="adText" class="textarea" placeholder="Skelbimo tekstas"></textarea>
+          <textarea
+            v-model="adText"
+            class="textarea"
+            :placeholder="$t('components.createAd.adText')"
+          ></textarea>
         </div>
       </div>
 
@@ -27,22 +35,24 @@
         <div class="control">
           <label class="checkbox">
             <input v-model="consentToTheRules" type="checkbox" />
-            Sutinku su{{ ' ' }}<a href="#">taisyklėmis</a>
+            {{ $t('components.createAd.iAgreeWhith') }}{{ ' '
+            }}<a href="#">{{ $t('components.createAd.rules') }}</a>
           </label>
         </div>
       </div>
 
       <div class="field is-grouped">
         <div class="control">
-          <button class="button is-link" type="submit">Patvirtinti</button>
+          <button class="button is-link" type="submit">
+            {{ $t('common.confirm') }}
+          </button>
         </div>
         <div class="control">
-          <button class="button is-link is-light" @click="clear">Atšaukti</button>
+          <button class="button is-link is-light" @click="clear">{{ $t('common.cancel') }}</button>
         </div>
       </div>
     </form>
     <create-ad-messages :newMessage="message"></create-ad-messages>
-    <pre>{{ isLoading }}</pre>
   </div>
 </template>
 
