@@ -3,7 +3,7 @@ import { ADD_MESSAGE } from './actions.types';
 import { SET_NEW_MESSAGE, SET_MESSAGES } from './mutations.types';
 
 const state = {
-  newMessage: 'test',
+  newMessage: {},
   messages: []
 };
 
@@ -17,14 +17,14 @@ const getters = {
 };
 
 const actions = {
-  async [ADD_MESSAGE]({ commit }, { message }) {
+  async [ADD_MESSAGE]({ commit }, message) {
     console.log('newMessage ', message);
     try {
       console.log(commit, message);
-      const { data } = await axios.post(process.env.VUE_APP_DATA_URL, { message });
+      const { data, status } = await axios.post(process.env.VUE_APP_DATA_URL, message);
 
       commit(SET_NEW_MESSAGE, message);
-      console.log(data);
+      console.log(data, status);
     } catch (error) {
       console.log(error);
     }
@@ -34,7 +34,6 @@ const actions = {
 const mutations = {
   [SET_NEW_MESSAGE](state, message) {
     state.newMessage = message;
-    console.log(message);
   },
   [SET_MESSAGES](state, messages) {
     state.message = messages;

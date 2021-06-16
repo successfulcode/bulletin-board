@@ -21,7 +21,7 @@ export default {
   methods: {
     addMessage(message) {
       this.$store.dispatch(ADD_MESSAGE, message);
-      console.log('message', message);
+      console.log('dashboard', message);
     }
   }
 };

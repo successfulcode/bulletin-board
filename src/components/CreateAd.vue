@@ -6,10 +6,11 @@
       <div class="control">
         <div class="select">
           <select v-model="adCategory">
-            <option>Nekilnojamasis turtas</option>
-            <option>Transportas</option>
-            <option>Darbas, verslas</option>
-            <option>Namai, buitis</option>
+            <option value="" disabled>---Pasirinkite kategorija---</option>
+            <option value="Nekilnojamasis turta">Nekilnojamasis turtas</option>
+            <option value="Transportas">Transportas</option>
+            <option value="Darbas, verslas">Darbas, verslas</option>
+            <option value="Namai, buitis">Namai, buitis</option>
           </select>
         </div>
       </div>
@@ -45,7 +46,7 @@
 <script>
 export default {
   name: 'CreateAd',
-  props: ['message'],
+  props: { message: Object },
   data() {
     return {
       adCategory: '',
