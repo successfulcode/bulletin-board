@@ -1,6 +1,6 @@
 <template>
   <div>
-    <create-ad :message="newMessage" @addMessage="addMessage"></create-ad>
+    <create-ad :message="newMessage" @addMessage="addMessage" :isLoading="isLoading"></create-ad>
   </div>
 </template>
 
@@ -15,13 +15,14 @@ export default {
   components: { CreateAd },
   computed: {
     ...mapState({
-      newMessage: (state) => state.ads.newMessage
+      newMessage: (state) => state.ads.newMessage,
+      isLoading: (state) => state.auth.isLoading,
+      isErrors: (state) => state.auth.errors
     })
   },
   methods: {
     addMessage(message) {
       this.$store.dispatch(ADD_MESSAGE, message);
-      console.log('dashboard', message);
     }
   }
 };

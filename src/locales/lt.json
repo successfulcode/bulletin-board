@@ -5,7 +5,9 @@
       "signUp": "Registruotis",
       "password": "Slaptažodis",
       "email": "El.paštas",
-      "fieldIsrequired": "Šis laukas privalomas"
+      "fieldIsrequired": "Šis laukas privalomas",
+      "confirm": "Patvirtinti",
+      "cancel": "Atšakti"
     },
     "components": {
       "login": {

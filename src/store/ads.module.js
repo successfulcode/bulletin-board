@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { ADD_MESSAGE } from './actions.types';
-import { SET_NEW_MESSAGE, SET_MESSAGES } from './mutations.types';
+import {
+  SET_NEW_MESSAGE,
+  SET_MESSAGES,
+  ISLOADING,
+  ISLOADING_FALSE,
+  SET_ERROR
+} from './mutations.types';
 
 const state = {
   newMessage: {},
@@ -18,23 +24,33 @@ const getters = {
 
 const actions = {
   async [ADD_MESSAGE]({ commit }, message) {
-    console.log('newMessage ', message);
     try {
-      console.log(commit, message);
-      const { data, status } = await axios.post(process.env.VUE_APP_DATA_URL, message);
-
-      commit(SET_NEW_MESSAGE, message);
-      console.log(data, status);
+      commit(ISLOADING);
+      const {
+        data: { name },
+        status
+      } = await axios.post(process.env.VUE_APP_DATA_URL, message);
+      if (status === 200 && name) {
+        const id = { id: name };
+        const newMessage = {
+          ...message,
+          ...id
+        };
+        commit(SET_NEW_MESSAGE, newMessage);
+        commit(ISLOADING_FALSE);
+      }
     } catch (error) {
-      console.log(error);
+      commit(SET_ERROR, error.message);
+      commit(ISLOADING_FALSE);
     }
   }
 };
 
 const mutations = {
-  [SET_NEW_MESSAGE](state, message) {
-    state.newMessage = message;
+  [SET_NEW_MESSAGE](state, newMessage) {
+    state.newMessage = newMessage;
   },
+
   [SET_MESSAGES](state, messages) {
     state.message = messages;
   }
