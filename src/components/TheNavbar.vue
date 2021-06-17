@@ -22,9 +22,9 @@
       </div>
 
       <div class="navbar-end">
-        <div class="navbar-item">
+        <div class="navbar-item mr-2">
           <div v-if="isAuthenticated">
-            <strong>{{ currentUser.displayName }}</strong>
+            <strong class="mr-3">{{ currentUser.displayName }}</strong>
             <button class="button is-light" @click="logout">Logout</button>
           </div>
           <div v-else class="buttons">

@@ -43,16 +43,25 @@
 
       <div class="field is-grouped">
         <div class="control">
-          <button class="button is-link" type="submit">
+          <button
+            class="button is-link"
+            type="submit"
+            :class="{ 'is-loading': isLoading }"
+            :disabled="isLoading || !adText || !adCategory || !consentToTheRules"
+          >
             {{ $t('common.confirm') }}
           </button>
         </div>
         <div class="control">
-          <button class="button is-link is-light" @click="clear">{{ $t('common.cancel') }}</button>
+          <button class="button is-link is-light" @click="clear">
+            {{ $t('common.cancel') }}
+          </button>
         </div>
       </div>
     </form>
-    <create-ad-messages :newMessage="message"></create-ad-messages>
+    <div v-if="message.adText">
+      <create-ad-messages :newMessage="message"></create-ad-messages>
+    </div>
   </div>
 </template>
 
