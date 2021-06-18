@@ -3,8 +3,11 @@
     <div v-show="isLoading" class="has-text-centered">
       <spinner></spinner>
     </div>
-    <button @click="getAds">GET DATA TEST</button>
-    <pre>{{ ads }}</pre>
+    <div>
+      <button @click="getAds">GET DATA TEST</button>
+      <p class="mt-4">For tests...</p>
+      <pre>{{ ads }}</pre>
+    </div>
   </div>
 </template>
 
