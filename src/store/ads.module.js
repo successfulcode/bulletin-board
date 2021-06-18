@@ -65,7 +65,7 @@ const mutations = {
   },
 
   [SET_MESSAGES](state, messages) {
-    console.log('messages', messages)
+    console.log('messages', messages);
     state.messages = messages;
   }
 };

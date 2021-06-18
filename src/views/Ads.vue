@@ -22,14 +22,13 @@ export default {
       isLoading: (state) => state.auth.isLoading
     })
   },
+  mounted() {
+    this.getAds();
+  },
   methods: {
     getAds() {
       this.$store.dispatch(GET_ADS);
     }
-  },
-  mounted() {
-   this.getAds();
   }
 };
 </script>
-
