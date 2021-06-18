@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Login from '@/views/Login.vue';
 import SignUp from '@/views/SignUp.vue';
 import Dashboard from '@/views/Dashboard.vue';
+import Ads from '@/views/Ads.vue';
 import NotFound from '@/views/NotFound.vue';
 
 Vue.use(VueRouter);
@@ -23,6 +24,11 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard
+  },
+  {
+    path: '/ads',
+    name: 'Ads',
+    component: Ads
   },
   {
     path: '*',

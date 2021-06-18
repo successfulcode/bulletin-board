@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { ADD_MESSAGE } from './actions.types';
+import ApiService from '@/api';
+import { ADD_MESSAGE, GET_ADS } from './actions.types';
 import {
   SET_NEW_MESSAGE,
   SET_MESSAGES,
@@ -29,7 +29,7 @@ const actions = {
       const {
         data: { name },
         status
-      } = await axios.post(process.env.VUE_APP_DATA_URL, message);
+      } = await ApiService.createAd(message);
       if (status === 200 && name) {
         const id = { id: name };
         const newMessage = {
@@ -37,6 +37,19 @@ const actions = {
           ...id
         };
         commit(SET_NEW_MESSAGE, newMessage);
+        commit(ISLOADING_FALSE);
+      }
+    } catch (error) {
+      commit(SET_ERROR, error.message);
+      commit(ISLOADING_FALSE);
+    }
+  },
+  async [GET_ADS]({ commit }) {
+    try {
+      commit(ISLOADING);
+      const { data, status } = await ApiService.getAds();
+      if (status === 200) {
+        commit(SET_MESSAGES, data);
         commit(ISLOADING_FALSE);
       }
     } catch (error) {
@@ -52,7 +65,8 @@ const mutations = {
   },
 
   [SET_MESSAGES](state, messages) {
-    state.message = messages;
+    console.log('messages', messages)
+    state.messages = messages;
   }
 };
 

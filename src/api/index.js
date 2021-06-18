@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const authUrl = process.env.VUE_APP_AUTH_URL;
+const dataUrl = process.env.VUE_APP_DATA_URL;
 
 const ApiService = {
   loginUser(user) {
@@ -8,6 +9,12 @@ const ApiService = {
   },
   signUpUser(newUser) {
     return axios.post(`${authUrl}:signUp?key=${process.env.VUE_APP_API_KEY}`, newUser);
+  },
+  createAd(message) {
+    return axios.post(`${dataUrl}`, message);
+  },
+  getAds() {
+    return axios.get(`${dataUrl}`);
   }
 };
 

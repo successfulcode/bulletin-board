@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item has-text-dark" href="#!"> BULLETIN </a>
+      <a class="navbar-item has-text-dark" href="#!">BULLETIN</a>
       <button
         role="button"
         class="navbar-burger"
@@ -19,6 +19,7 @@
       <div class="navbar-start">
         <router-link to="/dashboard" class="navbar-item">Dashboard</router-link>
         <router-link to="/dashboard" class="navbar-item">Advertisements</router-link>
+        <router-link to="/ads" class="navbar-item">Ads</router-link>
       </div>
 
       <div class="navbar-end">

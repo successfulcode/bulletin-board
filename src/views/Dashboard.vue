@@ -1,6 +1,6 @@
 <template>
   <div>
-    <create-ad :message="newMessage" @addMessage="addMessage" :isLoading="isLoading"></create-ad>
+    <create-ad :message="newMessage" :is-loading="isLoading" @addMessage="addMessage"></create-ad>
   </div>
 </template>
 

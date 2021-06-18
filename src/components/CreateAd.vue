@@ -53,6 +53,7 @@
           </button>
         </div>
         <div class="control">
+          <!-- fix cancel button, it make post request -->
           <button class="button is-link is-light" @click="clear">
             {{ $t('common.cancel') }}
           </button>
@@ -60,7 +61,7 @@
       </div>
     </form>
     <div v-if="message.adText">
-      <create-ad-messages :newMessage="message"></create-ad-messages>
+      <create-ad-messages :new-message="message"></create-ad-messages>
     </div>
   </div>
 </template>
@@ -69,8 +70,8 @@
 import CreateAdMessages from './CreateAdMessages.vue';
 export default {
   name: 'CreateAd',
-  props: { message: Object, isLoading: Boolean },
   components: { CreateAdMessages },
+  props: { message: Object, isLoading: Boolean },
   data() {
     return {
       adCategory: '',
