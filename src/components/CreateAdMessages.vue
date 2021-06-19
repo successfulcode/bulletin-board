@@ -14,6 +14,6 @@
 <script>
 export default {
   name: 'CreateAdMessages',
-  props: ['newMessage']
+  props: { newMessage: Object }
 };
 </script>

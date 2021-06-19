@@ -1,7 +1,7 @@
 <template>
   <div class="mt-4">
     <div>
-      <create-ad-alert :AlertText="$t('components.createAd.aboutFilelds')"></create-ad-alert>
+      <create-ad-alert :alert-text="$t('components.createAd.aboutFilelds')"></create-ad-alert>
     </div>
     <form class="mt-4" @submit.prevent="onSubmit">
       <div class="field">
@@ -39,23 +39,29 @@
           <label class="checkbox">
             <input v-model="consentToTheRules" type="checkbox" />
             {{ $t('components.createAd.iAgreeWhith') }}
-            {{' '}}<a href="#">{{ $t('components.createAd.rules') }}</a>
+            {{ ' ' }}<a href="#">{{ $t('components.createAd.rules') }}</a>
           </label>
         </div>
       </div>
 
       <div class="field is-flex is-justify-content-left">
         <div class="column is-2">
-          <input name="price" class="input" type="number" v-model="adPrice" :placeholder="$t('components.createAd.price')" />
+          <input
+            v-model="adPrice"
+            name="price"
+            class="input"
+            type="number"
+            :placeholder="$t('components.createAd.price')"
+          />
           <p class="help">{{ $t('components.createAd.aboutPrice') }}</p>
         </div>
         <label for="price" class="label mt-5 ml-1 mr-5">{{ $t('components.createAd.eur') }}</label>
         <div class="column is-3">
-          <input class="input mr-4" type="text" v-model="adEmail" :placeholder="'Email'" />
+          <input v-model="adEmail" class="input mr-4" type="text" :placeholder="'Email'" />
           <p class="help">{{ $t('components.createAd.aboutEmail') }}</p>
         </div>
         <div class="column is-3">
-          <input class="input" type="text" v-model="adTel" :placeholder="'Tel'" />
+          <input v-model="adTel" class="input" type="text" :placeholder="'Tel'" />
           <p class="help">{{ $t('components.createAd.aboutTel') }}</p>
         </div>
       </div>
@@ -96,7 +102,7 @@ export default {
       adCategory: '',
       adText: '',
       consentToTheRules: false,
-      adPrice:'',
+      adPrice: '',
       adEmail: '',
       adTel: ''
     };
@@ -112,15 +118,13 @@ export default {
       };
       this.$emit('addMessage', newMessage);
       console.log('addMessage', newMessage);
-      this.clear()
+      this.clear();
     },
     clear() {
       this.adCategory = '';
       this.adText = '';
       this.adPrice = '';
-      this.adEmail = '',
-      this.adTel= '',
-      this.consentToTheRules = false;
+      (this.adEmail = ''), (this.adTel = ''), (this.consentToTheRules = false);
     }
   }
 };
