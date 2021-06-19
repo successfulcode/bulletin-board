@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <form @submit.prevent="onSubmit">
+  <div class="mt-4">
+    <div>
+      <create-ad-alert :AlertText="$t('components.createAd.aboutFilelds')"></create-ad-alert>
+    </div>
+    <form class="mt-4" @submit.prevent="onSubmit">
       <div class="field">
         <label class="label">{{ $t('components.createAd.category') }}</label>
         <div class="control">
@@ -35,10 +38,18 @@
         <div class="control">
           <label class="checkbox">
             <input v-model="consentToTheRules" type="checkbox" />
-            {{ $t('components.createAd.iAgreeWhith') }}{{ ' '
-            }}<a href="#">{{ $t('components.createAd.rules') }}</a>
+            {{ $t('components.createAd.iAgreeWhith') }}
+            {{' '}}<a href="#">{{ $t('components.createAd.rules') }}</a>
           </label>
         </div>
+      </div>
+
+      <div class="field is-flex is-justify-content-left">
+        <div>
+          <input class="input" type="number" v-model="price" :placeholder="$t('components.createAd.price')" />
+          <p class="help">{{ $t('components.createAd.aboutPrice') }}</p>
+        </div>
+        <label class="label mt-2 ml-2">{{ $t('components.createAd.eur') }}</label>
       </div>
 
       <div class="field is-grouped">
@@ -66,16 +77,18 @@
 </template>
 
 <script>
+import CreateAdAlert from './CreateAdAlert.vue';
 import CreateAdMessages from './CreateAdMessages.vue';
 export default {
   name: 'CreateAd',
-  components: { CreateAdMessages },
+  components: { CreateAdMessages, CreateAdAlert },
   props: { message: Object, isLoading: Boolean },
   data() {
     return {
       adCategory: '',
       adText: '',
-      consentToTheRules: false
+      consentToTheRules: false,
+      price:''
     };
   },
   methods: {
@@ -89,6 +102,8 @@ export default {
     clear() {
       this.adCategory = '';
       this.adText = '';
+      this.price = '';
+      this.consentToTheRules = false;
     }
   }
 };

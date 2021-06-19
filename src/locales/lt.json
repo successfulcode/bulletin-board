@@ -1,5 +1,5 @@
 {
-  "lt":{
+  "lt": {
     "common": {
       "login": "Prisijungti",
       "signUp": "Registruotis",
@@ -22,18 +22,22 @@
         "checkPassword": "Ne mažiau negu 6 simboliai, naudoti mažosios, didžiosios raidės ir simbolį",
         "password2": "Slaptažodžiai turi sutapti",
         "confirmPassword": "Patvirtinkite slaptažodį"
-      }, 
+      },
       "createAd": {
         "category": "Katergorija",
         "selectCategory": "Pasirinkite kategorija",
         "realEstate": "Nekilnojamasis turtas",
-        "transport":"Transportas",
-        "workBusiness":"Darbas, verslas",
+        "transport": "Transportas",
+        "workBusiness": "Darbas, verslas",
         "homHousehold": "Namai, buitis",
         "adText": "Skelbimo tekstas",
         "ad": "Skelbimas",
         "iAgreeWhith": "Sutinku su",
-        "rules":"taisyklėmis"
+        "rules": "taisyklėmis",
+        "price": "Kaina",
+        "eur": "Eur",
+        "aboutPrice": "Įveskite galutinę kainą",
+        "aboutFilelds": "Kad, galėtumete patvirtinti skelbimą, prašau užpildykite visus laukus (kategorija, skelbimo tekstą, kaina). Taip pat prašau, patvirtinkite, kad sutinkate su mūsų tinklalapio taisyklėmis. Primename, kad Jūs asmeniškai esate atsakingi už skeligimo turinį."
       }
     }
   }
