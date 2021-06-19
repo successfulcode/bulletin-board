@@ -45,11 +45,19 @@
       </div>
 
       <div class="field is-flex is-justify-content-left">
-        <div>
-          <input class="input" type="number" v-model="price" :placeholder="$t('components.createAd.price')" />
+        <div class="column is-2">
+          <input name="price" class="input" type="number" v-model="adPrice" :placeholder="$t('components.createAd.price')" />
           <p class="help">{{ $t('components.createAd.aboutPrice') }}</p>
         </div>
-        <label class="label mt-2 ml-2">{{ $t('components.createAd.eur') }}</label>
+        <label for="price" class="label mt-5 ml-1 mr-5">{{ $t('components.createAd.eur') }}</label>
+        <div class="column is-3">
+          <input class="input mr-4" type="text" v-model="adEmail" :placeholder="'Email'" />
+          <p class="help">{{ $t('components.createAd.aboutEmail') }}</p>
+        </div>
+        <div class="column is-3">
+          <input class="input" type="text" v-model="adTel" :placeholder="'Tel'" />
+          <p class="help">{{ $t('components.createAd.aboutTel') }}</p>
+        </div>
       </div>
 
       <div class="field is-grouped">
@@ -88,21 +96,30 @@ export default {
       adCategory: '',
       adText: '',
       consentToTheRules: false,
-      price:''
+      adPrice:'',
+      adEmail: '',
+      adTel: ''
     };
   },
   methods: {
     onSubmit() {
       const newMessage = {
         adCategory: this.adCategory,
-        adText: this.adText
+        adText: this.adText,
+        adPrice: '',
+        adEmail: '',
+        adTel: ''
       };
       this.$emit('addMessage', newMessage);
+      console.log('addMessage', newMessage);
+      this.clear()
     },
     clear() {
       this.adCategory = '';
       this.adText = '';
-      this.price = '';
+      this.adPrice = '';
+      this.adEmail = '',
+      this.adTel= '',
       this.consentToTheRules = false;
     }
   }
