@@ -53,8 +53,7 @@
           </button>
         </div>
         <div class="control">
-          <!-- fix cancel button, it make post request -->
-          <button class="button is-link is-light" @click="clear">
+          <button class="button is-link is-light" @click.prevent="clear">
             {{ $t('common.cancel') }}
           </button>
         </div>
