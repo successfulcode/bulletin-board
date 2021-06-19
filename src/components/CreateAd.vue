@@ -8,7 +8,7 @@
         <label class="label">{{ $t('components.createAd.category') }}</label>
         <div class="control">
           <div class="select">
-            <select v-model="adCategory">
+            <select v-model="$v.adCategory.$model" class="input" :class="{'is-danger': $v.adCategory.$error, 'is-success': !$v.adCategory.$invalid }">
               <option value="" disabled>
                 ---{{ $t('components.createAd.selectCategory') }}---
               </option>
@@ -27,8 +27,9 @@
         <label class="label">{{ $t('components.createAd.ad') }}</label>
         <div class="control">
           <textarea
-            v-model="adText"
+            v-model="$v.adText.$model"
             class="textarea"
+            :class="{'is-danger': $v.adText.$error, 'is-success': !$v.adText.$invalid }"
             :placeholder="$t('components.createAd.adText')"
           ></textarea>
         </div>
@@ -47,9 +48,10 @@
       <div class="field is-flex is-justify-content-left">
         <div class="column is-2">
           <input
-            v-model="adPrice"
+            v-model="$v.adPrice.$model"
             name="price"
             class="input"
+            :class="{'is-danger': $v.adPrice.$error, 'is-success': !$v.adPrice.$invalid }"
             type="number"
             :placeholder="$t('components.createAd.price')"
           />
@@ -57,11 +59,21 @@
         </div>
         <label for="price" class="label mt-5 ml-1 mr-5">{{ $t('components.createAd.eur') }}</label>
         <div class="column is-3">
-          <input v-model="adEmail" class="input mr-4" type="text" :placeholder="'Email'" />
+          <input 
+            v-model="$v.adEmail.$model" 
+            class="input mr-4" 
+            :class="{'is-danger': $v.adEmail.$error, 'is-success': !$v.adEmail.$invalid }" 
+            type="text" :placeholder="'Email'" 
+          />
           <p class="help">{{ $t('components.createAd.aboutEmail') }}</p>
         </div>
         <div class="column is-3">
-          <input v-model="adTel" class="input" type="text" :placeholder="'Tel'" />
+          <input 
+            v-model="$v.adTel.$model" 
+            class="input" 
+            :class="{'is-danger': $v.adTel.$error, 'is-success': !$v.adTel.$invalid }"  
+            type="text" :placeholder="'Tel'" 
+          />
           <p class="help">{{ $t('components.createAd.aboutTel') }}</p>
         </div>
       </div>
@@ -93,6 +105,7 @@
 <script>
 import CreateAdAlert from './CreateAdAlert.vue';
 import CreateAdMessages from './CreateAdMessages.vue';
+import { required, minLength, email } from 'vuelidate/lib/validators';
 export default {
   name: 'CreateAd',
   components: { CreateAdMessages, CreateAdAlert },
@@ -106,6 +119,13 @@ export default {
       adEmail: '',
       adTel: ''
     };
+  },
+   validations: {
+    adCategory: { required },
+    adText: { required },
+    adPrice: { required },
+    adEmail: { required, email },
+    adTel: { required, minLength: minLength(9) }
   },
   methods: {
     onSubmit() {
