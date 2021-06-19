@@ -112,9 +112,9 @@ export default {
       const newMessage = {
         adCategory: this.adCategory,
         adText: this.adText,
-        adPrice: '',
-        adEmail: '',
-        adTel: ''
+        adPrice: this.adPrice,
+        adEmail: this.adEmail,
+        adTel: this.adTel
       };
       this.$emit('addMessage', newMessage);
       console.log('addMessage', newMessage);
