@@ -12,7 +12,7 @@
             <strong>{{ Name }}{{' '}}</strong>
             <small>{{ $t('common.email') }}.:{{ ' ' }}{{ Email }}</small>
             <small>{{ $t('common.tel') }}.:{{ ' ' }}{{ Tel }}</small>
-            <small>{{ $moment(AdDate).format('YYYY-MM-DD') }}</small>
+            <small>{{' '}}{{ $moment(AdDate).format('YYYY-MM-DD') }}</small>
             <br />
             {{ Text }}
             <br />
