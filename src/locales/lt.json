@@ -13,7 +13,10 @@
       "login": {
         "confirm": "Patvirtinti",
         "invalidEmail": "Patikrinkite el. paštą",
-        "checkPassword": "Patikrinkite slaptažodį"
+        "checkPassword": "Patikrinkite slaptažodį",
+        "dontHaveAnAccount": "Neturite paskyros?",
+        "create": "Sukūrkite",
+        "here": "čia"
       },
       "signUp": {
         "firstName": "Vardas",
@@ -21,7 +24,10 @@
         "invalidEmail": "Neteistingas el. paštas",
         "checkPassword": "Ne mažiau negu 6 simboliai, naudoti mažosios, didžiosios raidės ir simbolį",
         "password2": "Slaptažodžiai turi sutapti",
-        "confirmPassword": "Patvirtinkite slaptažodį"
+        "confirmPassword": "Patvirtinkite slaptažodį",
+        "haveAnAccount": "Jau turite paskyrą?",
+        "create": "Spauskite",
+        "here": "čia"
       },
       "createAd": {
         "category": "Katergorija",

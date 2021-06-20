@@ -172,6 +172,16 @@
           {{ $t('components.login.confirm') }}
         </button>
       </div>
+      <div class="mt-2 has-text-centered">
+        <p>
+          {{ $t('components.signUp.haveAnAccount') }}{{' '}}{{ $t('components.signUp.create') }} 
+          <strong>
+            <router-link to="/login">
+              {{ $t('components.signUp.here') }}
+            </router-link> 
+          </strong>
+        </p>
+      </div>
     </form>
   </div>
 </template>
