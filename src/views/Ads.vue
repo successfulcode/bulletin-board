@@ -3,16 +3,21 @@
     <div v-show="isLoading" class="has-text-centered">
       <spinner></spinner>
     </div>
-    <div v-for="ad in ads" :key="ad.id" class="mt-4">
-      <ads-item
-        :category="ad.Category"
-        :text="ad.Text"
-        :price="ad.Price"
-        :email="ad.Email"
-        :tel="ad.Tel"
-        :ad-date="ad.Date"
-        :name="ad.Name"
-      ></ads-item>
+    <div v-if="ads">
+      <div v-for="ad in ads" :key="ad.id" class="mt-4">
+        <ads-item
+          :category="ad.Category"
+          :text="ad.Text"
+          :price="ad.Price"
+          :email="ad.Email"
+          :tel="ad.Tel"
+          :ad-date="ad.Date"
+          :name="ad.Name"
+        ></ads-item>
+      </div>
+    </div>
+    <div v-else>
+      {{ $t('components.ads.noAds') }}
     </div>
   </div>
 </template>

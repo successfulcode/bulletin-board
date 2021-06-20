@@ -53,6 +53,9 @@
         "logout": "Atsijungti",
         "ads": "Skelbimai",
         "createAd": "Įdėti skelbimą"
+      },
+      "ads": {
+        "noAds": "Skelbimų nėra..."
       }
     }
   }
