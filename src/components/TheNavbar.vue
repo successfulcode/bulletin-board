@@ -17,22 +17,21 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <router-link to="/dashboard" class="navbar-item">Dashboard</router-link>
-        <router-link to="/dashboard" class="navbar-item">Advertisements</router-link>
-        <router-link to="/ads" class="navbar-item">Ads</router-link>
+        <router-link to="/dashboard" class="navbar-item">{{ $t('components.theNavbar.createAd') }}</router-link>
+        <router-link to="/ads" class="navbar-item">{{ $t('components.theNavbar.ads') }}</router-link>
       </div>
 
       <div class="navbar-end">
         <div class="navbar-item mr-2">
           <div v-if="isAuthenticated">
             <strong class="mr-3">{{ currentUser.displayName }}</strong>
-            <button class="button is-light" @click="logout">Logout</button>
+            <button class="button is-light" @click="logout">{{ $t('components.theNavbar.logout') }}</button>
           </div>
           <div v-else class="buttons">
             <router-link to="/signup" class="button is-info">
-              <strong>Sign Up</strong>
+              <strong>{{ $t('common.signUp') }}</strong>
             </router-link>
-            <router-link to="/login" class="button is-light"> Log in </router-link>
+            <router-link to="/login" class="button is-light">{{ $t('common.login') }}</router-link>
           </div>
         </div>
       </div>

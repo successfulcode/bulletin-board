@@ -14,9 +14,6 @@
         :Name="ad.Name"
       ></ads-item>
     </div>
-    <div>
-      <pre>{{ ads }}</pre>
-    </div>
   </div>
 </template>
 

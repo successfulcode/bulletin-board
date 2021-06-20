@@ -66,7 +66,6 @@ const mutations = {
   },
 
   [SET_MESSAGES](state, messages) {
-    console.log('messages', messages);
     const newMessages = Object.keys(messages).map(id => ({...messages[id], id})).reverse()
     state.messages = newMessages;
   }
