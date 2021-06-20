@@ -1,9 +1,9 @@
 <template>
   <div class="mt-4">
-    <div>
+    <div v-if="$v.$invalid || isLoading || !consentToTheRules">
       <create-ad-alert :alert-text="$t('components.createAd.aboutFilelds')"></create-ad-alert>
     </div>
-    <form class="mt-4" @submit.prevent="onSubmit">
+    <form class="mt-4" @submit.prevent="onSubmit(); $v.$reset();">
       <div class="field">
         <label class="label">{{ $t('components.createAd.category') }}</label>
         <div class="control">
@@ -84,7 +84,7 @@
             class="button is-link"
             type="submit"
             :class="{ 'is-loading': isLoading }"
-            :disabled="isLoading || !adText || !adCategory || !consentToTheRules"
+            :disabled="$v.$invalid || isLoading || !consentToTheRules"
           >
             {{ $t('common.confirm') }}
           </button>
