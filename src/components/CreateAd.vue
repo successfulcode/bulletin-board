@@ -117,7 +117,8 @@ export default {
       consentToTheRules: false,
       adPrice: '',
       adEmail: '',
-      adTel: ''
+      adTel: '',
+      adDate: Date.now()
     };
   },
    validations: {
@@ -130,11 +131,12 @@ export default {
   methods: {
     onSubmit() {
       const newMessage = {
-        adCategory: this.adCategory,
-        adText: this.adText,
-        adPrice: this.adPrice,
-        adEmail: this.adEmail,
-        adTel: this.adTel
+        Category: this.adCategory,
+        Text: this.adText,
+        Price: this.adPrice,
+        Email: this.adEmail,
+        Tel: this.adTel,
+        Date: this.adDate
       };
       this.$emit('addMessage', newMessage);
       console.log('addMessage', newMessage);
