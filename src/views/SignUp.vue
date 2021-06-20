@@ -1,7 +1,7 @@
 <template>
-  <div class="columns is-flex is-justify-content-center">
+  <div class="columns is-flex is-justify-content-center mt-5">
     <form
-      class="column is-4 mt-5"
+      class="column is-5 mt-5 box"
       @submit.prevent="
         onSubmit(firstName, lastName, email, password);
         $v.$reset();
