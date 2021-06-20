@@ -3,7 +3,7 @@
     <div v-show="isLoading" class="has-text-centered">
       <spinner></spinner>
     </div>
-    <div v-if="ads">
+    <div v-if="ads.length > 0">
       <div v-for="ad in ads" :key="ad.id" class="mt-4">
         <ads-item
           :category="ad.Category"
