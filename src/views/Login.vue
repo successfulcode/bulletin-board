@@ -88,11 +88,11 @@
       </div>
       <div class="mt-2 has-text-centered">
         <p>
-          {{ $t('components.login.dontHaveAnAccount') }}{{' '}}{{ $t('components.login.create') }} 
+          {{ $t('components.login.dontHaveAnAccount') }}{{ ' ' }}{{ $t('components.login.create') }}
           <strong>
             <router-link to="/signup">
               {{ $t('components.login.here') }}
-            </router-link> 
+            </router-link>
           </strong>
         </p>
       </div>

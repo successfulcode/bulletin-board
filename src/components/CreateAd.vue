@@ -3,12 +3,22 @@
     <div v-if="$v.$invalid || isLoading || !consentToTheRules">
       <create-ad-alert :alert-text="$t('components.createAd.aboutFilelds')"></create-ad-alert>
     </div>
-    <form class="mt-4" @submit.prevent="onSubmit(); $v.$reset();">
+    <form
+      class="mt-4"
+      @submit.prevent="
+        onSubmit();
+        $v.$reset();
+      "
+    >
       <div class="field">
         <label class="label">{{ $t('components.createAd.category') }}</label>
         <div class="control">
           <div class="select">
-            <select v-model="$v.adCategory.$model" class="input" :class="{'is-danger': $v.adCategory.$error, 'is-success': !$v.adCategory.$invalid }">
+            <select
+              v-model="$v.adCategory.$model"
+              class="input"
+              :class="{ 'is-danger': $v.adCategory.$error, 'is-success': !$v.adCategory.$invalid }"
+            >
               <option value="" disabled>
                 ---{{ $t('components.createAd.selectCategory') }}---
               </option>
@@ -29,7 +39,7 @@
           <textarea
             v-model="$v.adText.$model"
             class="textarea"
-            :class="{'is-danger': $v.adText.$error, 'is-success': !$v.adText.$invalid }"
+            :class="{ 'is-danger': $v.adText.$error, 'is-success': !$v.adText.$invalid }"
             :placeholder="$t('components.createAd.adText')"
           ></textarea>
         </div>
@@ -51,7 +61,7 @@
             v-model="$v.adPrice.$model"
             name="price"
             class="input"
-            :class="{'is-danger': $v.adPrice.$error, 'is-success': !$v.adPrice.$invalid }"
+            :class="{ 'is-danger': $v.adPrice.$error, 'is-success': !$v.adPrice.$invalid }"
             type="number"
             :placeholder="$t('components.createAd.price')"
           />
@@ -59,20 +69,22 @@
         </div>
         <label for="price" class="label mt-5 ml-1 mr-5">{{ $t('components.createAd.eur') }}</label>
         <div class="column is-3">
-          <input 
-            v-model="$v.adEmail.$model" 
-            class="input mr-4" 
-            :class="{'is-danger': $v.adEmail.$error, 'is-success': !$v.adEmail.$invalid }" 
-            type="text" :placeholder="'Email'" 
+          <input
+            v-model="$v.adEmail.$model"
+            class="input mr-4"
+            :class="{ 'is-danger': $v.adEmail.$error, 'is-success': !$v.adEmail.$invalid }"
+            type="text"
+            :placeholder="'Email'"
           />
           <p class="help">{{ $t('components.createAd.aboutEmail') }}</p>
         </div>
         <div class="column is-3">
-          <input 
-            v-model="$v.adTel.$model" 
-            class="input" 
-            :class="{'is-danger': $v.adTel.$error, 'is-success': !$v.adTel.$invalid }"  
-            type="text" :placeholder="'Tel'" 
+          <input
+            v-model="$v.adTel.$model"
+            class="input"
+            :class="{ 'is-danger': $v.adTel.$error, 'is-success': !$v.adTel.$invalid }"
+            type="text"
+            :placeholder="'Tel'"
           />
           <p class="help">{{ $t('components.createAd.aboutTel') }}</p>
         </div>
@@ -109,7 +121,7 @@ import { required, minLength, email } from 'vuelidate/lib/validators';
 export default {
   name: 'CreateAd',
   components: { CreateAdMessages, CreateAdAlert },
-  props: { message: Object, isLoading: Boolean },
+  props: { message: Object, isLoading: Boolean, currentUser: String },
   data() {
     return {
       adCategory: '',
@@ -121,7 +133,7 @@ export default {
       adDate: Date.now()
     };
   },
-   validations: {
+  validations: {
     adCategory: { required },
     adText: { required },
     adPrice: { required },
@@ -136,10 +148,10 @@ export default {
         Price: this.adPrice,
         Email: this.adEmail,
         Tel: this.adTel,
-        Date: this.adDate
+        Date: this.adDate,
+        name: this.currentUser
       };
       this.$emit('addMessage', newMessage);
-      console.log('addMessage', newMessage);
       this.clear();
     },
     clear() {
