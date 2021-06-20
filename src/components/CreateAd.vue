@@ -1,7 +1,10 @@
 <template>
   <div class="mt-4">
     <div v-if="$v.$invalid || isLoading || !consentToTheRules">
-      <create-ad-alert :currentUser="`${$t('components.createAd.hello')} ${currentUser}!`" :alertText="$t('components.createAd.aboutFilelds')"></create-ad-alert>
+      <create-ad-alert
+        :current-user="`${$t('components.createAd.hello')} ${currentUser}!`"
+        :alert-text="$t('components.createAd.aboutFilelds')"
+      ></create-ad-alert>
     </div>
     <form
       class="mt-4"

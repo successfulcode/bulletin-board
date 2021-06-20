@@ -1,5 +1,9 @@
 <template>
-  <div class="lds-facebook"><div></div><div></div><div></div></div>
+  <div class="lds-facebook">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
 </template>
 
 <style scoped>
@@ -34,7 +38,8 @@
     top: 8px;
     height: 64px;
   }
-  50%, 100% {
+  50%,
+  100% {
     top: 24px;
     height: 32px;
   }

@@ -1,6 +1,11 @@
 <template>
   <div>
-    <create-ad :message="newMessage" :is-loading="isLoading" :currentUser="currentUser.displayName" @addMessage="addMessage"></create-ad>
+    <create-ad
+      :message="newMessage"
+      :is-loading="isLoading"
+      :current-user="currentUser.displayName"
+      @addMessage="addMessage"
+    ></create-ad>
   </div>
 </template>
 

@@ -9,11 +9,16 @@
       <div class="media-content">
         <div class="content">
           <p>
-            <strong>{{Name}}</strong> <small>{{$t('common.email')}}.:{{' '}}{{Email}}</small> <small>{{$t('common.tel')}}.:{{' '}}{{Tel}}</small> <small>{{$moment(AdDate).format("YYYY-MM-DD")}}</small>
+            <strong>{{ Name }}</strong>
+            <small>{{ $t('common.email') }}.:{{ ' ' }}{{ Email }}</small>
+            <small>{{ $t('common.tel') }}.:{{ ' ' }}{{ Tel }}</small>
+            <small>{{ $moment(AdDate).format('YYYY-MM-DD') }}</small>
             <br />
-            {{Text}}
+            {{ Text }}
             <br />
-            <strong>{{ $t('common.price') }}:{{' '}}{{Price}}{{' '}}{{ $t('common.eur') }}</strong>
+            <strong
+              >{{ $t('common.price') }}:{{ ' ' }}{{ Price }}{{ ' ' }}{{ $t('common.eur') }}</strong
+            >
           </p>
         </div>
         <nav class="level is-mobile">
@@ -43,7 +48,7 @@
 <script>
 export default {
   name: 'AdsItem',
-  props: ['Category', 'Text', 'Price', 'Email', 'Tel', 'AdDate','Name']
+  props: ['Category', 'Text', 'Price', 'Email', 'Tel', 'AdDate', 'Name']
 };
 </script>
 

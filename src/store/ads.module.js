@@ -62,11 +62,13 @@ const actions = {
 const mutations = {
   [SET_NEW_MESSAGE](state, newMessage) {
     state.newMessage = newMessage;
-    state.messages = [newMessage, ...state.messages]
+    state.messages = [newMessage, ...state.messages];
   },
 
   [SET_MESSAGES](state, messages) {
-    const newMessages = Object.keys(messages).map(id => ({...messages[id], id})).reverse()
+    const newMessages = Object.keys(messages)
+      .map((id) => ({ ...messages[id], id }))
+      .reverse();
     state.messages = newMessages;
   }
 };

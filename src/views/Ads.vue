@@ -3,15 +3,15 @@
     <div v-show="isLoading" class="has-text-centered">
       <spinner></spinner>
     </div>
-    <div class="mt-4" v-for="ad in ads" :key="ad.id">
-      <ads-item 
-        :Category="ad.Category" 
-        :Text="ad.Text"  
-        :Price="ad.Price" 
-        :Email="ad.Email" 
-        :Tel="ad.Tel" 
-        :AdDate="ad.Date" 
-        :Name="ad.Name"
+    <div v-for="ad in ads" :key="ad.id" class="mt-4">
+      <ads-item
+        :category="ad.Category"
+        :text="ad.Text"
+        :price="ad.Price"
+        :email="ad.Email"
+        :tel="ad.Tel"
+        :ad-date="ad.Date"
+        :name="ad.Name"
       ></ads-item>
     </div>
   </div>
