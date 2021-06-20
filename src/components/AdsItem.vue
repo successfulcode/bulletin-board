@@ -9,11 +9,11 @@
       <div class="media-content">
         <div class="content">
           <p>
-            <strong>{{Name}}</strong> <small>{{Email}}</small> <small>{{Tel}}</small> <small>{{AdDate}}</small>
+            <strong>{{Name}}</strong> <small>{{$t('common.email')}}.:{{' '}}{{Email}}</small> <small>{{$t('common.tel')}}.:{{' '}}{{Tel}}</small> <small>{{$moment(AdDate).format("YYYY-MM-DD")}}</small>
             <br />
             {{Text}}
             <br />
-            <strong>Kaina: {{Price}} Eur</strong>
+            <strong>{{ $t('common.price') }}:{{' '}}{{Price}}{{' '}}{{ $t('common.eur') }}</strong>
           </p>
         </div>
         <nav class="level is-mobile">

@@ -7,7 +7,10 @@
       "email": "El.paštas",
       "fieldIsrequired": "Šis laukas privalomas",
       "confirm": "Patvirtinti",
-      "cancel": "Atšaukti"
+      "cancel": "Atšaukti",
+      "price": "Kaina",
+      "eur": "Eur",
+      "tel": "Tel"
     },
     "components": {
       "login": {
@@ -40,16 +43,13 @@
         "ad": "Skelbimas",
         "iAgreeWhith": "Sutinku su",
         "rules": "taisyklėmis",
-        "price": "Kaina",
-        "eur": "Eur",
         "aboutPrice": "Įveskite galutinę skelbimo kainą",
         "aboutFilelds": "Kad, galėtumete patvirtinti skelbimą, prašau užpildykite visus laukus (kategorija, skelbimo tekstą, kaina). Taip pat prašau, patvirtinkite, kad sutinkate su mūsų tinklalapio taisyklėmis. Primename, kad Jūs asmeniškai esate atsakingi už skeligimo turinį.",
-        "email": "El. paštas",
         "aboutEmail": "Įveskite El.paštą, kuris matysis skelbime",
-        "tel": "Tel.",
         "aboutTel": "Įveskite telefono numerį, kuris matysis skelbime",
         "hello": "Sveiki"
-      }
+      },
+      "adsItem": {}
     }
   }
 }

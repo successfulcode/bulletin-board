@@ -63,18 +63,18 @@
             class="input"
             :class="{ 'is-danger': $v.adPrice.$error, 'is-success': !$v.adPrice.$invalid }"
             type="number"
-            :placeholder="$t('components.createAd.price')"
+            :placeholder="$t('common.price')"
           />
           <p class="help">{{ $t('components.createAd.aboutPrice') }}</p>
         </div>
-        <label for="price" class="label mt-5 ml-1 mr-5">{{ $t('components.createAd.eur') }}</label>
+        <label for="price" class="label mt-5 ml-1 mr-5">{{ $t('common.eur') }}</label>
         <div class="column is-3">
           <input
             v-model="$v.adEmail.$model"
             class="input mr-4"
             :class="{ 'is-danger': $v.adEmail.$error, 'is-success': !$v.adEmail.$invalid }"
             type="text"
-            :placeholder="'Email'"
+            :placeholder="$t('common.email')"
           />
           <p class="help">{{ $t('components.createAd.aboutEmail') }}</p>
         </div>
@@ -84,7 +84,7 @@
             class="input"
             :class="{ 'is-danger': $v.adTel.$error, 'is-success': !$v.adTel.$invalid }"
             type="text"
-            :placeholder="'Tel'"
+            :placeholder="$t('common.tel')"
           />
           <p class="help">{{ $t('components.createAd.aboutTel') }}</p>
         </div>
@@ -153,6 +153,7 @@ export default {
       };
       this.$emit('addMessage', newMessage);
       this.clear();
+      this.$router.push('ads');
     },
     clear() {
       this.adCategory = '';

@@ -13,6 +13,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import Vuelidate from 'vuelidate';
+import VueMoment from 'vue-moment';
 
 library.add(faLock, faEnvelope, faExclamationTriangle, faCheck, faUser);
 
@@ -21,6 +22,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false;
 
 Vue.use(Vuelidate);
+Vue.use(VueMoment);
 
 new Vue({
   router,
