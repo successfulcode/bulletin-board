@@ -1,7 +1,7 @@
 <template>
   <article class="message">
     <div class="message-body">
-      {{ AlertText }}
+      <strong>{{currentUser}}</strong>{{' '}}{{ alertText }}
     </div>
   </article>
 </template>
@@ -9,7 +9,7 @@
 <script>
 export default {
   name: 'CreateAdAlert',
-  props: { AlertText: String }
+  props: { alertText: String, currentUser: String }
 };
 </script>
 

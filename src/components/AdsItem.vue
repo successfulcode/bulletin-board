@@ -9,10 +9,11 @@
       <div class="media-content">
         <div class="content">
           <p>
-            <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+            <strong>{{Name}}</strong> <small>{{Email}}</small> <small>{{Tel}}</small> <small>{{AdDate}}</small>
             <br />
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa
-            fringilla egestas. Nullam condimentum luctus turpis.
+            {{Text}}
+            <br />
+            <strong>Kaina: {{Price}} Eur</strong>
           </p>
         </div>
         <nav class="level is-mobile">
@@ -41,7 +42,8 @@
 
 <script>
 export default {
-  name: 'AdsItem'
+  name: 'AdsItem',
+  props: ['Category', 'Text', 'Price', 'Email', 'Tel', 'AdDate','Name']
 };
 </script>
 

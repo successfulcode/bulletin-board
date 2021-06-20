@@ -1,7 +1,7 @@
 <template>
   <div class="mt-4">
     <div v-if="$v.$invalid || isLoading || !consentToTheRules">
-      <create-ad-alert :alert-text="$t('components.createAd.aboutFilelds')"></create-ad-alert>
+      <create-ad-alert :currentUser="`${$t('components.createAd.hello')} ${currentUser}!`" :alertText="$t('components.createAd.aboutFilelds')"></create-ad-alert>
     </div>
     <form
       class="mt-4"
@@ -149,7 +149,7 @@ export default {
         Email: this.adEmail,
         Tel: this.adTel,
         Date: this.adDate,
-        name: this.currentUser
+        Name: this.currentUser
       };
       this.$emit('addMessage', newMessage);
       this.clear();

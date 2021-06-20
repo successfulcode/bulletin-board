@@ -3,13 +3,18 @@
     <div v-show="isLoading" class="has-text-centered">
       <spinner></spinner>
     </div>
-    <div class="mt-4">
-      <ads-item></ads-item>
-      <ads-item></ads-item>
+    <div class="mt-4" v-for="ad in ads" :key="ad.id">
+      <ads-item 
+        :Category="ad.Category" 
+        :Text="ad.Text"  
+        :Price="ad.Price" 
+        :Email="ad.Email" 
+        :Tel="ad.Tel" 
+        :AdDate="ad.Date" 
+        :Name="ad.Name"
+      ></ads-item>
     </div>
     <div>
-      <button @click="getAds">GET DATA TEST</button>
-      <p class="mt-4">For tests...</p>
       <pre>{{ ads }}</pre>
     </div>
   </div>

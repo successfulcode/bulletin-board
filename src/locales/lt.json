@@ -47,7 +47,8 @@
         "email": "El. paštas",
         "aboutEmail": "Įveskite El.paštą, kuris matysis skelbime",
         "tel": "Tel.",
-        "aboutTel": "Įveskite telefono numerį, kuris matysis skelbime"
+        "aboutTel": "Įveskite telefono numerį, kuris matysis skelbime",
+        "hello": "Sveiki"
       }
     }
   }
