@@ -19,6 +19,9 @@ const getters = {
   },
   getMessages(state) {
     return state.messages;
+  },
+  getCurrentUserMessages(state, id) {
+    return state.messages.filte((msg) => msg.id === id);
   }
 };
 

@@ -21,7 +21,10 @@
           $t('components.theNavbar.createAd')
         }}</router-link>
         <router-link to="/ads" class="navbar-item">{{
-          $t('components.theNavbar.ads')
+          $t('components.theNavbar.allAds')
+        }}</router-link>
+        <router-link to="/mineads" class="navbar-item">{{
+          $t('components.theNavbar.mineAds')
         }}</router-link>
       </div>
 
