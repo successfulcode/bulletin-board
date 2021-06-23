@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item has-text-dark" href="#!">BULLETIN</a>
+      <router-link class="navbar-item has-text-dark" to="/">BULLETIN</router-link>
       <button
         role="button"
         class="navbar-burger"
@@ -16,7 +16,7 @@
     </div>
 
     <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
+      <div v-if="isAuthenticated" class="navbar-start">
         <router-link to="/dashboard" class="navbar-item">{{
           $t('components.theNavbar.createAd')
         }}</router-link>
@@ -27,21 +27,26 @@
           $t('components.theNavbar.mineAds')
         }}</router-link>
       </div>
+      <div v-else class="navbar-start">
+        <router-link to="/ads" class="navbar-item">{{
+          $t('components.theNavbar.allAds')
+        }}</router-link>
+      </div>
+    </div>
 
-      <div class="navbar-end">
-        <div class="navbar-item mr-2">
-          <div v-if="isAuthenticated">
-            <strong class="mr-3">{{ currentUser.displayName }}</strong>
-            <button class="button is-light" @click="logout">
-              {{ $t('components.theNavbar.logout') }}
-            </button>
-          </div>
-          <div v-else class="buttons">
-            <router-link to="/signup" class="button is-info">
-              <strong>{{ $t('common.signUp') }}</strong>
-            </router-link>
-            <router-link to="/login" class="button is-light">{{ $t('common.login') }}</router-link>
-          </div>
+    <div class="navbar-end">
+      <div class="navbar-item mr-2">
+        <div v-if="isAuthenticated">
+          <strong class="mr-3">{{ currentUser.displayName }}</strong>
+          <button class="button is-light" @click="logout">
+            {{ $t('components.theNavbar.logout') }}
+          </button>
+        </div>
+        <div v-else class="buttons">
+          <router-link to="/signup" class="button is-info">
+            <strong>{{ $t('common.signUp') }}</strong>
+          </router-link>
+          <router-link to="/login" class="button is-light">{{ $t('common.login') }}</router-link>
         </div>
       </div>
     </div>

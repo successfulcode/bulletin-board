@@ -234,6 +234,10 @@ export default {
   methods: {
     onSubmit(firstName, lastName, email, password) {
       this.$store.dispatch(SIGN_UP, { firstName, lastName, email, password });
+    }
+  },
+  watch: {
+    isAuthenticated: function () {
       this.isAuthenticated && this.$router.push('dashboard');
     }
   }

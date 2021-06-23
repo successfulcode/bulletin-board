@@ -134,18 +134,12 @@ export default {
   methods: {
     onSubmit(email, password) {
       this.$store.dispatch(LOGIN, { email, password });
-      this.email = '';
-      this.password = '';
-      this.$router.push('dashboard');
     }
-    // checkAuth() {
-    //   if (this.isAuthenticated) {
-    //     this.$router.push('dashboard');
-    //   }
-    // }
+  },
+  watch: {
+    isAuthenticated: function () {
+      this.isAuthenticated && this.$router.push('dashboard');
+    }
   }
-  // created() {
-  //   this.checkAuth();
-  // }
 };
 </script>
