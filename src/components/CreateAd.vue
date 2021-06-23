@@ -25,12 +25,18 @@
               <option value="" disabled>
                 ---{{ $t('components.createAd.selectCategory') }}---
               </option>
-              <option value="Nekilnojamasis turta">
+              <option :value="$t('components.createAd.realEstate')">
                 {{ $t('components.createAd.realEstate') }}
               </option>
-              <option value="Transportas">{{ $t('components.createAd.transport') }}</option>
-              <option value="Darbas, verslas">{{ $t('components.createAd.workBusiness') }}</option>
-              <option value="Namai, buitis">{{ $t('components.createAd.homHousehold') }}</option>
+              <option :value="$t('components.createAd.transport')">
+                {{ $t('components.createAd.transport') }}
+              </option>
+              <option :value="$t('components.createAd.workBusiness')">
+                {{ $t('components.createAd.workBusiness') }}
+              </option>
+              <option :value="$t('components.createAd.homHousehold')">
+                {{ $t('components.createAd.homHousehold') }}
+              </option>
             </select>
           </div>
         </div>
