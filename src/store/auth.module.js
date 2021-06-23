@@ -79,6 +79,7 @@ const mutations = {
   [SET_AUTH](state, user, idToken, refreshToken) {
     state.user = user;
     state.isAuthenticated = true;
+    localStorage.setItem('localId', user.localId);
     localStorage.setItem('idToken', idToken);
     localStorage.setItem('refreshToken', refreshToken);
   },
@@ -86,6 +87,7 @@ const mutations = {
     state.isAuthenticated = false;
     state.errors = null;
     state.user = {};
+    localStorage.removeItem('localId');
     localStorage.removeItem('idToken');
     localStorage.removeItem('refreshToken');
   },
