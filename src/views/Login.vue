@@ -111,7 +111,7 @@ export default {
   data() {
     return {
       email: 'test@test.lt',
-      password: '123456'
+      password: 'Test123456'
     };
   },
   validations: {
@@ -134,10 +134,18 @@ export default {
   methods: {
     onSubmit(email, password) {
       this.$store.dispatch(LOGIN, { email, password });
-      this.isAuthenticated && this.$router.push('dashboard');
       this.email = '';
       this.password = '';
+      this.$router.push('dashboard');
     }
+    // checkAuth() {
+    //   if (this.isAuthenticated) {
+    //     this.$router.push('dashboard');
+    //   }
+    // }
   }
+  // created() {
+  //   this.checkAuth();
+  // }
 };
 </script>

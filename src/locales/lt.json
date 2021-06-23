@@ -51,8 +51,9 @@
       },
       "theNavbar": {
         "logout": "Atsijungti",
-        "ads": "Skelbimai",
-        "createAd": "Įdėti skelbimą"
+        "allAds": "Visi skelbimai",
+        "createAd": "Įdėti skelbimą",
+        "mineAds": "Mano skelbimai"
       },
       "ads": {
         "noAds": "Skelbimų nėra..."
