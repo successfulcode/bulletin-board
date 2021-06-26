@@ -17,25 +17,25 @@
       </div>
     </div>
     <div v-else>
-      {{ $t('components.ads.noAds') }}
+      {{ $t("components.ads.noAds") }}
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import { GET_ADS } from '@/store/actions.types';
-import Spinner from '@/assets/Spinner.vue';
-import AdsItem from '../components/AdsItem.vue';
+import { mapState } from "vuex";
+import { GET_ADS } from "@/store/actions.types";
+import Spinner from "@/assets/Spinner.vue";
+import AdsItem from "../components/AdsItem.vue";
 
 export default {
-  name: 'Ads',
+  name: "Ads",
   components: { Spinner, AdsItem },
   computed: {
     ...mapState({
       ads: (state) => state.ads.messages,
-      isLoading: (state) => state.auth.isLoading
-    })
+      isLoading: (state) => state.auth.isLoading,
+    }),
   },
   mounted() {
     this.getAds();
@@ -43,7 +43,7 @@ export default {
   methods: {
     getAds() {
       this.$store.dispatch(GET_ADS);
-    }
-  }
+    },
+  },
 };
 </script>

@@ -3,11 +3,11 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
-  name: 'MineAds',
+  name: "MineAds",
   computed: {
-    ...mapGetters(['getCurrentUserMessages'])
-  }
+    ...mapGetters(["getCurrentUserMessages"]),
+  },
 };
 </script>

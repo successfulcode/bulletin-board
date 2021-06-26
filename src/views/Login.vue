@@ -7,14 +7,17 @@
         $v.$reset();
       "
     >
-      <div class="has-text-centered is-size-3">{{ $t('common.login') }}</div>
+      <div class="has-text-centered is-size-3">{{ $t("common.login") }}</div>
       <div>
         <div class="field mt-5">
           <div class="control has-icons-left has-icons-right">
             <input
               v-model.trim="$v.email.$model"
               class="input"
-              :class="{ 'is-danger': $v.email.$error, 'is-success': !$v.email.$invalid }"
+              :class="{
+                'is-danger': $v.email.$error,
+                'is-success': !$v.email.$invalid,
+              }"
               type="email"
               :placeholder="$t('common.email')"
               :disabled="isLoading"
@@ -35,11 +38,17 @@
               />
             </span>
           </div>
-          <p v-if="$v.email.$dirty && !$v.email.required" class="help is-danger">
-            {{ $t('common.fieldIsrequired') }}
+          <p
+            v-if="$v.email.$dirty && !$v.email.required"
+            class="help is-danger"
+          >
+            {{ $t("common.fieldIsrequired") }}
           </p>
-          <p v-else-if="$v.email.$dirty && !$v.email.email" class="help is-danger">
-            {{ $t('components.login.invalidEmail') }}
+          <p
+            v-else-if="$v.email.$dirty && !$v.email.email"
+            class="help is-danger"
+          >
+            {{ $t("components.login.invalidEmail") }}
           </p>
         </div>
         <div class="field">
@@ -47,7 +56,10 @@
             <input
               v-model.trim="$v.password.$model"
               class="input"
-              :class="{ 'is-danger': $v.password.$error, 'is-success': !$v.password.$invalid }"
+              :class="{
+                'is-danger': $v.password.$error,
+                'is-success': !$v.password.$invalid,
+              }"
               type="password"
               :placeholder="$t('common.password')"
               :disabled="isLoading"
@@ -68,11 +80,17 @@
               />
             </span>
           </div>
-          <p v-if="$v.password.$dirty && !$v.password.required" class="help is-danger">
-            {{ $t('common.fieldIsrequired') }}
+          <p
+            v-if="$v.password.$dirty && !$v.password.required"
+            class="help is-danger"
+          >
+            {{ $t("common.fieldIsrequired") }}
           </p>
-          <p v-else-if="$v.password.$dirty && !$v.password.minLength" class="help is-danger">
-            {{ $t('components.login.checkPassword') }}
+          <p
+            v-else-if="$v.password.$dirty && !$v.password.minLength"
+            class="help is-danger"
+          >
+            {{ $t("components.login.checkPassword") }}
           </p>
         </div>
       </div>
@@ -83,15 +101,16 @@
           type="submit"
           :disabled="$v.$invalid || isLoading"
         >
-          {{ $t('components.login.confirm') }}
+          {{ $t("components.login.confirm") }}
         </button>
       </div>
       <div class="mt-2 has-text-centered">
         <p>
-          {{ $t('components.login.dontHaveAnAccount') }}{{ ' ' }}{{ $t('components.login.create') }}
+          {{ $t("components.login.dontHaveAnAccount") }}{{ " "
+          }}{{ $t("components.login.create") }}
           <strong>
             <router-link to="/signup">
-              {{ $t('components.login.here') }}
+              {{ $t("components.login.here") }}
             </router-link>
           </strong>
         </p>
@@ -101,45 +120,45 @@
 </template>
 
 <script>
-import { required, minLength, email } from 'vuelidate/lib/validators';
-import { mapState } from 'vuex';
-import { LOGIN } from '@/store/actions.types';
+import { required, minLength, email } from "vuelidate/lib/validators";
+import { mapState } from "vuex";
+import { LOGIN } from "@/store/actions.types";
 
 export default {
-  name: 'Login',
+  name: "Login",
 
   data() {
     return {
-      email: 'test@test.lt',
-      password: 'Test123456'
+      email: "test@test.lt",
+      password: "Test123456",
     };
   },
   validations: {
     email: {
       required,
-      email
+      email,
     },
     password: {
       required,
-      minLength: minLength(6)
-    }
+      minLength: minLength(6),
+    },
   },
   computed: {
     ...mapState({
       isAuthenticated: (state) => state.auth.isAuthenticated,
       isLoading: (state) => state.auth.isLoading,
-      isErrors: (state) => state.auth.errors
-    })
+      isErrors: (state) => state.auth.errors,
+    }),
+  },
+  watch: {
+    isAuthenticated: function () {
+      this.isAuthenticated && this.$router.push("dashboard");
+    },
   },
   methods: {
     onSubmit(email, password) {
       this.$store.dispatch(LOGIN, { email, password });
-    }
+    },
   },
-  watch: {
-    isAuthenticated: function () {
-      this.isAuthenticated && this.$router.push('dashboard');
-    }
-  }
 };
 </script>

@@ -1,16 +1,16 @@
-import ApiService from '@/api';
-import { ADD_MESSAGE, GET_ADS } from './actions.types';
+import ApiService from "@/api";
+import { ADD_MESSAGE, GET_ADS } from "./actions.types";
 import {
   SET_NEW_MESSAGE,
   SET_MESSAGES,
   ISLOADING,
   ISLOADING_FALSE,
-  SET_ERROR
-} from './mutations.types';
+  SET_ERROR,
+} from "./mutations.types";
 
 const state = {
   newMessage: {},
-  messages: []
+  messages: [],
 };
 
 const getters = {
@@ -21,9 +21,9 @@ const getters = {
     return state.messages;
   },
   getCurrentUserMessages(state) {
-    const id = localStorage.getItem('localId');
+    const id = localStorage.getItem("localId");
     return state.messages.filter((msg) => msg.id === id);
-  }
+  },
 };
 
 const actions = {
@@ -32,13 +32,13 @@ const actions = {
       commit(ISLOADING);
       const {
         data: { name },
-        status
+        status,
       } = await ApiService.createAd(message);
       if (status === 200 && name) {
         const id = { id: name };
         const newMessage = {
           ...message,
-          ...id
+          ...id,
         };
         commit(SET_NEW_MESSAGE, newMessage);
         commit(ISLOADING_FALSE);
@@ -60,7 +60,7 @@ const actions = {
       commit(SET_ERROR, error.message);
       commit(ISLOADING_FALSE);
     }
-  }
+  },
 };
 
 const mutations = {
@@ -74,12 +74,12 @@ const mutations = {
       .map((id) => ({ ...messages[id], id }))
       .reverse();
     state.messages = newMessages;
-  }
+  },
 };
 
 export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
 };
