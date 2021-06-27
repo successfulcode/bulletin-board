@@ -14,13 +14,13 @@ const state = {
 };
 
 const getters = {
-  getNewMessage(state) {
+  newAd(state) {
     return state.newMessage;
   },
-  getMessages(state) {
+  ads(state) {
     return state.messages;
   },
-  getCurrentUserAds(state, rootState) {
+  currentUserAds(state, rootState) {
     console.log('getCurrentUserAds', rootState.currentUser.localId)
     return state.messages.filter((ad) => ad.userLocalId === rootState.currentUser.localId);
   }

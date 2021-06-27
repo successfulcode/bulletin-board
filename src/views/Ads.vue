@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import { GET_ADS } from '@/store/actions.types';
 import Spinner from '@/assets/Spinner.vue';
 import AdsItem from '../components/AdsItem.vue';
@@ -33,9 +33,9 @@ export default {
   components: { Spinner, AdsItem },
   computed: {
     ...mapState({
-      ads: (state) => state.ads.messages,
       isLoading: (state) => state.auth.isLoading
-    })
+    }),
+    ...mapGetters(['ads']),
   },
   methods: {
     getAds() {
