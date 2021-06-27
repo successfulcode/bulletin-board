@@ -10,7 +10,6 @@
 </template>
 
 <script>
-// import axios from 'axios';
 import CreateAd from '@/components/CreateAd.vue';
 import { mapState, mapGetters } from 'vuex';
 import { ADD_MESSAGE } from '@/store/actions.types';

@@ -131,14 +131,14 @@ export default {
       isErrors: (state) => state.auth.errors
     })
   },
-  methods: {
-    onSubmit(email, password) {
-      this.$store.dispatch(LOGIN, { email, password });
-    }
-  },
   watch: {
     isAuthenticated: function () {
       this.isAuthenticated && this.$router.push('dashboard');
+    }
+  },
+  methods: {
+    onSubmit(email, password) {
+      this.$store.dispatch(LOGIN, { email, password });
     }
   }
 };
