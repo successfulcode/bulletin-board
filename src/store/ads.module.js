@@ -21,7 +21,6 @@ const getters = {
     return state.messages;
   },
   currentUserAds(state, rootState) {
-    console.log('getCurrentUserAds', rootState.currentUser.localId);
     return state.messages.filter((ad) => ad.userLocalId === rootState.currentUser.localId);
   }
 };
