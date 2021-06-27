@@ -1,10 +1,13 @@
 <template>
   <div>
+    <div>
+      <pre>{{ currentUserAds }}</pre>
+    </div>
     <div v-show="isLoading" class="has-text-centered">
       <spinner></spinner>
     </div>
-    <div v-if="ads.length > 0">
-      <div v-for="ad in ads" :key="ad.id" class="mt-4">
+    <div v-if="currentUserAds.length > 0">
+      <div v-for="ad in currentUserAds" :key="ad.id" class="mt-4">
         <ads-item
           :category="ad.Category"
           :text="ad.Text"
@@ -23,18 +26,19 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
-import { GET_ADS } from '@/store/actions.types';
+import { mapGetters, mapState } from 'vuex';
+import AdsItem from '@/components/AdsItem.vue';
 import Spinner from '@/assets/Spinner.vue';
-import AdsItem from '../components/AdsItem.vue';
+import { GET_ADS } from '@/store/actions.types';
+
 export default {
-  name: 'Ads',
+  name: 'CurrentUserAds',
   components: { Spinner, AdsItem },
   computed: {
+    ...mapGetters(['currentUserAds']),
     ...mapState({
       isLoading: (state) => state.auth.isLoading
-    }),
-    ...mapGetters(['ads'])
+    })
   },
   mounted() {
     this.getAds();

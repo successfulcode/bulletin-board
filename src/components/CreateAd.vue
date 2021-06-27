@@ -14,7 +14,7 @@
       "
     >
       <div class="field">
-        <label class="label">{{ $t("components.createAd.category") }}</label>
+        <label class="label">{{ $t('components.createAd.category') }}</label>
         <div class="control">
           <div class="select">
             <select
@@ -22,23 +22,23 @@
               class="input"
               :class="{
                 'is-danger': $v.adCategory.$error,
-                'is-success': !$v.adCategory.$invalid,
+                'is-success': !$v.adCategory.$invalid
               }"
             >
               <option value="" disabled>
-                ---{{ $t("components.createAd.selectCategory") }}---
+                ---{{ $t('components.createAd.selectCategory') }}---
               </option>
               <option :value="$t('components.createAd.realEstate')">
-                {{ $t("components.createAd.realEstate") }}
+                {{ $t('components.createAd.realEstate') }}
               </option>
               <option :value="$t('components.createAd.transport')">
-                {{ $t("components.createAd.transport") }}
+                {{ $t('components.createAd.transport') }}
               </option>
               <option :value="$t('components.createAd.workBusiness')">
-                {{ $t("components.createAd.workBusiness") }}
+                {{ $t('components.createAd.workBusiness') }}
               </option>
               <option :value="$t('components.createAd.homHousehold')">
-                {{ $t("components.createAd.homHousehold") }}
+                {{ $t('components.createAd.homHousehold') }}
               </option>
             </select>
           </div>
@@ -46,14 +46,14 @@
       </div>
 
       <div class="field">
-        <label class="label">{{ $t("components.createAd.ad") }}</label>
+        <label class="label">{{ $t('components.createAd.ad') }}</label>
         <div class="control">
           <textarea
             v-model="$v.adText.$model"
             class="textarea"
             :class="{
               'is-danger': $v.adText.$error,
-              'is-success': !$v.adText.$invalid,
+              'is-success': !$v.adText.$invalid
             }"
             :placeholder="$t('components.createAd.adText')"
           ></textarea>
@@ -64,8 +64,8 @@
         <div class="control">
           <label class="checkbox">
             <input v-model="consentToTheRules" type="checkbox" />
-            {{ $t("components.createAd.iAgreeWhith") }}
-            {{ " " }}<a href="#">{{ $t("components.createAd.rules") }}</a>
+            {{ $t('components.createAd.iAgreeWhith') }}
+            {{ ' ' }}<a href="#">{{ $t('components.createAd.rules') }}</a>
           </label>
         </div>
       </div>
@@ -78,28 +78,26 @@
             class="input"
             :class="{
               'is-danger': $v.adPrice.$error,
-              'is-success': !$v.adPrice.$invalid,
+              'is-success': !$v.adPrice.$invalid
             }"
             type="number"
             :placeholder="$t('common.price')"
           />
-          <p class="help">{{ $t("components.createAd.aboutPrice") }}</p>
+          <p class="help">{{ $t('components.createAd.aboutPrice') }}</p>
         </div>
-        <label for="price" class="label mt-5 ml-1 mr-5">{{
-          $t("common.eur")
-        }}</label>
+        <label for="price" class="label mt-5 ml-1 mr-5">{{ $t('common.eur') }}</label>
         <div class="column is-3">
           <input
             v-model="$v.adEmail.$model"
             class="input mr-4"
             :class="{
               'is-danger': $v.adEmail.$error,
-              'is-success': !$v.adEmail.$invalid,
+              'is-success': !$v.adEmail.$invalid
             }"
             type="text"
             :placeholder="$t('common.email')"
           />
-          <p class="help">{{ $t("components.createAd.aboutEmail") }}</p>
+          <p class="help">{{ $t('components.createAd.aboutEmail') }}</p>
         </div>
         <div class="column is-3">
           <input
@@ -107,12 +105,12 @@
             class="input"
             :class="{
               'is-danger': $v.adTel.$error,
-              'is-success': !$v.adTel.$invalid,
+              'is-success': !$v.adTel.$invalid
             }"
             type="text"
             :placeholder="$t('common.tel')"
           />
-          <p class="help">{{ $t("components.createAd.aboutTel") }}</p>
+          <p class="help">{{ $t('components.createAd.aboutTel') }}</p>
         </div>
       </div>
 
@@ -124,12 +122,12 @@
             :class="{ 'is-loading': isLoading }"
             :disabled="$v.$invalid || isLoading || !consentToTheRules"
           >
-            {{ $t("common.confirm") }}
+            {{ $t('common.confirm') }}
           </button>
         </div>
         <div class="control">
           <button class="button is-link is-light" @click.prevent="clear">
-            {{ $t("common.cancel") }}
+            {{ $t('common.cancel') }}
           </button>
         </div>
       </div>
@@ -141,22 +139,22 @@
 </template>
 
 <script>
-import CreateAdAlert from "./CreateAdAlert.vue";
-import CreateAdMessages from "./CreateAdMessages.vue";
-import { required, minLength, email } from "vuelidate/lib/validators";
+import CreateAdAlert from './CreateAdAlert.vue';
+import CreateAdMessages from './CreateAdMessages.vue';
+import { required, minLength, email } from 'vuelidate/lib/validators';
 export default {
-  name: "CreateAd",
+  name: 'CreateAd',
   components: { CreateAdMessages, CreateAdAlert },
   props: { message: Object, isLoading: Boolean, currentUser: String },
   data() {
     return {
-      adCategory: "",
-      adText: "",
+      adCategory: '',
+      adText: '',
       consentToTheRules: false,
-      adPrice: "",
-      adEmail: "",
-      adTel: "",
-      adDate: Date.now(),
+      adPrice: '',
+      adEmail: '',
+      adTel: '',
+      adDate: Date.now()
     };
   },
   validations: {
@@ -164,7 +162,7 @@ export default {
     adText: { required },
     adPrice: { required },
     adEmail: { required, email },
-    adTel: { required, minLength: minLength(9) },
+    adTel: { required, minLength: minLength(9) }
   },
   methods: {
     onSubmit() {
@@ -175,18 +173,18 @@ export default {
         Email: this.adEmail,
         Tel: this.adTel,
         Date: this.adDate,
-        Name: this.currentUser,
+        Name: this.currentUser
       };
-      this.$emit("addMessage", newMessage);
+      this.$emit('addMessage', newMessage);
       this.clear();
-      this.$router.push("ads");
+      this.$router.push('ads');
     },
     clear() {
-      this.adCategory = "";
-      this.adText = "";
-      this.adPrice = "";
-      (this.adEmail = ""), (this.adTel = ""), (this.consentToTheRules = false);
-    },
-  },
+      this.adCategory = '';
+      this.adText = '';
+      this.adPrice = '';
+      (this.adEmail = ''), (this.adTel = ''), (this.consentToTheRules = false);
+    }
+  }
 };
 </script>

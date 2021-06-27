@@ -2,15 +2,15 @@
   <article class="message">
     <div class="message-body">
       <strong>{{ currentUser }}</strong
-      >{{ " " }}{{ alertText }}
+      >{{ ' ' }}{{ alertText }}
     </div>
   </article>
 </template>
 
 <script>
 export default {
-  name: "CreateAdAlert",
-  props: { alertText: String, currentUser: String },
+  name: 'CreateAdAlert',
+  props: { alertText: String, currentUser: String }
 };
 </script>
 

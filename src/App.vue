@@ -8,13 +8,13 @@
 </template>
 
 <script>
-import Navbar from "@/components/TheNavbar.vue";
+import Navbar from '@/components/TheNavbar.vue';
 
 export default {
-  components: { Navbar },
+  components: { Navbar }
 };
 </script>
 
 <style lang="scss">
-@import "@/assets/styles.scss";
+@import '@/assets/styles.scss';
 </style>
