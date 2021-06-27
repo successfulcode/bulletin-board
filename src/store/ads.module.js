@@ -70,9 +70,8 @@ const actions = {
 
 const mutations = {
   [SET_NEW_MESSAGE](state, newMessage) {
-    console.log('newMessage', newMessage)
-    // state.newMessage = newMessage;
-    // state.messages = [newMessage, ...state.messages];
+    state.newMessage = newMessage;
+    state.messages = [newMessage, ...state.messages];
   },
 
   [SET_MESSAGES](state, messages) {
