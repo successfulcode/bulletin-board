@@ -29,18 +29,21 @@ const getters = {
 const actions = {
   async [ADD_MESSAGE]({ commit, rootState }, message) {
     try {
+      const userId = { userLocalId: rootState.auth.user.localId };
+      const adsMessage = {
+        ...message,
+        ...userId
+      };
       commit(ISLOADING);
       const {
         data: { name },
         status
-      } = await ApiService.createAd(message);
+      } = await ApiService.createAd(adsMessage);
       if (status === 200 && name) {
         const id = { id: name };
-        const userId = { userLocalId: rootState.auth.user.localId };
         const newMessage = {
           ...message,
-          ...id,
-          ...userId
+          ...id
         };
         commit(SET_NEW_MESSAGE, newMessage);
         commit(ISLOADING_FALSE);
@@ -67,8 +70,9 @@ const actions = {
 
 const mutations = {
   [SET_NEW_MESSAGE](state, newMessage) {
-    state.newMessage = newMessage;
-    state.messages = [newMessage, ...state.messages];
+    console.log('newMessage', newMessage)
+    // state.newMessage = newMessage;
+    // state.messages = [newMessage, ...state.messages];
   },
 
   [SET_MESSAGES](state, messages) {
