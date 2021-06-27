@@ -32,14 +32,18 @@ const actions = {
       };
       commit(ISLOADING);
       const { data, status } = await ApiService.loginUser(user);
-      const loggedUser = {
-        localId: data.localId,
-        email: data.email,
-        displayName: data.displayName
+      const loggedUser = { 
+        displayName: data.displayName, 
+        email: data.email, 
+        localId: data.localId, 
+        idToken: data.idToken, 
+        refreshToken: data.refreshToken
       };
+
       if (status === 200) {
-        commit(SET_AUTH, loggedUser, data.idToken, data.refreshToken);
+        commit(SET_AUTH, loggedUser );
         commit(ISLOADING_FALSE);
+        console.log('data', loggedUser);
       }
     } catch (error) {
       commit(SET_ERROR, error.message);
@@ -56,14 +60,20 @@ const actions = {
       };
       commit(ISLOADING);
       const { data, status } = await ApiService.signUpUser(newUser);
-      const loggedUser = {
-        localId: data.localId,
-        email: data.email,
-        displayName: data.displayName
+      const loggedUser = { 
+        displayName: data.displayName, 
+        email: data.email, 
+        localId: data.localId, 
+        idToken: data.idToken, 
+        refreshToken: data.refreshToken
       };
+      
+      const idToken = data.idToken
+      const refreshToken = data.refreshToken
       if (status === 200) {
-        commit(SET_AUTH, loggedUser, data.idToken, data.refreshToken);
+        commit(SET_AUTH, loggedUser, idToken, refreshToken);
         commit(ISLOADING_FALSE);
+        console.log('data', data);
       }
     } catch (error) {
       commit(SET_ERROR, error.message);
@@ -76,10 +86,11 @@ const actions = {
 };
 
 const mutations = {
-  [SET_AUTH](state, user, idToken, refreshToken) {
-    state.user = user;
+  [SET_AUTH](state, { displayName, email, localId, idToken, refreshToken }) {
+    const loggedUser = { displayName, email, localId };
+    state.user = loggedUser;
     state.isAuthenticated = true;
-    localStorage.setItem('localId', user.localId);
+    localStorage.setItem('localId', localId);
     localStorage.setItem('idToken', idToken);
     localStorage.setItem('refreshToken', refreshToken);
   },
