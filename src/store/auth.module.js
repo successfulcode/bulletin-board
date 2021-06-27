@@ -1,4 +1,3 @@
-// import axios from 'axios';
 import { LOGIN, SIGN_UP, LOGOUT } from './actions.types';
 import { SET_AUTH, PURGE_AUTH, SET_ERROR, ISLOADING, ISLOADING_FALSE } from './mutations.types';
 import ApiService from '@/api';
