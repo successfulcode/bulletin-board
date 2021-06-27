@@ -6,7 +6,7 @@
         onSubmit(email, password);
         $v.$reset();
       "
-      >
+    >
       <div class="has-text-centered is-size-3">{{ $t('common.login') }}</div>
       <div>
         <div class="field mt-5">
@@ -14,7 +14,10 @@
             <input
               v-model.trim="$v.email.$model"
               class="input"
-              :class="{ 'is-danger': $v.email.$error, 'is-success': !$v.email.$invalid }"
+              :class="{
+                'is-danger': $v.email.$error,
+                'is-success': !$v.email.$invalid
+              }"
               type="email"
               :placeholder="$t('common.email')"
               :disabled="isLoading"
@@ -47,7 +50,10 @@
             <input
               v-model.trim="$v.password.$model"
               class="input"
-              :class="{ 'is-danger': $v.password.$error, 'is-success': !$v.password.$invalid }"
+              :class="{
+                'is-danger': $v.password.$error,
+                'is-success': !$v.password.$invalid
+              }"
               type="password"
               :placeholder="$t('common.password')"
               :disabled="isLoading"

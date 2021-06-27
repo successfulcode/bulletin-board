@@ -20,7 +20,10 @@
             <select
               v-model="$v.adCategory.$model"
               class="input"
-              :class="{ 'is-danger': $v.adCategory.$error, 'is-success': !$v.adCategory.$invalid }"
+              :class="{
+                'is-danger': $v.adCategory.$error,
+                'is-success': !$v.adCategory.$invalid
+              }"
             >
               <option value="" disabled>
                 ---{{ $t('components.createAd.selectCategory') }}---
@@ -48,7 +51,10 @@
           <textarea
             v-model="$v.adText.$model"
             class="textarea"
-            :class="{ 'is-danger': $v.adText.$error, 'is-success': !$v.adText.$invalid }"
+            :class="{
+              'is-danger': $v.adText.$error,
+              'is-success': !$v.adText.$invalid
+            }"
             :placeholder="$t('components.createAd.adText')"
           ></textarea>
         </div>
@@ -70,7 +76,10 @@
             v-model="$v.adPrice.$model"
             name="price"
             class="input"
-            :class="{ 'is-danger': $v.adPrice.$error, 'is-success': !$v.adPrice.$invalid }"
+            :class="{
+              'is-danger': $v.adPrice.$error,
+              'is-success': !$v.adPrice.$invalid
+            }"
             type="number"
             :placeholder="$t('common.price')"
           />
@@ -81,7 +90,10 @@
           <input
             v-model="$v.adEmail.$model"
             class="input mr-4"
-            :class="{ 'is-danger': $v.adEmail.$error, 'is-success': !$v.adEmail.$invalid }"
+            :class="{
+              'is-danger': $v.adEmail.$error,
+              'is-success': !$v.adEmail.$invalid
+            }"
             type="text"
             :placeholder="$t('common.email')"
           />
@@ -91,7 +103,10 @@
           <input
             v-model="$v.adTel.$model"
             class="input"
-            :class="{ 'is-danger': $v.adTel.$error, 'is-success': !$v.adTel.$invalid }"
+            :class="{
+              'is-danger': $v.adTel.$error,
+              'is-success': !$v.adTel.$invalid
+            }"
             type="text"
             :placeholder="$t('common.tel')"
           />

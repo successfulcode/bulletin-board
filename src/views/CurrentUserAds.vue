@@ -1,8 +1,8 @@
 <template>
-<div>
   <div>
-    <pre>{{ currentUserAds }}</pre>
-  </div>
+    <div>
+      <pre>{{ currentUserAds }}</pre>
+    </div>
     <div v-show="isLoading" class="has-text-centered">
       <spinner></spinner>
     </div>
@@ -40,13 +40,13 @@ export default {
       isLoading: (state) => state.auth.isLoading
     })
   },
+  mounted() {
+    this.getAds();
+  },
   methods: {
     getAds() {
       this.$store.dispatch(GET_ADS);
     }
-  },
-  mounted() {
-    this.getAds();
   }
 };
 </script>

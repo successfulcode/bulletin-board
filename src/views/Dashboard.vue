@@ -13,7 +13,6 @@
 import CreateAd from '@/components/CreateAd.vue';
 import { mapState, mapGetters } from 'vuex';
 import { ADD_MESSAGE } from '@/store/actions.types';
-
 export default {
   name: 'Dashboard',
   components: { CreateAd },

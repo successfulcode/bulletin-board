@@ -13,7 +13,10 @@
           <input
             v-model.trim="$v.firstName.$model"
             class="input"
-            :class="{ 'is-danger': $v.firstName.$error, 'is-success': !$v.firstName.$invalid }"
+            :class="{
+              'is-danger': $v.firstName.$error,
+              'is-success': !$v.firstName.$invalid
+            }"
             type="text"
             :placeholder="$t('components.signUp.firstName')"
             :disabled="isLoading"
@@ -43,7 +46,10 @@
           <input
             v-model.trim="$v.lastName.$model"
             class="input"
-            :class="{ 'is-danger': $v.lastName.$error, 'is-success': !$v.lastName.$invalid }"
+            :class="{
+              'is-danger': $v.lastName.$error,
+              'is-success': !$v.lastName.$invalid
+            }"
             type="text"
             :placeholder="$t('components.signUp.lastName')"
             :disabled="isLoading"
@@ -73,7 +79,10 @@
           <input
             v-model.trim="$v.email.$model"
             class="input"
-            :class="{ 'is-danger': $v.email.$error, 'is-success': !$v.email.$invalid }"
+            :class="{
+              'is-danger': $v.email.$error,
+              'is-success': !$v.email.$invalid
+            }"
             type="email"
             :placeholder="$t('common.email')"
             :disabled="isLoading"
@@ -106,7 +115,10 @@
           <input
             v-model.trim="$v.password.$model"
             class="input"
-            :class="{ 'is-danger': $v.password.$error, 'is-success': !$v.password.$invalid }"
+            :class="{
+              'is-danger': $v.password.$error,
+              'is-success': !$v.password.$invalid
+            }"
             type="password"
             :placeholder="$t('common.password')"
             :disabled="isLoading"
@@ -139,7 +151,10 @@
           <input
             v-model.trim="$v.password2.$model"
             class="input"
-            :class="{ 'is-danger': $v.password2.$error, 'is-success': !$v.password2.$invalid }"
+            :class="{
+              'is-danger': $v.password2.$error,
+              'is-success': !$v.password2.$invalid
+            }"
             type="password"
             :placeholder="$t('components.signUp.confirmPassword')"
             :disabled="isLoading"
