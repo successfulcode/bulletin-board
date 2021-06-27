@@ -23,8 +23,8 @@
         <router-link to="/ads" class="navbar-item">{{
           $t('components.theNavbar.allAds')
         }}</router-link>
-        <router-link to="/mineads" class="navbar-item">{{
-          $t('components.theNavbar.mineAds')
+        <router-link to="/currentuserads" class="navbar-item">{{
+          $t('components.theNavbar.currentuserads')
         }}</router-link>
       </div>
       <div v-else class="navbar-start">

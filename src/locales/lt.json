@@ -53,7 +53,7 @@
         "logout": "Atsijungti",
         "allAds": "Visi skelbimai",
         "createAd": "Įdėti skelbimą",
-        "mineAds": "Mano skelbimai"
+        "currentuserads": "Mano skelbimai"
       },
       "ads": {
         "noAds": "Skelbimų nėra..."

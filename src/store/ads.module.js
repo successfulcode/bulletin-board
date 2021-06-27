@@ -20,14 +20,14 @@ const getters = {
   getMessages(state) {
     return state.messages;
   },
-  getCurrentUserMessages(state) {
-    const id = localStorage.getItem('localId');
-    return state.messages.filter((msg) => msg.id === id);
+  getCurrentUserAds(state, rootState) {
+    console.log('getCurrentUserAds', rootState.currentUser.localId)
+    return state.messages.filter((ad) => ad.userLocalId === rootState.currentUser.localId);
   }
 };
 
 const actions = {
-  async [ADD_MESSAGE]({ commit }, message) {
+  async [ADD_MESSAGE]({ commit, rootState }, message) {
     try {
       commit(ISLOADING);
       const {
@@ -36,9 +36,11 @@ const actions = {
       } = await ApiService.createAd(message);
       if (status === 200 && name) {
         const id = { id: name };
+        const userId = { userLocalId: rootState.auth.user.localId };
         const newMessage = {
           ...message,
-          ...id
+          ...id,
+          ...userId
         };
         commit(SET_NEW_MESSAGE, newMessage);
         commit(ISLOADING_FALSE);

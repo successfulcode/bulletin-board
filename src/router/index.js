@@ -4,7 +4,7 @@ import Login from '@/views/Login.vue';
 import SignUp from '@/views/SignUp.vue';
 import Dashboard from '@/views/Dashboard.vue';
 import Ads from '@/views/Ads.vue';
-import MineAds from '@/views/MineAds.vue';
+import CurrentUserAds from '@/views/CurrentUserAds.vue';
 import NotFound from '@/views/NotFound.vue';
 import store from '@/store';
 
@@ -37,9 +37,9 @@ const routes = [
     }
   },
   {
-    path: '/mineads',
-    name: 'Mineads',
-    component: MineAds,
+    path: '/currentuserads',
+    name: 'CurrentUserAds',
+    component: CurrentUserAds,
     meta: {
       requiresAuth: true
     }

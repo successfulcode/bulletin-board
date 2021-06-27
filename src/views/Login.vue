@@ -6,7 +6,7 @@
         onSubmit(email, password);
         $v.$reset();
       "
-    >
+      >
       <div class="has-text-centered is-size-3">{{ $t('common.login') }}</div>
       <div>
         <div class="field mt-5">
