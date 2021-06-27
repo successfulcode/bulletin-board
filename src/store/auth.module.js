@@ -67,11 +67,9 @@ const actions = {
         idToken: data.idToken, 
         refreshToken: data.refreshToken
       };
-      
-      const idToken = data.idToken
-      const refreshToken = data.refreshToken
+
       if (status === 200) {
-        commit(SET_AUTH, loggedUser, idToken, refreshToken);
+        commit(SET_AUTH, loggedUser);
         commit(ISLOADING_FALSE);
         console.log('data', data);
       }
