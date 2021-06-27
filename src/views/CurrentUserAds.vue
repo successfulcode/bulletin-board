@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div>
-      <pre>{{ currentUserAds }}</pre>
-    </div>
     <div v-show="isLoading" class="has-text-centered">
       <spinner></spinner>
     </div>
