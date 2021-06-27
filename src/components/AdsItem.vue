@@ -9,7 +9,7 @@
       <div class="media-content">
         <div class="content">
           <p>
-            <!-- <strong>{{ Name }}{{ ' ' }}</strong> -->
+            <strong>{{ Name }}{{ ' ' }}</strong>
             <strong>Kategorija: {{ Category }}{{ ' ' }}</strong>
             <small>{{ $t('common.email') }}.:{{ ' ' }}{{ Email }}{{ ' ' }}</small>
             <small>{{ $t('common.tel') }}.:{{ ' ' }}{{ Tel }}</small>
