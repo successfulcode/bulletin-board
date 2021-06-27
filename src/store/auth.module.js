@@ -42,7 +42,6 @@ const actions = {
       if (status === 200) {
         commit(SET_AUTH, loggedUser );
         commit(ISLOADING_FALSE);
-        console.log('data', loggedUser);
       }
     } catch (error) {
       commit(SET_ERROR, error.message);
@@ -70,7 +69,6 @@ const actions = {
       if (status === 200) {
         commit(SET_AUTH, loggedUser);
         commit(ISLOADING_FALSE);
-        console.log('data', data);
       }
     } catch (error) {
       commit(SET_ERROR, error.message);
