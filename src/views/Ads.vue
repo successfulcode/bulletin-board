@@ -36,7 +36,7 @@ export default {
     }),
     ...mapGetters(['ads'])
   },
-  mounted() {
+  created() {
     this.getAds();
   },
   methods: {

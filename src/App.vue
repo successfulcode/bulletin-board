@@ -9,9 +9,13 @@
 
 <script>
 import Navbar from '@/components/TheNavbar.vue';
+import { AUTO_LOGIN } from '@/store/actions.types';
 
 export default {
-  components: { Navbar }
+  components: { Navbar },
+  mounted() {
+    this.$store.dispatch(AUTO_LOGIN);
+  }
 };
 </script>
 
