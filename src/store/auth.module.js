@@ -1,4 +1,4 @@
-import { LOGIN, SIGN_UP, LOGOUT, CHECK_AUTH, AUTO_LOGOUT, AUTO_LOGIN } from './actions.types';
+import { LOGIN, SIGN_UP, LOGOUT, AUTO_LOGOUT, AUTO_LOGIN } from './actions.types';
 import { SET_AUTH, PURGE_AUTH, SET_ERROR, ISLOADING, ISLOADING_FALSE } from './mutations.types';
 import ApiService from '@/api';
 
@@ -79,24 +79,23 @@ const actions = {
       commit(ISLOADING_FALSE);
     }
   },
-  async [CHECK_AUTH] ({ commit }){
-    try {
-      commit(ISLOADING);
-      const token = {
-        token: localStorage.getItem('idToken'),
-        // token: localStorage.getItem('refreshToken'),
-        returnSecureToken: true
-      }
-      const { data, status } = await ApiService.authWhithToken(token);
-      if (status === 200) {
-       console.log('CHECK_AUTH', data);
-      }
-    } catch (error) {
-      commit(SET_ERROR, error.message);
-      commit(ISLOADING_FALSE);
-      console.log(error);
-    }
-  },
+  // async [CHECK_AUTH] ({ commit }){
+  //   try {
+  //     commit(ISLOADING);
+  //     const token = {
+  //       token: localStorage.getItem('idToken'),
+  //       returnSecureToken: true
+  //     }
+  //     const { data, status } = await ApiService.authWhithToken(token);
+  //     if (status === 200) {
+  //      console.log('CHECK_AUTH', data);
+  //     }
+  //   } catch (error) {
+  //     commit(SET_ERROR, error.message);
+  //     commit(ISLOADING_FALSE);
+  //     console.log(error);
+  //   }
+  // },
   [AUTO_LOGOUT]({ commit }, expiresIn){
     try {
       setTimeout(()=>{
@@ -123,7 +122,6 @@ const actions = {
         const expiresIn = (expirationDate.getTime() - new Date().getTime()) / 1000
         commit(SET_AUTH, {displayName, email, localId, idToken, refreshToken, expiresIn })
         dispatch(AUTO_LOGOUT, expiresIn)
-        console.log('newExpirationDate', expiresIn )
       }} catch (error) {
       console.log(error)
     }
@@ -135,7 +133,6 @@ const actions = {
 
 const mutations = {
   [SET_AUTH](state, { displayName, email, localId, idToken, refreshToken, expiresIn }) {
-    console.log('test', displayName, email, localId, idToken, refreshToken, expiresIn)
     const loggedUser = { displayName, email, localId };
     state.user = loggedUser;
     state.isAuthenticated = true;

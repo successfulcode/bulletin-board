@@ -72,9 +72,9 @@ router.beforeEach((to, from, next) => {
     } else {
       next({
         path: '/login',
-        query: {
-          errorMessage: 'Unauthorized'
-        }
+        // query: {
+        //   errorMessage: 'Unauthorized'
+        // }
       });
     }
   } else {

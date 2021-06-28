@@ -13,9 +13,8 @@ import { AUTO_LOGIN } from '@/store/actions.types';
 
 export default {
   components: { Navbar },
-  created() {
+  mounted() {
     this.$store.dispatch(AUTO_LOGIN);
-    console.log('AUTO_LOGIN2')
   }
 };
 </script>
