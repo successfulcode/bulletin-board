@@ -55,7 +55,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { LOGOUT } from '@/store/actions.types';
+import { LOGOUT, CHECK_AUTH } from '@/store/actions.types';
 export default {
   name: 'TheNavbar',
   computed: {
@@ -64,7 +64,13 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch(LOGOUT).then(() => this.$router.push('login'));
+    },
+    checkAuth() {
+       this.$store.dispatch(CHECK_AUTH)
     }
+  },
+  created() {
+    this.checkAuth();
   }
 };
 </script>
