@@ -1,4 +1,3 @@
-import { LOGIN, SIGN_UP, LOGOUT } from './actions.types';
 import { LOGIN, SIGN_UP, LOGOUT, AUTO_LOGOUT, AUTO_LOGIN } from './actions.types';
 import { SET_AUTH, PURGE_AUTH, SET_ERROR, ISLOADING, ISLOADING_FALSE } from './mutations.types';
 import ApiService from '@/api';
