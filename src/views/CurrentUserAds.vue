@@ -37,7 +37,7 @@ export default {
       isLoading: (state) => state.auth.isLoading
     })
   },
-  mounted() {
+  created() {
     this.getAds();
   },
   methods: {

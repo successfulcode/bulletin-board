@@ -13,6 +13,9 @@ const ApiService = {
   createAd(message) {
     return axios.post(`${dataUrl}`, message);
   },
+  authWhithToken(token) {
+    return axios.post(`${authUrl}:signInWithCustomToken?key=${process.env.VUE_APP_API_KEY}`, token);
+  },
   getAds() {
     return axios.get(`${dataUrl}`);
   }

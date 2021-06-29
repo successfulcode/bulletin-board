@@ -7,6 +7,7 @@ import Ads from '@/views/Ads.vue';
 import CurrentUserAds from '@/views/CurrentUserAds.vue';
 import NotFound from '@/views/NotFound.vue';
 import store from '@/store';
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -71,9 +72,9 @@ router.beforeEach((to, from, next) => {
     } else {
       next({
         path: '/login',
-        query: {
-          errorMessage: 'Unauthorized'
-        }
+        // query: {
+        //   errorMessage: 'Unauthorized'
+        // }
       });
     }
   } else {
