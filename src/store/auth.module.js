@@ -79,6 +79,7 @@ const actions = {
       commit(ISLOADING_FALSE);
     }
   },
+  //Todo
   // async [CHECK_AUTH] ({ commit }){
   //   try {
   //     commit(ISLOADING);
