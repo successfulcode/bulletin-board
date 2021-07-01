@@ -31,17 +31,17 @@ const actions = {
       };
       commit(ISLOADING);
       const { data, status } = await ApiService.loginUser(user);
-      const loggedUser = { 
-        displayName: data.displayName, 
-        email: data.email, 
-        localId: data.localId, 
-        idToken: data.idToken, 
+      const loggedUser = {
+        displayName: data.displayName,
+        email: data.email,
+        localId: data.localId,
+        idToken: data.idToken,
         refreshToken: data.refreshToken,
         expiresIn: data.expiresIn
       };
 
       if (status === 200) {
-        commit(SET_AUTH, loggedUser );
+        commit(SET_AUTH, loggedUser);
         commit(ISLOADING_FALSE);
         dispatch(AUTO_LOGOUT, data.expiresIn);
       }
@@ -60,11 +60,11 @@ const actions = {
       };
       commit(ISLOADING);
       const { data, status } = await ApiService.signUpUser(newUser);
-      const loggedUser = { 
-        displayName: data.displayName, 
-        email: data.email, 
-        localId: data.localId, 
-        idToken: data.idToken, 
+      const loggedUser = {
+        displayName: data.displayName,
+        email: data.email,
+        localId: data.localId,
+        idToken: data.idToken,
         refreshToken: data.refreshToken,
         expiresIn: data.expiresIn
       };
@@ -97,13 +97,13 @@ const actions = {
   //     console.log(error);
   //   }
   // },
-  [AUTO_LOGOUT]({ commit }, expiresIn){
+  [AUTO_LOGOUT]({ commit }, expiresIn) {
     try {
-      setTimeout(()=>{
-        commit(PURGE_AUTH)
-      }, expiresIn * 1000)
+      setTimeout(() => {
+        commit(PURGE_AUTH);
+      }, expiresIn * 1000);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   },
   [AUTO_LOGIN]({ dispatch, commit }) {
@@ -112,19 +112,20 @@ const actions = {
     const localId = localStorage.getItem('localId');
     const displayName = localStorage.getItem('displayName');
     const email = localStorage.getItem('email');
-    const expirationDate = new Date(localStorage.getItem('expirationDate'))
-   
+    const expirationDate = new Date(localStorage.getItem('expirationDate'));
+
     try {
-      if(!idToken || !refreshToken || !displayName || !email || !expirationDate) {
-        dispatch(LOGOUT)
+      if (!idToken || !refreshToken || !displayName || !email || !expirationDate) {
+        dispatch(LOGOUT);
       } else if (expirationDate <= new Date()) {
-        dispatch(LOGOUT)
+        dispatch(LOGOUT);
       } else {
-        const expiresIn = (expirationDate.getTime() - new Date().getTime()) / 1000
-        commit(SET_AUTH, {displayName, email, localId, idToken, refreshToken, expiresIn })
-        dispatch(AUTO_LOGOUT, expiresIn)
-      }} catch (error) {
-      console.log(error)
+        const expiresIn = (expirationDate.getTime() - new Date().getTime()) / 1000;
+        commit(SET_AUTH, { displayName, email, localId, idToken, refreshToken, expiresIn });
+        dispatch(AUTO_LOGOUT, expiresIn);
+      }
+    } catch (error) {
+      console.log(error);
     }
   },
   [LOGOUT]({ commit }) {
@@ -143,7 +144,7 @@ const mutations = {
     localStorage.setItem('localId', localId);
     localStorage.setItem('idToken', idToken);
     localStorage.setItem('refreshToken', refreshToken);
-    localStorage.setItem('expirationDate', expirationDate)
+    localStorage.setItem('expirationDate', expirationDate);
   },
   [PURGE_AUTH](state) {
     state.isAuthenticated = false;
