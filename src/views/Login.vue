@@ -42,7 +42,7 @@
             {{ $t('common.fieldIsrequired') }}
           </p>
           <p v-else-if="$v.email.$dirty && !$v.email.email" class="help is-danger">
-            {{ $t('components.login.invalidEmail') }}
+            {{ $t('views.login.invalidEmail') }}
           </p>
         </div>
         <div class="field">
@@ -78,7 +78,7 @@
             {{ $t('common.fieldIsrequired') }}
           </p>
           <p v-else-if="$v.password.$dirty && !$v.password.minLength" class="help is-danger">
-            {{ $t('components.login.checkPassword') }}
+            {{ $t('views.login.checkPassword') }}
           </p>
         </div>
       </div>
@@ -89,15 +89,15 @@
           type="submit"
           :disabled="$v.$invalid || isLoading"
         >
-          {{ $t('components.login.confirm') }}
+          {{ $t('views.login.confirm') }}
         </button>
       </div>
       <div class="mt-2 has-text-centered">
         <p>
-          {{ $t('components.login.dontHaveAnAccount') }}{{ ' ' }}{{ $t('components.login.create') }}
+          {{ $t('views.login.dontHaveAnAccount') }}{{ ' ' }}{{ $t('views.login.create') }}
           <strong>
             <router-link to="/signup">
-              {{ $t('components.login.here') }}
+              {{ $t('views.login.here') }}
             </router-link>
           </strong>
         </p>

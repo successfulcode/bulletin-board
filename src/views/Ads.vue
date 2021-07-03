@@ -17,7 +17,7 @@
       </div>
     </div>
     <div v-else>
-      {{ $t('components.ads.noAds') }}
+      {{ $t('views.ads.noAds') }}
     </div>
   </div>
 </template>

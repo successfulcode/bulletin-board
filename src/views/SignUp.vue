@@ -18,7 +18,7 @@
               'is-success': !$v.firstName.$invalid
             }"
             type="text"
-            :placeholder="$t('components.signUp.firstName')"
+            :placeholder="$t('views.signUp.firstName')"
             :disabled="isLoading"
           />
           <span class="icon is-small is-left">
@@ -51,7 +51,7 @@
               'is-success': !$v.lastName.$invalid
             }"
             type="text"
-            :placeholder="$t('components.signUp.lastName')"
+            :placeholder="$t('views.signUp.lastName')"
             :disabled="isLoading"
           />
           <span class="icon is-small is-left">
@@ -107,7 +107,7 @@
           {{ $t('common.fieldIsrequired') }}
         </p>
         <p v-else-if="$v.email.$dirty && !$v.email.email" class="help is-danger">
-          {{ $t('components.signUp.invalidEmail') }}
+          {{ $t('views.signUp.invalidEmail') }}
         </p>
       </div>
       <div class="field">
@@ -143,7 +143,7 @@
           {{ $t('common.fieldIsrequired') }}
         </p>
         <p v-else-if="$v.password.$dirty && !$v.password.minLength" class="help is-danger">
-          {{ $t('components.signUp.checkPassword') }}
+          {{ $t('views.signUp.checkPassword') }}
         </p>
       </div>
       <div class="field">
@@ -156,7 +156,7 @@
               'is-success': !$v.password2.$invalid
             }"
             type="password"
-            :placeholder="$t('components.signUp.confirmPassword')"
+            :placeholder="$t('views.signUp.confirmPassword')"
             :disabled="isLoading"
           />
           <span class="icon is-small is-left">
@@ -179,20 +179,20 @@
           {{ $t('common.fieldIsrequired') }}
         </p>
         <p v-else-if="$v.password2.$dirty && !$v.password2.sameAs" class="help is-danger">
-          {{ $t('components.signUp.password2') }}
+          {{ $t('views.signUp.password2') }}
         </p>
       </div>
       <div class="is-flex is-justify-content-center">
         <button class="button is-info" type="submit" :disabled="$v.$invalid || isLoading">
-          {{ $t('components.login.confirm') }}
+          {{ $t('views.login.confirm') }}
         </button>
       </div>
       <div class="mt-2 has-text-centered">
         <p>
-          {{ $t('components.signUp.haveAnAccount') }}{{ ' ' }}{{ $t('components.signUp.create') }}
+          {{ $t('views.signUp.haveAnAccount') }}{{ ' ' }}{{ $t('views.signUp.create') }}
           <strong>
             <router-link to="/login">
-              {{ $t('components.signUp.here') }}
+              {{ $t('views.signUp.here') }}
             </router-link>
           </strong>
         </p>
