@@ -12,7 +12,7 @@
       "eur": "Eur",
       "tel": "Tel"
     },
-    "components": {
+    "views": {
       "login": {
         "confirm": "Patvirtinti",
         "invalidEmail": "Patikrinkite el. paštą",
@@ -32,6 +32,11 @@
         "create": "Spauskite",
         "here": "čia"
       },
+      "ads": {
+        "noAds": "Skelbimų nėra..."
+      }
+    },
+    "components": {
       "createAd": {
         "category": "Katergorija",
         "selectCategory": "Pasirinkite kategorija",
@@ -54,9 +59,6 @@
         "allAds": "Visi skelbimai",
         "createAd": "Įdėti skelbimą",
         "currentuserads": "Mano skelbimai"
-      },
-      "ads": {
-        "noAds": "Skelbimų nėra..."
       }
     }
   }
