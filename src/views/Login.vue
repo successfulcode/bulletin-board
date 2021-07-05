@@ -1,5 +1,6 @@
 <template>
   <div class="columns is-flex is-justify-content-center mt-5">
+    <the-notification>Jūs sėkmingai prisijungėte!</the-notification>
     <form
       class="column is-4 mt-5 box"
       @submit.prevent="
@@ -110,8 +111,10 @@
 import { required, minLength, email } from 'vuelidate/lib/validators';
 import { mapState } from 'vuex';
 import { LOGIN } from '@/store/actions.types';
+import TheNotification from '../components/TheNotification.vue';
 
 export default {
+  components: { TheNotification },
   name: 'Login',
 
   data() {
