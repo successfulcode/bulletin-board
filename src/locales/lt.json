@@ -68,6 +68,11 @@
         "successSignUpMessage": "Sveiki! Jūs sėkmingai užsiregistravote!",
         "invalidSignUpMessage": "Kažkas ne taip! Patikrinkite įvedamus duomenys!",
         "invalidUserExist": "Toks vartotojas jau yra! Patikrinkite įvedamus duomenys!"
+      },
+      "adsModule": {
+        "successMessage": "Skelbimas sėkmingai sukurtas!",
+        "invalidMessage": "Nepavyko sukurti skelbimo! Patikrinkite įvedamus duomenys!",
+        "invalidGetMessage": "Kažkas ne taip! Nepavyko įkelti naujausiu skelbimų!"
       }
     }
   }
