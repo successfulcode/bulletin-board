@@ -107,7 +107,7 @@
               'is-danger': $v.adTel.$error,
               'is-success': !$v.adTel.$invalid
             }"
-            type="text"
+            type="tel"
             :placeholder="$t('common.tel')"
           />
           <p class="help">{{ $t('components.createAd.aboutTel') }}</p>

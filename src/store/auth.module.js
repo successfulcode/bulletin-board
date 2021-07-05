@@ -1,6 +1,15 @@
 import { LOGIN, SIGN_UP, LOGOUT, AUTO_LOGOUT, AUTO_LOGIN } from './actions.types';
-import { SET_AUTH, PURGE_AUTH, SET_ERROR, ISLOADING, ISLOADING_FALSE } from './mutations.types';
+import {
+  SET_AUTH,
+  PURGE_AUTH,
+  SET_ERROR,
+  ISLOADING,
+  ISLOADING_FALSE,
+  OPEN_NOTIFICATION,
+  CLOSE_NOTIFICATION
+} from './mutations.types';
 import ApiService from '@/api';
+import i18n from '@/i18n';
 
 const state = {
   errors: null,
@@ -41,11 +50,23 @@ const actions = {
       };
 
       if (status === 200) {
+        const notificationRules = {
+          status: 'is-success',
+          timeout: 3000,
+          message: i18n.t('store.authModule.successLoginMessage')
+        };
+        commit(OPEN_NOTIFICATION, notificationRules);
         commit(SET_AUTH, loggedUser);
         commit(ISLOADING_FALSE);
         dispatch(AUTO_LOGOUT, data.expiresIn);
       }
     } catch (error) {
+      const notificationRules = {
+        status: 'is-danger',
+        timeout: 5000,
+        message: i18n.t('store.authModule.invalidLoginMessage')
+      };
+      commit(OPEN_NOTIFICATION, notificationRules);
       commit(SET_ERROR, error.message);
       commit(ISLOADING_FALSE);
     }
@@ -68,35 +89,39 @@ const actions = {
         refreshToken: data.refreshToken,
         expiresIn: data.expiresIn
       };
-
       if (status === 200) {
+        const notificationRules = {
+          status: 'is-success',
+          timeout: 3000,
+          message: i18n.t('store.authModule.successSignUpMessage')
+        };
+        commit(OPEN_NOTIFICATION, notificationRules);
         commit(SET_AUTH, loggedUser);
         commit(ISLOADING_FALSE);
         dispatch(AUTO_LOGOUT, data.expiresIn);
       }
     } catch (error) {
-      commit(SET_ERROR, error.message);
-      commit(ISLOADING_FALSE);
+      if (error.response.data.error.code === 400) {
+        const notificationRules = {
+          status: 'is-danger',
+          timeout: 5000,
+          message: i18n.t('store.authModule.invalidUserExist')
+        };
+        commit(OPEN_NOTIFICATION, notificationRules);
+        commit(SET_ERROR, error.message);
+        commit(ISLOADING_FALSE);
+      } else {
+        const notificationRules = {
+          status: 'is-danger',
+          timeout: 5000,
+          message: i18n.t('store.authModule.invalidSignUpMessage')
+        };
+        commit(OPEN_NOTIFICATION, notificationRules);
+        commit(SET_ERROR, error.message);
+        commit(ISLOADING_FALSE);
+      }
     }
   },
-  //Todo
-  // async [CHECK_AUTH] ({ commit }){
-  //   try {
-  //     commit(ISLOADING);
-  //     const token = {
-  //       token: localStorage.getItem('idToken'),
-  //       returnSecureToken: true
-  //     }
-  //     const { data, status } = await ApiService.authWhithToken(token);
-  //     if (status === 200) {
-  //      console.log('CHECK_AUTH', data);
-  //     }
-  //   } catch (error) {
-  //     commit(SET_ERROR, error.message);
-  //     commit(ISLOADING_FALSE);
-  //     console.log(error);
-  //   }
-  // },
   [AUTO_LOGOUT]({ commit }, expiresIn) {
     try {
       setTimeout(() => {
@@ -130,6 +155,7 @@ const actions = {
   },
   [LOGOUT]({ commit }) {
     commit(PURGE_AUTH);
+    commit(CLOSE_NOTIFICATION);
   }
 };
 

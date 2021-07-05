@@ -60,6 +60,20 @@
         "createAd": "Įdėti skelbimą",
         "currentuserads": "Mano skelbimai"
       }
+    },
+    "store": {
+      "authModule": {
+        "successLoginMessage": "Sveiki! Jūs sėkmingai prisijungėte!",
+        "invalidLoginMessage": "Kažkas ne taip! Patikrinkite elektroninį paštą arba slaptažodį!",
+        "successSignUpMessage": "Sveiki! Jūs sėkmingai užsiregistravote!",
+        "invalidSignUpMessage": "Kažkas ne taip! Patikrinkite įvedamus duomenys!",
+        "invalidUserExist": "Toks vartotojas jau yra! Patikrinkite įvedamus duomenys!"
+      },
+      "adsModule": {
+        "successMessage": "Skelbimas sėkmingai sukurtas!",
+        "invalidMessage": "Nepavyko sukurti skelbimo! Patikrinkite įvedamus duomenys!",
+        "invalidGetMessage": "Kažkas ne taip! Nepavyko įkelti naujausiu skelbimų!"
+      }
     }
   }
 }

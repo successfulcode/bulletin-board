@@ -1,5 +1,11 @@
 <template>
   <div>
+    <the-notification
+      v-if="notificationIsOpen"
+      :status="notificationStatus"
+      @close="closeNotification"
+      >{{ notificationMessage }}</the-notification
+    >
     <div v-show="isLoading" class="has-text-centered">
       <spinner></spinner>
     </div>
@@ -26,15 +32,18 @@
 import { mapState, mapGetters } from 'vuex';
 import { GET_ADS } from '@/store/actions.types';
 import Spinner from '@/assets/Spinner.vue';
-import AdsItem from '../components/AdsItem.vue';
+import AdsItem from '@/components/AdsItem.vue';
+import { CLOSE_NOTIFICATION } from '@/store/mutations.types';
+import TheNotification from '@/components/TheNotification.vue';
+
 export default {
   name: 'Ads',
-  components: { Spinner, AdsItem },
+  components: { Spinner, AdsItem, TheNotification },
   computed: {
     ...mapState({
       isLoading: (state) => state.auth.isLoading
     }),
-    ...mapGetters(['ads'])
+    ...mapGetters(['ads', 'notificationIsOpen', 'notificationStatus', 'notificationMessage'])
   },
   created() {
     this.getAds();
@@ -42,6 +51,9 @@ export default {
   methods: {
     getAds() {
       this.$store.dispatch(GET_ADS);
+    },
+    closeNotification() {
+      this.$store.commit(CLOSE_NOTIFICATION);
     }
   }
 };
