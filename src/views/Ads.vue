@@ -27,12 +27,13 @@
 import { mapState, mapGetters } from 'vuex';
 import { GET_ADS } from '@/store/actions.types';
 import Spinner from '@/assets/Spinner.vue';
-import AdsItem from '../components/AdsItem.vue';
+import AdsItem from '@/components/AdsItem.vue';
 import { CLOSE_NOTIFICATION } from '@/store/mutations.types';
+import TheNotification from '@/components/TheNotification.vue';
 
 export default {
   name: 'Ads',
-  components: { Spinner, AdsItem },
+  components: { Spinner, AdsItem, TheNotification },
   computed: {
     ...mapState({
       isLoading: (state) => state.auth.isLoading

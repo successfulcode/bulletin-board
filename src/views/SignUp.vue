@@ -209,7 +209,7 @@ import { required, minLength, email, sameAs } from 'vuelidate/lib/validators';
 import { SIGN_UP } from '@/store/actions.types';
 import { mapState, mapGetters } from 'vuex';
 import { CLOSE_NOTIFICATION } from '@/store/mutations.types';
-import TheNotification from '../components/TheNotification.vue';
+import TheNotification from '@/components/TheNotification.vue';
 
 export default {
   components: { TheNotification },
