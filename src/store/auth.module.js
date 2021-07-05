@@ -44,8 +44,8 @@ const actions = {
       if (status === 200) {
         const notificationRules = {
           status: 'is-success',
-          timeout: 5000,
-          message: i18n.t('components.authModule.successMessage')
+          timeout: 3000,
+          message: i18n.t('store.authModule.successLoginMessage')
         }
         commit(OPEN_NOTIFICATION, notificationRules)
         commit(SET_AUTH, loggedUser );
@@ -56,7 +56,7 @@ const actions = {
       const notificationRules = {
         status: 'is-danger',
         timeout: 5000,
-        message: i18n.t('components.authModule.invalidMessage')
+        message: i18n.t('store.authModule.invalidLoginMessage')
       }
       commit(OPEN_NOTIFICATION, notificationRules);
       commit(SET_ERROR, error.message);
@@ -81,13 +81,27 @@ const actions = {
         refreshToken: data.refreshToken,
         expiresIn: data.expiresIn
       };
-
+      console.log('STATUS', status)
       if (status === 200) {
+        const notificationRules = {
+          status: 'is-success',
+          timeout: 3000,
+          message: i18n.t('store.authModule.successSignUpMessage')
+        }
+        commit(OPEN_NOTIFICATION, notificationRules)
         commit(SET_AUTH, loggedUser);
         commit(ISLOADING_FALSE);
         dispatch(AUTO_LOGOUT, data.expiresIn);
-      }
+      } 
+
+      
     } catch (error) {
+      const notificationRules = {
+        status: 'is-danger',
+        timeout: 5000,
+        message: i18n.t('store.authModule.invalidSignUpMessage')
+      }
+      commit(OPEN_NOTIFICATION, notificationRules);
       commit(SET_ERROR, error.message);
       commit(ISLOADING_FALSE);
     }
