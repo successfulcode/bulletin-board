@@ -22,7 +22,7 @@
         ></ads-item>
       </div>
     </div>
-    <div v-else>
+    <div v-else-if="ads.length <= 0 && !isLoading">
       {{ $t('views.ads.noAds') }}
     </div>
   </div>

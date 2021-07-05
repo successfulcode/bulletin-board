@@ -17,9 +17,7 @@
             <br />
             {{ Text }}
             <br />
-            <strong
-              >{{ $t('common.price') }}:{{ ' ' }}{{ Price }}{{ ' ' }}{{ $t('common.eur') }}</strong
-            >
+            <strong>{{ $t('common.price') }}:{{ ' ' }}{{ Price }}{{ ' ' }}{{ $t('common.eur') }}</strong>
           </p>
         </div>
         <nav class="level is-mobile">
