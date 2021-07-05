@@ -1,12 +1,12 @@
 <template>
-<div class="columns is-flex is-justify-content-center ">
-  <div  class="column is-6 mt-5 ">
-    <div class="notification is-light" :class="status">
-      <button class="delete" @click="close"></button>
+  <div class="columns is-flex is-justify-content-center">
+    <div class="column is-6 mt-5">
+      <div class="notification is-light" :class="status">
+        <button class="delete" @click="close"></button>
         <slot></slot>
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -16,14 +16,14 @@ export default {
       type: String,
       requiired: true,
       validator: function (status) {
-        return ['is-success', 'is-danger', 'is-warning'].indexOf(status) !== -1
+        return ['is-success', 'is-danger', 'is-warning'].indexOf(status) !== -1;
       }
     }
   },
   methods: {
     close() {
-      this.$emit('close')
+      this.$emit('close');
     }
   }
-}
+};
 </script>

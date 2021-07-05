@@ -45,7 +45,7 @@ const actions = {
           status: 'is-success',
           timeout: 3000,
           message: i18n.t('store.adsModule.successMessage')
-        }
+        };
         commit(OPEN_NOTIFICATION, notificationRules);
         const id = { id: name };
         const newMessage = {
@@ -60,7 +60,7 @@ const actions = {
         status: 'is-danger',
         timeout: 5000,
         message: i18n.t('store.adsModule.invalidMessage')
-      }
+      };
       commit(OPEN_NOTIFICATION, notificationRules);
       commit(SET_ERROR, error.message);
       commit(ISLOADING_FALSE);
@@ -79,7 +79,7 @@ const actions = {
         status: 'is-danger',
         timeout: 5000,
         message: i18n.t('store.adsModule.invalidMessage')
-      }
+      };
       commit(OPEN_NOTIFICATION, notificationRules);
       commit(SET_ERROR, error.message);
       commit(ISLOADING_FALSE);

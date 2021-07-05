@@ -1,6 +1,11 @@
 <template>
   <div>
-    <the-notification :status="notificationStatus" @close="closeNotification" v-if="notificationIsOpen">{{notificationMessage}}</the-notification>
+    <the-notification
+      v-if="notificationIsOpen"
+      :status="notificationStatus"
+      @close="closeNotification"
+      >{{ notificationMessage }}</the-notification
+    >
     <div v-show="isLoading" class="has-text-centered">
       <spinner></spinner>
     </div>
@@ -35,7 +40,12 @@ export default {
   name: 'CurrentUserAds',
   components: { Spinner, AdsItem, TheNotification },
   computed: {
-    ...mapGetters(['currentUserAds', 'notificationIsOpen', 'notificationStatus', 'notificationMessage']),
+    ...mapGetters([
+      'currentUserAds',
+      'notificationIsOpen',
+      'notificationStatus',
+      'notificationMessage'
+    ]),
     ...mapState({
       isLoading: (state) => state.auth.isLoading
     })
@@ -48,7 +58,7 @@ export default {
       this.$store.dispatch(GET_ADS);
     },
     closeNotification() {
-      this.$store.commit(CLOSE_NOTIFICATION)
+      this.$store.commit(CLOSE_NOTIFICATION);
     }
   }
 };

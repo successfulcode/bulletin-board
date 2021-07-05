@@ -4,7 +4,7 @@ const state = {
   open: false,
   status: 'is-warning',
   message: ''
-}
+};
 
 const getters = {
   notificationIsOpen(state) {
@@ -15,27 +15,25 @@ const getters = {
   },
   notificationMessage(state) {
     return state.message;
-  }  
-}
+  }
+};
 
-const actions = {
-
-}
+const actions = {};
 
 const mutations = {
-  [OPEN_NOTIFICATION] (state, { status, timeout, message }) {
+  [OPEN_NOTIFICATION](state, { status, timeout, message }) {
     state.open = true;
     state.status = status;
     state.message = message;
     setTimeout(() => {
       state.open = false;
       state.message = '';
-    }, timeout)
+    }, timeout);
   },
-  [CLOSE_NOTIFICATION] (state) {
+  [CLOSE_NOTIFICATION](state) {
     state.open = false;
   }
-}
+};
 
 export default {
   state,

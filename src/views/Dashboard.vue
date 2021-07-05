@@ -1,11 +1,11 @@
 <template>
   <div>
-    <the-notification 
-      :status="notificationStatus" 
-      @close="closeNotification" 
+    <the-notification
       v-if="notificationIsOpen"
+      :status="notificationStatus"
+      @close="closeNotification"
     >
-      {{notificationMessage}}
+      {{ notificationMessage }}
     </the-notification>
     <create-ad
       :message="newMessage"
@@ -31,14 +31,19 @@ export default {
       isLoading: (state) => state.auth.isLoading,
       isErrors: (state) => state.auth.errors
     }),
-    ...mapGetters(['currentUser', 'notificationIsOpen', 'notificationStatus', 'notificationMessage'])
+    ...mapGetters([
+      'currentUser',
+      'notificationIsOpen',
+      'notificationStatus',
+      'notificationMessage'
+    ])
   },
   methods: {
     addMessage(message) {
       this.$store.dispatch(ADD_MESSAGE, message);
     },
     closeNotification() {
-      this.$store.commit(CLOSE_NOTIFICATION)
+      this.$store.commit(CLOSE_NOTIFICATION);
     }
   }
 };

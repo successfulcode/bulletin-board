@@ -1,7 +1,12 @@
 <template>
-   <div class="p-4">
-    <the-notification :status="notificationStatus" @close="closeNotification" v-if="notificationIsOpen">{{notificationMessage}}</the-notification>
-    <div class="columns is-flex is-justify-content-center mt-5"> 
+  <div class="p-4">
+    <the-notification
+      v-if="notificationIsOpen"
+      :status="notificationStatus"
+      @close="closeNotification"
+      >{{ notificationMessage }}</the-notification
+    >
+    <div class="columns is-flex is-justify-content-center mt-5">
       <form
         class="column is-4 mt-5 box"
         @submit.prevent="
@@ -118,8 +123,8 @@ import { mapGetters } from 'vuex';
 import { CLOSE_NOTIFICATION } from '@/store/mutations.types';
 
 export default {
-  components: { TheNotification },
   name: 'Login',
+  components: { TheNotification },
 
   data() {
     return {
@@ -155,7 +160,7 @@ export default {
       this.$store.dispatch(LOGIN, { email, password });
     },
     closeNotification() {
-      this.$store.commit(CLOSE_NOTIFICATION)
+      this.$store.commit(CLOSE_NOTIFICATION);
     }
   }
 };
