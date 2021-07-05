@@ -5,8 +5,10 @@ import {
   SET_MESSAGES,
   ISLOADING,
   ISLOADING_FALSE,
-  SET_ERROR
+  SET_ERROR,
+  OPEN_NOTIFICATION
 } from './mutations.types';
+import i18n from '@/i18n';
 
 const state = {
   newMessage: {},
