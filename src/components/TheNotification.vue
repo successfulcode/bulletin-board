@@ -1,6 +1,6 @@
 <template>
 <div class="columns is-flex is-justify-content-center ">
-  <div  class="column is-5 mt-5 ">
+  <div  class="column is-6 mt-5 ">
     <div class="notification is-light" :class="status">
       <button class="delete" @click="close"></button>
         <slot></slot>

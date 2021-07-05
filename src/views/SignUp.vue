@@ -1,14 +1,16 @@
 <template>
-  <div class="columns is-flex is-justify-content-center mt-5">
-    <form
-      class="column is-5 mt-5 box"
-      @submit.prevent="
-        onSubmit(firstName, lastName, email, password);
-        $v.$reset();
-      "
-    >
-      <div class="has-text-centered is-size-3">{{ $t('common.signUp') }}</div>
-      <div class="field mt-5">
+  <div>
+    <the-notification :status="notificationStatus" @close="closeNotification" v-if="notificationIsOpen">{{notificationMessage}}</the-notification>
+    <div class="columns is-flex is-justify-content-center mt-5">
+      <form
+        class="column is-5 mt-5 box"
+        @submit.prevent="
+          onSubmit(firstName, lastName, email, password);
+          $v.$reset();
+        "
+      >
+        <div class="has-text-centered is-size-3">{{ $t('common.signUp') }}</div>
+        <div class="field mt-5">
         <div class="control has-icons-left has-icons-right">
           <input
             v-model.trim="$v.firstName.$model"
@@ -40,8 +42,8 @@
         <p v-if="$v.firstName.$dirty && !$v.firstName.required" class="help is-danger">
           {{ $t('common.fieldIsrequired') }}
         </p>
-      </div>
-      <div class="field">
+        </div>
+        <div class="field">
         <div class="control has-icons-left has-icons-right">
           <input
             v-model.trim="$v.lastName.$model"
@@ -73,8 +75,8 @@
         <p v-if="$v.lastName.$dirty && !$v.lastName.required" class="help is-danger">
           {{ $t('common.fieldIsrequired') }}
         </p>
-      </div>
-      <div class="field">
+        </div>
+        <div class="field">
         <div class="control has-icons-left has-icons-right">
           <input
             v-model.trim="$v.email.$model"
@@ -109,8 +111,8 @@
         <p v-else-if="$v.email.$dirty && !$v.email.email" class="help is-danger">
           {{ $t('views.signUp.invalidEmail') }}
         </p>
-      </div>
-      <div class="field">
+        </div>
+        <div class="field">
         <div class="control has-icons-left has-icons-right">
           <input
             v-model.trim="$v.password.$model"
@@ -145,8 +147,8 @@
         <p v-else-if="$v.password.$dirty && !$v.password.minLength" class="help is-danger">
           {{ $t('views.signUp.checkPassword') }}
         </p>
-      </div>
-      <div class="field">
+        </div>
+        <div class="field">
         <div class="control has-icons-left has-icons-right">
           <input
             v-model.trim="$v.password2.$model"
@@ -181,13 +183,13 @@
         <p v-else-if="$v.password2.$dirty && !$v.password2.sameAs" class="help is-danger">
           {{ $t('views.signUp.password2') }}
         </p>
-      </div>
-      <div class="is-flex is-justify-content-center">
+        </div>
+        <div class="is-flex is-justify-content-center">
         <button class="button is-info" type="submit" :disabled="$v.$invalid || isLoading">
           {{ $t('views.login.confirm') }}
         </button>
-      </div>
-      <div class="mt-2 has-text-centered">
+        </div>
+        <div class="mt-2 has-text-centered">
         <p>
           {{ $t('views.signUp.haveAnAccount') }}{{ ' ' }}{{ $t('views.signUp.create') }}
           <strong>
@@ -196,17 +198,21 @@
             </router-link>
           </strong>
         </p>
-      </div>
-    </form>
-  </div>
+        </div>
+      </form>
+    </div>
+  </div>  
 </template>
 
 <script>
 import { required, minLength, email, sameAs } from 'vuelidate/lib/validators';
 import { SIGN_UP } from '@/store/actions.types';
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
+import { CLOSE_NOTIFICATION } from '@/store/mutations.types';
+import TheNotification from '../components/TheNotification.vue';
 
 export default {
+  components: { TheNotification },
   name: 'SignUp',
   data() {
     return {
@@ -244,7 +250,8 @@ export default {
     ...mapState({
       isAuthenticated: (state) => state.auth.isAuthenticated,
       isLoading: (state) => state.auth.isLoading
-    })
+    }),
+    ...mapGetters(['notificationIsOpen', 'notificationStatus', 'notificationMessage'])
   },
   watch: {
     isAuthenticated: function () {
@@ -254,6 +261,9 @@ export default {
   methods: {
     onSubmit(firstName, lastName, email, password) {
       this.$store.dispatch(SIGN_UP, { firstName, lastName, email, password });
+    },
+    closeNotification() {
+      this.$store.commit(CLOSE_NOTIFICATION)
     }
   }
 };
