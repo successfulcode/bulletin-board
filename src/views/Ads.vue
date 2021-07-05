@@ -29,6 +29,7 @@ import { GET_ADS } from '@/store/actions.types';
 import Spinner from '@/assets/Spinner.vue';
 import AdsItem from '../components/AdsItem.vue';
 import { CLOSE_NOTIFICATION } from '@/store/mutations.types';
+
 export default {
   name: 'Ads',
   components: { Spinner, AdsItem },
