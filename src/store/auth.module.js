@@ -81,7 +81,6 @@ const actions = {
         refreshToken: data.refreshToken,
         expiresIn: data.expiresIn
       };
-      console.log('STATUS', status)
       if (status === 200) {
         const notificationRules = {
           status: 'is-success',
@@ -96,33 +95,28 @@ const actions = {
 
       
     } catch (error) {
-      const notificationRules = {
-        status: 'is-danger',
-        timeout: 5000,
-        message: i18n.t('store.authModule.invalidSignUpMessage')
+      if (error.response.data.error.code === 400) {
+        const notificationRules = {
+          status: 'is-danger',
+          timeout: 5000,
+          message: i18n.t('store.authModule.invalidUserExist')
+        }
+        commit(OPEN_NOTIFICATION, notificationRules);
+        commit(SET_ERROR, error.message);
+        commit(ISLOADING_FALSE);
+      } else {
+        const notificationRules = {
+          status: 'is-danger',
+          timeout: 5000,
+          message: i18n.t('store.authModule.invalidSignUpMessage')
+        }
+        commit(OPEN_NOTIFICATION, notificationRules);
+        commit(SET_ERROR, error.message);
+        commit(ISLOADING_FALSE);
       }
-      commit(OPEN_NOTIFICATION, notificationRules);
-      commit(SET_ERROR, error.message);
-      commit(ISLOADING_FALSE);
+      
     }
   },
-  // async [CHECK_AUTH] ({ commit }){
-  //   try {
-  //     commit(ISLOADING);
-  //     const token = {
-  //       token: localStorage.getItem('idToken'),
-  //       returnSecureToken: true
-  //     }
-  //     const { data, status } = await ApiService.authWhithToken(token);
-  //     if (status === 200) {
-  //      console.log('CHECK_AUTH', data);
-  //     }
-  //   } catch (error) {
-  //     commit(SET_ERROR, error.message);
-  //     commit(ISLOADING_FALSE);
-  //     console.log(error);
-  //   }
-  // },
   [AUTO_LOGOUT]({ commit }, expiresIn){
     try {
       setTimeout(()=>{
