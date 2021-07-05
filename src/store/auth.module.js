@@ -1,5 +1,5 @@
 import { LOGIN, SIGN_UP, LOGOUT, AUTO_LOGOUT, AUTO_LOGIN } from './actions.types';
-import { SET_AUTH, PURGE_AUTH, SET_ERROR, ISLOADING, ISLOADING_FALSE } from './mutations.types';
+import { SET_AUTH, PURGE_AUTH, SET_ERROR, ISLOADING, ISLOADING_FALSE, OPEN_NOTIFICATION } from './mutations.types';
 import ApiService from '@/api';
 
 const state = {
@@ -41,11 +41,22 @@ const actions = {
       };
 
       if (status === 200) {
+        const notificationRules = {
+          status: 'is-success',
+          timeout: 5000
+        }
+        commit(OPEN_NOTIFICATION, notificationRules)
         commit(SET_AUTH, loggedUser );
         commit(ISLOADING_FALSE);
         dispatch(AUTO_LOGOUT, data.expiresIn);
       }
     } catch (error) {
+      const notificationRules = {
+        status: 'is-danger',
+        timeout: 5000,
+        message: 'Sveiki Jūs sėkmingai prisijungėte!'
+      }
+      commit(OPEN_NOTIFICATION, notificationRules)
       commit(SET_ERROR, error.message);
       commit(ISLOADING_FALSE);
     }
