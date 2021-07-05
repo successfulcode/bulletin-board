@@ -1,6 +1,7 @@
 import { LOGIN, SIGN_UP, LOGOUT, AUTO_LOGOUT, AUTO_LOGIN } from './actions.types';
-import { SET_AUTH, PURGE_AUTH, SET_ERROR, ISLOADING, ISLOADING_FALSE, OPEN_NOTIFICATION } from './mutations.types';
+import { SET_AUTH, PURGE_AUTH, SET_ERROR, ISLOADING, ISLOADING_FALSE, OPEN_NOTIFICATION, CLOSE_NOTIFICATION } from './mutations.types';
 import ApiService from '@/api';
+import i18n from '@/i18n';
 
 const state = {
   errors: null,
@@ -43,7 +44,8 @@ const actions = {
       if (status === 200) {
         const notificationRules = {
           status: 'is-success',
-          timeout: 5000
+          timeout: 5000,
+          message: i18n.t('components.authModule.successMessage')
         }
         commit(OPEN_NOTIFICATION, notificationRules)
         commit(SET_AUTH, loggedUser );
@@ -54,9 +56,9 @@ const actions = {
       const notificationRules = {
         status: 'is-danger',
         timeout: 5000,
-        message: 'Sveiki Jūs sėkmingai prisijungėte!'
+        message: i18n.t('components.authModule.invalidMessage')
       }
-      commit(OPEN_NOTIFICATION, notificationRules)
+      commit(OPEN_NOTIFICATION, notificationRules);
       commit(SET_ERROR, error.message);
       commit(ISLOADING_FALSE);
     }
@@ -139,6 +141,7 @@ const actions = {
   },
   [LOGOUT]({ commit }) {
     commit(PURGE_AUTH);
+    commit(CLOSE_NOTIFICATION);
   }
 };
 

@@ -59,6 +59,10 @@
         "allAds": "Visi skelbimai",
         "createAd": "Įdėti skelbimą",
         "currentuserads": "Mano skelbimai"
+      },
+      "authModule": {
+        "successMessage": "Sveiki! Jūs sėkmingai prisijungėte!",
+        "invalidMessage": "Kažkas ne taip! Patikrinkite elektroninį paštą arba slaptažodį!"
       }
     }
   }
