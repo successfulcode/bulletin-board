@@ -4,6 +4,7 @@ import Login from '@/views/Login.vue';
 import SignUp from '@/views/SignUp.vue';
 import Dashboard from '@/views/Dashboard.vue';
 import Ads from '@/views/Ads.vue';
+import Ad from '@/views/Ad.vue';
 import CurrentUserAds from '@/views/CurrentUserAds.vue';
 import NotFound from '@/views/NotFound.vue';
 import store from '@/store';
@@ -48,6 +49,14 @@ const routes = [
     path: '/ads',
     name: 'Ads',
     component: Ads,
+    meta: {
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/ad/:id',
+    name: 'Ad',
+    component: Ad,
     meta: {
       requiresAuth: false
     }
