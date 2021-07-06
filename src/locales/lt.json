@@ -35,6 +35,9 @@
       },
       "ads": {
         "noAds": "Skelbimų nėra..."
+      },
+      "ad": {
+        "adNr": "Skelbimo Nr."
       }
     },
     "components": {
