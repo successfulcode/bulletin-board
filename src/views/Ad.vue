@@ -19,7 +19,7 @@
         </div>
         <div class="media-content">
           <div class="content">
-             <h1><strong>Skelbimo Nr.:</strong>{{ ' ' }}{{ $route.params.id }}</h1>
+             <h1><strong>{{ $t('views.ad.adNr') }}:</strong>{{ ' ' }}{{ $route.params.id }}</h1>
               <strong>{{ currentAd.Name }}{{ ' ' }} </strong>
               <strong>Kategorija: {{ currentAd.Category }}{{ ' ' }}</strong>
               <small>{{ $t('common.email') }}.:{{ ' ' }}{{ currentAd.Email }}{{ ' ' }}</small>
