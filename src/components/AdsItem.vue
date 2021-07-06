@@ -8,17 +8,18 @@
       </div>
       <div class="media-content">
         <div class="content">
-          <p>
             <strong>{{ name }}{{ ' ' }}</strong>
             <strong>Kategorija: {{ category }}{{ ' ' }}</strong>
             <small>{{ $t('common.email') }}.:{{ ' ' }}{{ email }}{{ ' ' }}</small>
             <small>{{ $t('common.tel') }}.:{{ ' ' }}{{ tel }}</small>
             <small>{{ ' ' }}{{ $moment(adDate).format('YYYY-MM-DD') }}</small>
             <br />
-            {{ text }}
-            <br />
+            <div class="ellipsis mb-2">
+              <p >
+                {{ text }}
+              </p>
+            </div>
             <strong>{{ $t('common.price') }}:{{ ' ' }}{{ price }}{{ ' ' }}{{ $t('common.eur') }}</strong>
-          </p>
         </div>
         <nav class="level is-mobile">
           <div class="level-left">
@@ -59,4 +60,15 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.ellipsis {
+ text-overflow:ellipsis;
+  overflow:hidden;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  word-break: break-word;
+}
+</style>
+
