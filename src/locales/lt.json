@@ -10,7 +10,8 @@
       "cancel": "Atšaukti",
       "price": "Kaina",
       "eur": "Eur",
-      "tel": "Tel"
+      "tel": "Tel",
+      "more": "Daugiau"
     },
     "views": {
       "login": {

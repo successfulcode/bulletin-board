@@ -19,6 +19,7 @@
           :tel="ad.Tel"
           :ad-date="ad.Date"
           :name="ad.Name"
+          :id="ad.id"
         ></ads-item>
       </div>
     </div>

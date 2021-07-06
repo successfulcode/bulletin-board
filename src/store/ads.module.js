@@ -1,8 +1,9 @@
 import ApiService from '@/api';
-import { ADD_MESSAGE, GET_ADS } from './actions.types';
+import { ADD_MESSAGE, GET_ADS, GET_AD } from './actions.types';
 import {
   SET_NEW_MESSAGE,
   SET_MESSAGES,
+  SET_CURRENT_MESSAGE,
   ISLOADING,
   ISLOADING_FALSE,
   SET_ERROR,
@@ -12,7 +13,8 @@ import i18n from '@/i18n';
 
 const state = {
   newMessage: {},
-  messages: []
+  messages: [],
+  currentMessage: {}
 };
 
 const getters = {
@@ -21,6 +23,9 @@ const getters = {
   },
   ads(state) {
     return state.messages;
+  },
+  currentAd(state) {
+    return state.currentMessage;
   },
   currentUserAds(state, rootState) {
     return state.messages.filter((ad) => ad.userLocalId === rootState.currentUser.localId);
@@ -84,6 +89,25 @@ const actions = {
       commit(SET_ERROR, error.message);
       commit(ISLOADING_FALSE);
     }
+  },
+  async [GET_AD]({ commit }, id) {
+    try {
+      commit(ISLOADING);
+      const { data, status } = await ApiService.getAd(id);
+      if (status === 200) {
+        commit(SET_CURRENT_MESSAGE, data);
+        commit(ISLOADING_FALSE);
+      }
+    } catch (error) {
+      const notificationRules = {
+        status: 'is-danger',
+        timeout: 5000,
+        message: i18n.t('store.adsModule.invalidMessage')
+      };
+      commit(OPEN_NOTIFICATION, notificationRules);
+      commit(SET_ERROR, error.message);
+      commit(ISLOADING_FALSE);
+    }
   }
 };
 
@@ -92,12 +116,14 @@ const mutations = {
     state.newMessage = newMessage;
     state.messages = [newMessage, ...state.messages];
   },
-
   [SET_MESSAGES](state, messages) {
     const newMessages = Object.keys(messages)
       .map((id) => ({ ...messages[id], id }))
       .reverse();
     state.messages = newMessages;
+  },
+  [SET_CURRENT_MESSAGE](state, currentMessage) {
+    state.currentMessage = currentMessage;
   }
 };
 

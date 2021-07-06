@@ -17,7 +17,10 @@ const ApiService = {
     return axios.post(`${authUrl}:signInWithCustomToken?key=${process.env.VUE_APP_API_KEY}`, token);
   },
   getAds() {
-    return axios.get(`${dataUrl}`);
+    return axios.get(`${dataUrl}.json`);
+  },
+  getAd(id) {
+    return axios.get(`${dataUrl}/${id}.json`);
   }
 };
 
