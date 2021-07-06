@@ -10,7 +10,7 @@
       <spinner></spinner>
     </div>
     <div v-if="ads.length > 0">
-      <div v-for="ad in ads" :key="ad.id" class="mt-4">
+      <div v-for="ad in ads" :key="ad.id" class="mt-4 px-4">
         <ads-item
           :category="ad.Category"
           :text="ad.Text"

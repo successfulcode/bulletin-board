@@ -5,9 +5,11 @@
       <button
         role="button"
         class="navbar-burger"
+        :class="burgerIsActive && 'is-active'"
         aria-label="menu"
         aria-expanded="false"
-        data-target="navbarBasicExample"
+        data-target="bulletinNavbar"
+        @click="toggleBurger"
       >
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -15,7 +17,7 @@
       </button>
     </div>
 
-    <div id="navbarBasicExample" class="navbar-menu">
+    <div id="bulletinNavbar" class="navbar-menu" :class="burgerIsActive && 'is-active'">
       <div v-if="isAuthenticated" class="navbar-start">
         <router-link to="/dashboard" class="navbar-item">{{
           $t('components.theNavbar.createAd')
@@ -58,12 +60,20 @@ import { mapGetters } from 'vuex';
 import { LOGOUT } from '@/store/actions.types';
 export default {
   name: 'TheNavbar',
+  data() {
+    return{
+      burgerIsActive: false
+    }
+  },
   computed: {
     ...mapGetters(['currentUser', 'isAuthenticated'])
   },
   methods: {
     logout() {
       this.$store.dispatch(LOGOUT).then(() => this.$router.push('login'));
+    },
+    toggleBurger() {
+      this.burgerIsActive = !this.burgerIsActive
     }
   }
 };
