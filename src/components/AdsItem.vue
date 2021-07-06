@@ -20,6 +20,9 @@
                   {{ text }}
                 </p>
               </div>
+              <div>
+                <router-link :to="{ name: 'Ad', params: { id } }">{{ $t('common.more') }}...</router-link>
+              </div>
               <strong>{{ $t('common.price') }}:{{ ' ' }}{{ price }}{{ ' ' }}{{ $t('common.eur') }}</strong>
           </div>
           <nav class="level is-mobile">
