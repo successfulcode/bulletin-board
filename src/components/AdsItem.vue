@@ -9,15 +9,15 @@
       <div class="media-content">
         <div class="content">
           <p>
-            <strong>{{ Name }}{{ ' ' }}</strong>
-            <strong>Kategorija: {{ Category }}{{ ' ' }}</strong>
-            <small>{{ $t('common.email') }}.:{{ ' ' }}{{ Email }}{{ ' ' }}</small>
-            <small>{{ $t('common.tel') }}.:{{ ' ' }}{{ Tel }}</small>
-            <small>{{ ' ' }}{{ $moment(AdDate).format('YYYY-MM-DD') }}</small>
+            <strong>{{ name }}{{ ' ' }}</strong>
+            <strong>Kategorija: {{ category }}{{ ' ' }}</strong>
+            <small>{{ $t('common.email') }}.:{{ ' ' }}{{ email }}{{ ' ' }}</small>
+            <small>{{ $t('common.tel') }}.:{{ ' ' }}{{ tel }}</small>
+            <small>{{ ' ' }}{{ $moment(adDate).format('YYYY-MM-DD') }}</small>
             <br />
-            {{ Text }}
+            {{ text }}
             <br />
-            <strong>{{ $t('common.price') }}:{{ ' ' }}{{ Price }}{{ ' ' }}{{ $t('common.eur') }}</strong>
+            <strong>{{ $t('common.price') }}:{{ ' ' }}{{ price }}{{ ' ' }}{{ $t('common.eur') }}</strong>
           </p>
         </div>
         <nav class="level is-mobile">
@@ -47,7 +47,15 @@
 <script>
 export default {
   name: 'AdsItem',
-  props: ['Category', 'Text', 'Price', 'Email', 'Tel', 'AdDate', 'Name']
+  props: {
+    category: String,
+    text: String,
+    price: String,
+    email: String,
+    tel: String,
+    adDate: Number,
+    name: String
+  }
 };
 </script>
 
