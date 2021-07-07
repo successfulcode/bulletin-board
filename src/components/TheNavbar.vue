@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <router-link class="navbar-item has-text-dark" to="/">BULLETIN</router-link>
+      <router-link class="navbar-item has-text-dark" to="/ads">BULLETIN</router-link>
       <button
         role="button"
         class="navbar-burger"
