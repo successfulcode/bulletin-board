@@ -152,7 +152,7 @@ export default {
   },
   watch: {
     isAuthenticated: function () {
-      this.isAuthenticated && this.$router.push('dashboard');
+      this.isAuthenticated && this.$router.push('ads');
     }
   },
   methods: {
