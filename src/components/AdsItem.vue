@@ -4,26 +4,33 @@
       <article class="media">
         <div class="media-left">
           <figure class="image is-128x128">
-            <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image" />
+            <img
+              :src="image ? image : `https://bulma.io/images/placeholders/128x128.png`"
+              alt="Image"
+            />
           </figure>
         </div>
         <div class="media-content">
           <div class="content">
-              <strong>{{ name }}{{ ' ' }}</strong>
-              <strong>Kategorija: {{ category }}{{ ' ' }}</strong>
-              <small>{{ $t('common.email') }}.:{{ ' ' }}{{ email }}{{ ' ' }}</small>
-              <small>{{ $t('common.tel') }}.:{{ ' ' }}{{ tel }}</small>
-              <small>{{ ' ' }}{{ $moment(adDate).format('YYYY-MM-DD') }}</small>
-              <br />
-              <div class="ellipsis mb-2">
-                <p >
-                  {{ text }}
-                </p>
-              </div>
-              <div>
-                <router-link :to="{ name: 'Ad', params: { id } }">{{ $t('common.more') }}...</router-link>
-              </div>
-              <strong>{{ $t('common.price') }}:{{ ' ' }}{{ price }}{{ ' ' }}{{ $t('common.eur') }}</strong>
+            <strong>{{ name }}{{ ' ' }}</strong>
+            <strong>Kategorija: {{ category }}{{ ' ' }}</strong>
+            <small>{{ $t('common.email') }}.:{{ ' ' }}{{ email }}{{ ' ' }}</small>
+            <small>{{ $t('common.tel') }}.:{{ ' ' }}{{ tel }}</small>
+            <small>{{ ' ' }}{{ $moment(adDate).format('YYYY-MM-DD') }}</small>
+            <br />
+            <div class="ellipsis mb-2">
+              <p>
+                {{ text }}
+              </p>
+            </div>
+            <div>
+              <router-link :to="{ name: 'Ad', params: { id } }"
+                >{{ $t('common.more') }}...</router-link
+              >
+            </div>
+            <strong
+              >{{ $t('common.price') }}:{{ ' ' }}{{ price }}{{ ' ' }}{{ $t('common.eur') }}</strong
+            >
           </div>
           <nav class="level is-mobile">
             <div class="level-left">
@@ -61,15 +68,16 @@ export default {
     tel: String,
     adDate: Number,
     name: String,
-    id: String
+    id: String,
+    image: String
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .ellipsis {
- text-overflow:ellipsis;
-  overflow:hidden;
+  text-overflow: ellipsis;
+  overflow: hidden;
   display: -webkit-box !important;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -77,4 +85,3 @@ export default {
   word-break: break-word;
 }
 </style>
-
