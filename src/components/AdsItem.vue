@@ -69,7 +69,7 @@ export default {
     adDate: Number,
     name: String,
     id: String,
-    image: String
+    image: Object
   }
 };
 </script>
