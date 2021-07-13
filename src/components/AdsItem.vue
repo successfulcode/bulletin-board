@@ -5,7 +5,7 @@
         <div class="media-left">
           <figure class="image is-128x128">
             <img
-              :src="image ? image : `https://bulma.io/images/placeholders/128x128.png`"
+              :src="image ? image.url : `https://bulma.io/images/placeholders/128x128.png`"
               alt="Image"
             />
           </figure>

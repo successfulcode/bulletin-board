@@ -221,7 +221,6 @@ export default {
       if (selectedFile && types.includes(selectedFile.type)) {
         this.file = selectedFile;
         this.fileError = false;
-
         await this.sendImg();
       } else {
         this.file = null;
