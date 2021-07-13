@@ -114,7 +114,28 @@
           <p class="help">{{ $t('components.createAd.aboutTel') }}</p>
         </div>
       </div>
-
+      <div class="mb-5">
+        <input type="file" @change="handleChange" :disabled="this.images.length >= 3" />
+        <p v-if="fileError" class="help is-danger">Galima įkelti tik *.jpg arba *.png failus</p>
+        <div v-if="imageIsloading">
+          <progress
+            class="progress is-small is-primary mt-4"
+            :value="downloadingProgress"
+            max="100"
+          ></progress>
+        </div>
+        <div v-if="images" class="is-flex">
+          <div class="mt-3 is-flex is-justify-content-left">
+            <figure
+              v-for="image in images"
+              :key="image.url"
+              class="image is-128x128 ml-1 mr-1 mb-4"
+            >
+              <img :src="image.url" />
+            </figure>
+          </div>
+        </div>
+      </div>
       <div class="field is-grouped">
         <div class="control">
           <button
@@ -127,7 +148,7 @@
           </button>
         </div>
         <div class="control">
-          <button class="button is-link is-light" @click.prevent="clear">
+          <button class="button is-link is-light" type="reset" @click.prevent="clear">
             {{ $t('common.cancel') }}
           </button>
         </div>
@@ -143,6 +164,8 @@
 import CreateAdAlert from './CreateAdAlert.vue';
 import CreateAdMessages from './CreateAdMessages.vue';
 import { required, minLength, email } from 'vuelidate/lib/validators';
+import firebase from 'firebase/app';
+
 export default {
   name: 'CreateAd',
   components: { CreateAdMessages, CreateAdAlert },
@@ -155,7 +178,12 @@ export default {
       adPrice: '',
       adEmail: '',
       adTel: '',
-      adDate: Date.now()
+      adDate: Date.now(),
+      file: null,
+      fileError: false,
+      images: [],
+      downloadingProgress: null,
+      imageIsloading: false
     };
   },
   validations: {
@@ -174,7 +202,8 @@ export default {
         Email: this.adEmail,
         Tel: this.adTel,
         Date: this.adDate,
-        Name: this.currentUser
+        Name: this.currentUser,
+        Images: this.images
       };
       this.$emit('addMessage', newMessage);
       this.clear();
@@ -185,8 +214,45 @@ export default {
       this.adText = '';
       this.adPrice = '';
       (this.adEmail = ''), (this.adTel = ''), (this.consentToTheRules = false);
+    },
+    async handleChange(e) {
+      const types = ['image/jpeg', 'image/png'];
+      const selectedFile = e.target.files[0];
+      if (selectedFile && types.includes(selectedFile.type)) {
+        this.file = selectedFile;
+        this.fileError = false;
+        await this.sendImg();
+      } else {
+        this.file = null;
+        this.fileError = true;
+      }
+    },
+    sendImg() {
+      this.imageIsloading = true;
+      const uploadTask = firebase.storage().ref(`imges/${this.file.name}`).put(this.file);
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          this.downloadingProgress = progress;
+          console.log('Upload is ' + progress + '% done');
+          if (snapshot.state === 100) {
+            this.downloadingProgress = null;
+          }
+        },
+        (error) => {
+          console.log(error);
+          this.imageIsloading = false;
+        },
+        () => {
+          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+            this.images.push({ url: downloadURL });
+            this.imageIsloading = false;
+            console.log('File available at', this.images);
+          });
+        }
+      );
     }
   }
 };
 </script>
-
