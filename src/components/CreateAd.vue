@@ -164,13 +164,12 @@
 
 <script>
 import CreateAdAlert from './CreateAdAlert.vue';
-import CreateAdMessages from './CreateAdMessages.vue';
 import { required, minLength, email } from 'vuelidate/lib/validators';
 import firebase from 'firebase/app';
 
 export default {
   name: 'CreateAd',
-  components: { CreateAdMessages, CreateAdAlert },
+  components: { CreateAdAlert },
   props: { message: Object, isLoading: Boolean, currentUser: String },
   data() {
     return {
