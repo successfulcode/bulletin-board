@@ -56,7 +56,8 @@
         "aboutFilelds": "Kad, galėtumete patvirtinti skelbimą, prašau užpildykite visus laukus (kategorija, skelbimo tekstą, kainą, telefono numerį ir el.pašto adresą). Taip pat prašau, patvirtinkite, kad sutinkate su mūsų tinklalapio taisyklėmis. Primename, kad Jūs asmeniškai esate atsakingi už skeligimo turinį.",
         "aboutEmail": "Įveskite El.paštą, kuris matysis skelbime",
         "aboutTel": "Įveskite telefono numerį, kuris matysis skelbime",
-        "hello": "Sveiki"
+        "hello": "Sveiki",
+        "photoЕxpansionError":"Galima įkelti tik *.jpg arba *.png failus"
       },
       "theNavbar": {
         "logout": "Atsijungti",

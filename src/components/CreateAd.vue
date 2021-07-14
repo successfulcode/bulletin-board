@@ -116,7 +116,9 @@
       </div>
       <div class="mb-5">
         <input type="file" @change="handleChange" :disabled="this.images.length >= 3" />
-        <p v-if="fileError" class="help is-danger">Galima įkelti tik *.jpg arba *.png failus</p>
+        <p v-if="fileError" class="help is-danger">
+          {{ $t('components.createAd.photoЕxpansionError') }}
+        </p>
         <div v-if="imageIsloading">
           <progress
             class="progress is-small is-primary mt-4"
