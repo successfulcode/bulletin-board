@@ -10,7 +10,7 @@
     <div v-if="isLoading" class="has-text-centered">
       <spinner></spinner>
     </div>
-    <div v-else class="box">
+    <div v-else class="box mt-4">
       <article class="media">
         <div class="media-left">
           <figure class="image is-128x128">
