@@ -1,9 +1,9 @@
 <template>
   <div>
     <the-notification
-    v-if="notificationIsOpen"
-    :status="notificationStatus"
-    @close="closeNotification"
+      v-if="notificationIsOpen"
+      :status="notificationStatus"
+      @close="closeNotification"
     >
       {{ notificationMessage }}
     </the-notification>
@@ -14,24 +14,36 @@
       <article class="media">
         <div class="media-left">
           <figure class="image is-128x128">
-            <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image" />
+            <img
+              :src="
+                currentAd.Images
+                  ? currentAd.Images[0].url
+                  : `https://bulma.io/images/placeholders/128x128.png`
+              "
+              alt="Image"
+            />
           </figure>
         </div>
         <div class="media-content">
           <div class="content">
-             <h1><strong>{{ $t('views.ad.adNr') }}:</strong>{{ ' ' }}{{ $route.params.id }}</h1>
-              <strong>{{ currentAd.Name }}{{ ' ' }} </strong>
-              <strong>Kategorija: {{ currentAd.Category }}{{ ' ' }}</strong>
-              <small>{{ $t('common.email') }}.:{{ ' ' }}{{ currentAd.Email }}{{ ' ' }}</small>
-              <small>{{ $t('common.tel') }}.:{{ ' ' }}{{ currentAd.Tel }}</small>
-              <small>{{ ' ' }}{{ $moment(currentAd.AdDate).format('YYYY-MM-DD') }}</small>
-              <br />
-              <div class="wrap mb-2">
-                <p >
-                  {{ currentAd.Text }}
-                </p>
-              </div>
-              <strong>{{ $t('common.price') }}:{{ ' ' }}{{ currentAd.Price }}{{ ' ' }}{{ $t('common.eur') }}</strong>
+            <h1>
+              <strong>{{ $t('views.ad.adNr') }}:</strong>{{ ' ' }}{{ $route.params.id }}
+            </h1>
+            <strong>{{ currentAd.Name }}{{ ' ' }} </strong>
+            <strong>Kategorija: {{ currentAd.Category }}{{ ' ' }}</strong>
+            <small>{{ $t('common.email') }}.:{{ ' ' }}{{ currentAd.Email }}{{ ' ' }}</small>
+            <small>{{ $t('common.tel') }}.:{{ ' ' }}{{ currentAd.Tel }}</small>
+            <small>{{ ' ' }}{{ $moment(currentAd.AdDate).format('YYYY-MM-DD') }}</small>
+            <br />
+            <div class="wrap mb-2">
+              <p>
+                {{ currentAd.Text }}
+              </p>
+            </div>
+            <strong
+              >{{ $t('common.price') }}:{{ ' ' }}{{ currentAd.Price }}{{ ' '
+              }}{{ $t('common.eur') }}</strong
+            >
           </div>
           <nav class="level is-mobile">
             <div class="level-left">
@@ -85,7 +97,7 @@ export default {
       this.$store.commit(CLOSE_NOTIFICATION);
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -94,4 +106,3 @@ export default {
   word-break: break-word;
 }
 </style>
-
