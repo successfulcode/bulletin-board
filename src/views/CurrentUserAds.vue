@@ -20,6 +20,7 @@
           :ad-date="ad.Date"
           :name="ad.Name"
           :id="ad.id"
+          :image="ad.Images && ad.Images[0]"
         ></ads-item>
       </div>
     </div>
