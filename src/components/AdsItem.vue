@@ -92,7 +92,7 @@ export default {
   height: 128px;
 }
 .img {
-  width: 128px;
-  height: auto;
+  max-width: 128px;
+  max-height: 128px;
 }
 </style>
