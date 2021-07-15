@@ -11,26 +11,16 @@
       <spinner></spinner>
     </div>
     <div v-else class="box mt-4">
-      <article class="media">
-        <div class="media-left">
-          <figure class="image is-128x128">
-            <img
-              :src="
-                currentAd.Images
-                  ? currentAd.Images[0].url
-                  : `https://bulma.io/images/placeholders/128x128.png`
-              "
-              alt="Image"
-            />
-          </figure>
-        </div>
+      <div class="is-flex is-justify-content-center mb-4">
+        <ad-images :pictures="currentAd.Images"></ad-images>
+      </div>
+      <article>
         <div class="media-content">
           <div class="content">
-            <h1>
-              <strong>{{ $t('views.ad.adNr') }}:</strong>{{ ' ' }}{{ $route.params.id }}
-            </h1>
+            <strong>{{ $t('views.ad.adNr') }}:</strong>{{ ' ' }}{{ $route.params.id }}
+
             <strong>{{ currentAd.Name }}{{ ' ' }} </strong>
-            <strong>Kategorija: {{ currentAd.Category }}{{ ' ' }}</strong>
+            <strong>{{ $t('views.ad.category') }}: {{ currentAd.Category }}{{ ' ' }}</strong>
             <small>{{ $t('common.email') }}.:{{ ' ' }}{{ currentAd.Email }}{{ ' ' }}</small>
             <small>{{ $t('common.tel') }}.:{{ ' ' }}{{ currentAd.Tel }}</small>
             <small>{{ ' ' }}{{ $moment(currentAd.AdDate).format('YYYY-MM-DD') }}</small>
@@ -76,10 +66,11 @@ import { mapState, mapGetters } from 'vuex';
 import Spinner from '@/assets/Spinner.vue';
 import TheNotification from '@/components/TheNotification.vue';
 import { CLOSE_NOTIFICATION } from '@/store/mutations.types';
+import AdImages from '../components/AdImages.vue';
 
 export default {
   name: 'Ad',
-  components: { Spinner, TheNotification },
+  components: { Spinner, TheNotification, AdImages },
   computed: {
     ...mapState({
       isLoading: (state) => state.auth.isLoading
