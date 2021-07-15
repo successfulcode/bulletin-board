@@ -3,12 +3,15 @@
     <div class="box">
       <article class="media">
         <div class="media-left">
-          <figure class="image is-128x128">
-            <img
-              :src="image ? image.url : `https://bulma.io/images/placeholders/128x128.png`"
-              alt="Image"
-            />
-          </figure>
+          <div class="image-wrapper">
+            <figure class="image is-128x128">
+              <img
+                :src="image ? image.url : `https://bulma.io/images/placeholders/128x128.png`"
+                alt="Image"
+                class="img"
+              />
+            </figure>
+          </div>
         </div>
         <div class="media-content">
           <div class="content">
@@ -83,5 +86,13 @@ export default {
   -webkit-box-orient: vertical;
   white-space: normal;
   word-break: break-word;
+}
+.image-wrapper {
+  width: 128px;
+  height: 128px;
+}
+.img {
+  max-width: 128px;
+  max-height: 128px;
 }
 </style>
