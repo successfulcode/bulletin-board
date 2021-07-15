@@ -115,7 +115,7 @@
         </div>
       </div>
       <div class="mb-5">
-        <input type="file" @change="handleChange" :disabled="this.images.length >= 3" />
+        <input type="file" @change="handleChange" :disabled="this.images.length >= 8" />
         <p v-if="fileError" class="help is-danger">
           {{ $t('components.createAd.photoЕxpansionError') }}
         </p>

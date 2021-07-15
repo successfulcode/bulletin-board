@@ -25,7 +25,7 @@ firebase.initializeApp({
   messagingSenderId: process.env.VUE_APP_FIREBASE_MESSAGINGSENDERID,
   appId: process.env.VUE_APP_FIREBASE_APPID,
   measurementId: process.env.VUE_APP_FIREBASE_MEASUREMENTID
-})
+});
 
 library.add(faLock, faEnvelope, faExclamationTriangle, faCheck, faUser);
 
