@@ -64,8 +64,8 @@ export default {
   background-position: center center;
   border: 1px solid #ebebeb;
   margin: 5px;
-  width: 25rem;
-  height: 25rem;
+  width: 22rem;
+  height: 22rem;
   cursor: pointer;
 }
 
@@ -79,5 +79,12 @@ export default {
   width: 8rem;
   height: 8rem;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 320px) {
+  .image-main {
+    width: 16rem;
+    height: 16rem;
+  }
 }
 </style>
