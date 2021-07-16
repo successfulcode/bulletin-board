@@ -71,7 +71,7 @@
       </div>
 
       <div class="field is-flex is-justify-content-left">
-        <div class="column is-2">
+        <div class="column is-2 pl-0">
           <input
             v-model="$v.adPrice.$model"
             name="price"
@@ -115,7 +115,26 @@
         </div>
       </div>
       <div class="mb-5">
-        <input type="file" @change="handleChange" :disabled="this.images.length >= 8" />
+        <div class="file is-link has-name">
+          <label class="file-label">
+            <input
+              class="file-input"
+              type="file"
+              name="resume"
+              @change="handleChange"
+              :disabled="this.images.length >= 8"
+            />
+            <span class="file-cta">
+              <span class="file-icon">
+                <font-awesome-icon :icon="['fa', 'upload']" />
+              </span>
+              <span class="file-label"> {{ $t('components.createAd.upload') }}</span>
+            </span>
+            <span class="file-name">{{
+              this.file ? this.file.name : $t('components.createAd.adPhotos')
+            }}</span>
+          </label>
+        </div>
         <p v-if="fileError" class="help is-danger">
           {{ $t('components.createAd.photoЕxpansionError') }}
         </p>
@@ -126,14 +145,10 @@
             max="100"
           ></progress>
         </div>
-        <div v-if="images" class="is-flex">
-          <div class="mt-3 is-flex is-justify-content-left">
-            <figure
-              v-for="image in images"
-              :key="image.url"
-              class="image is-128x128 ml-1 mr-1 mb-4"
-            >
-              <img :src="image.url" />
+        <div v-if="images">
+          <div class="mt-3 is-flex is-justify-content-left is-flex-wrap-wrap">
+            <figure v-for="image in images" :key="image.url" class="image is-128x128 mb-4">
+              <div class="small-image" :style="{ backgroundImage: `url('${image.url}')` }"></div>
             </figure>
           </div>
         </div>
@@ -257,3 +272,16 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.small-image {
+  float: left;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: 1px solid #ebebeb;
+  margin: 5px;
+  width: 8rem;
+  height: 8rem;
+}
+</style>
