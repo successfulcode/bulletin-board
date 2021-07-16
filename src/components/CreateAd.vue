@@ -128,12 +128,8 @@
         </div>
         <div v-if="images" class="is-flex">
           <div class="mt-3 is-flex is-justify-content-left">
-            <figure
-              v-for="image in images"
-              :key="image.url"
-              class="image is-128x128 ml-1 mr-1 mb-4"
-            >
-              <img :src="image.url" />
+            <figure v-for="image in images" :key="image.url" class="image is-128x128 mb-4">
+              <div class="small-image" :style="{ backgroundImage: `url('${image.url}')` }"></div>
             </figure>
           </div>
         </div>
@@ -257,3 +253,16 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.small-image {
+  float: left;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: 1px solid #ebebeb;
+  margin: 5px;
+  width: 8rem;
+  height: 8rem;
+}
+</style>
