@@ -58,7 +58,9 @@
         "aboutEmail": "Įveskite El.paštą, kuris matysis skelbime",
         "aboutTel": "Įveskite telefono numerį, kuris matysis skelbime",
         "hello": "Sveiki",
-        "photoЕxpansionError":"Galima įkelti tik *.jpg arba *.png failus"
+        "photoЕxpansionError":"Galima įkelti tik *.jpg arba *.png failus",
+        "upload": "Įkelti",
+        "adPhotos": "skelbimo nuotraukos"
       },
       "theNavbar": {
         "logout": "Atsijungti",
