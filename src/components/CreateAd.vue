@@ -145,8 +145,8 @@
             max="100"
           ></progress>
         </div>
-        <div v-if="images" class="is-flex">
-          <div class="mt-3 is-flex is-justify-content-left">
+        <div v-if="images">
+          <div class="mt-3 is-flex is-justify-content-left is-flex-wrap-wrap">
             <figure v-for="image in images" :key="image.url" class="image is-128x128 mb-4">
               <div class="small-image" :style="{ backgroundImage: `url('${image.url}')` }"></div>
             </figure>
