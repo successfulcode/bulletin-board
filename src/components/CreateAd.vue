@@ -154,7 +154,7 @@
             <figure
               v-for="image in images"
               :key="image.url"
-              class="image is-128x128 mb-4"
+              class="image is-128x128 mb-1"
             >
               <div
                 class="small-image"
