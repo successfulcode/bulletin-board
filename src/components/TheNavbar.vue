@@ -61,9 +61,9 @@ import { LOGOUT } from '@/store/actions.types';
 export default {
   name: 'TheNavbar',
   data() {
-    return{
+    return {
       burgerIsActive: false
-    }
+    };
   },
   computed: {
     ...mapGetters(['currentUser', 'isAuthenticated'])
@@ -73,7 +73,7 @@ export default {
       this.$store.dispatch(LOGOUT).then(() => this.$router.push('login'));
     },
     toggleBurger() {
-      this.burgerIsActive = !this.burgerIsActive
+      this.burgerIsActive = !this.burgerIsActive;
     }
   }
 };
