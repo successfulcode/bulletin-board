@@ -148,6 +148,11 @@
         <div v-if="images">
           <div class="mt-3 is-flex is-justify-content-left is-flex-wrap-wrap">
             <figure v-for="image in images" :key="image.url" class="image is-128x128 mb-1">
+              <div>
+                <span class="delete-img" @click.stop="deleteImg(image.url)"
+                  ><font-awesome-icon :icon="['fa', 'times-circle']"
+                /></span>
+              </div>
               <div class="small-image" :style="{ backgroundImage: `url('${image.url}')` }"></div>
             </figure>
           </div>
@@ -265,6 +270,18 @@ export default {
           });
         }
       );
+    },
+    deleteImg(img) {
+      const desertRef = firebase.storage().refFromURL(img);
+      desertRef
+        .delete()
+        .then(() => {
+          console.log('img deleted success', this.images);
+          this.images = this.images.filter((image) => image.url !== img);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   }
 };
@@ -280,5 +297,13 @@ export default {
   margin: 5px;
   width: 8rem;
   height: 8rem;
+}
+.delete-img {
+  color: hsl(348, 100%, 61%);
+  font-size: 2rem;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  cursor: pointer;
 }
 </style>
