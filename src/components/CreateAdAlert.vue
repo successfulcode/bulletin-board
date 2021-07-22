@@ -11,7 +11,7 @@
 export default {
   name: 'CreateAdAlert',
   props: {
-    alertText: { type: String, defalt: 'Error!' },
+    alertText: { type: String, default: 'Error!' },
     currentUser: { type: String, required: true }
   }
 };
