@@ -182,7 +182,7 @@ import firebase from 'firebase/app';
 export default {
   name: 'CreateAd',
   components: { CreateAdAlert },
-  props: { isLoading: Boolean, currentUser: String },
+  props: { isLoading: Boolean, currentUser: { type: String, required: true } },
   data() {
     return {
       adCategory: '',
