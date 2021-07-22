@@ -14,7 +14,7 @@ export default {
   props: {
     status: {
       type: String,
-      requiired: true,
+      default: 'is-warning',
       validator: function (status) {
         return ['is-success', 'is-danger', 'is-warning'].indexOf(status) !== -1;
       }
