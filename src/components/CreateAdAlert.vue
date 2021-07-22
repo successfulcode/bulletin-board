@@ -10,7 +10,10 @@
 <script>
 export default {
   name: 'CreateAdAlert',
-  props: { alertText: String, currentUser: String }
+  props: {
+    alertText: { type: String, defalt: 'Error!' },
+    currentUser: { type: String, required: true }
+  }
 };
 </script>
 
