@@ -10,7 +10,8 @@ import {
   faExclamationTriangle,
   faCheck,
   faUser,
-  faUpload
+  faUpload,
+  faTimesCircle
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import Vuelidate from 'vuelidate';
@@ -28,7 +29,7 @@ firebase.initializeApp({
   measurementId: process.env.VUE_APP_FIREBASE_MEASUREMENTID
 });
 
-library.add(faLock, faEnvelope, faExclamationTriangle, faCheck, faUser, faUpload);
+library.add(faLock, faEnvelope, faExclamationTriangle, faCheck, faUser, faUpload, faTimesCircle);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
