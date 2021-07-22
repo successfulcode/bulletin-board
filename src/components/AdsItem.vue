@@ -64,15 +64,45 @@
 export default {
   name: 'AdsItem',
   props: {
-    category: String,
-    text: String,
-    price: String,
-    email: String,
-    tel: String,
-    adDate: Number,
-    name: String,
-    id: String,
-    image: Object
+    category: {
+      type: String,
+      required: true
+    },
+    text: {
+      type: String,
+      required: true
+    },
+    price: {
+      type: String,
+      required: true
+    },
+    email: {
+      type: String,
+      required: true
+    },
+    tel: {
+      type: String,
+      required: true
+    },
+    adDate: {
+      type: Number,
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    id: {
+      type: String,
+      required: true
+    },
+    image: {
+      type: Object,
+      default: function () {
+        return { url: 'https://bulma.io/images/placeholders/128x128.png' };
+      },
+      required: false
+    }
   }
 };
 </script>

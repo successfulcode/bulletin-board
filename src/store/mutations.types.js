@@ -8,4 +8,3 @@ export const SET_MESSAGES = 'store/mutationstypes/SET_MESSAGES';
 export const SET_CURRENT_MESSAGE = 'store/mutationstypes/SET_CURRENT_MESSAGE';
 export const OPEN_NOTIFICATION = 'store/mutationstypes/OPEN_NOTIFICATION';
 export const CLOSE_NOTIFICATION = 'store/mutationstypes/CLOSE_NOTIFICATION';
-

@@ -12,6 +12,7 @@
     <div v-if="ads.length > 0">
       <div v-for="ad in ads" :key="ad.id" class="mt-4 px-4">
         <ads-item
+          :id="ad.id"
           :category="ad.Category"
           :text="ad.Text"
           :price="ad.Price"
@@ -19,7 +20,6 @@
           :tel="ad.Tel"
           :ad-date="ad.Date"
           :name="ad.Name"
-          :id="ad.id"
           :image="ad.Images && ad.Images[0]"
         ></ads-item>
       </div>

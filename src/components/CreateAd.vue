@@ -121,8 +121,8 @@
               class="file-input"
               type="file"
               name="resume"
+              :disabled="images.length >= 8"
               @change="handleChange"
-              :disabled="this.images.length >= 8"
             />
             <span class="file-cta">
               <span class="file-icon">
@@ -131,7 +131,7 @@
               <span class="file-label"> {{ $t('components.createAd.upload') }}</span>
             </span>
             <span class="file-name">{{
-              this.file ? this.file.name : $t('components.createAd.adPhotos')
+              file ? file.name : $t('components.createAd.adPhotos')
             }}</span>
           </label>
         </div>
@@ -147,13 +147,13 @@
         </div>
         <div v-if="images">
           <div class="mt-3 is-flex is-justify-content-left is-flex-wrap-wrap">
-            <figure v-for="image in images" :key="image.url" class="image is-128x128 mb-4">
+            <figure v-for="image in images" :key="image.url" class="image is-128x128 mb-1">
               <div class="small-image" :style="{ backgroundImage: `url('${image.url}')` }"></div>
             </figure>
           </div>
         </div>
       </div>
-      <div class="field is-grouped">
+      <div class="field is-grouped mb-4">
         <div class="control">
           <button
             class="button is-link"
@@ -171,9 +171,6 @@
         </div>
       </div>
     </form>
-    <div v-if="message.adText">
-      <create-ad-messages :new-message="message"></create-ad-messages>
-    </div>
   </div>
 </template>
 
@@ -185,7 +182,7 @@ import firebase from 'firebase/app';
 export default {
   name: 'CreateAd',
   components: { CreateAdAlert },
-  props: { message: Object, isLoading: Boolean, currentUser: String },
+  props: { isLoading: Boolean, currentUser: { type: String, required: true } },
   data() {
     return {
       adCategory: '',

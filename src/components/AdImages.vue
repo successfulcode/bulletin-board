@@ -4,18 +4,18 @@
 
     <div
       class="image-main"
-      @click="index = 0"
       :style="{ backgroundImage: `url('${images[0]}')` }"
+      @click="index = 0"
     ></div>
 
     <br />
     <div v-if="images.length > 1">
       <div
-        class="image"
         v-for="(image, imageIndex) in images"
         :key="imageIndex"
-        @click="index = imageIndex"
+        class="image"
         :style="{ backgroundImage: `url('${image}')` }"
+        @click="index = imageIndex"
       ></div>
     </div>
   </div>
@@ -25,6 +25,9 @@
 import VueGallery from 'vue-gallery';
 
 export default {
+  components: {
+    gallery: VueGallery
+  },
   props: {
     pictures: {
       type: Array,
@@ -39,6 +42,9 @@ export default {
       index: null
     };
   },
+  created() {
+    this.getImages();
+  },
 
   methods: {
     getImages() {
@@ -46,12 +52,6 @@ export default {
         return item.url;
       }));
     }
-  },
-  created() {
-    this.getImages();
-  },
-  components: {
-    gallery: VueGallery
   }
 };
 </script>
