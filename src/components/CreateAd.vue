@@ -149,8 +149,11 @@
           <div class="mt-3 is-flex is-justify-content-left is-flex-wrap-wrap">
             <figure v-for="image in images" :key="image.url" class="image is-128x128 mb-1">
               <div>
-                <span class="delete-img" @click.stop="deleteImg(image.url)"
-                  ><font-awesome-icon :icon="['fa', 'times-circle']"
+                <span class="delete-img-span"
+                  ><font-awesome-icon
+                    class="delete-img"
+                    :icon="['fa', 'times-circle']"
+                    @click.stop="deleteImg(image.url)"
                 /></span>
               </div>
               <div class="small-image" :style="{ backgroundImage: `url('${image.url}')` }"></div>
@@ -305,12 +308,19 @@ export default {
   width: 8rem;
   height: 8rem;
 }
-.delete-img {
+.delete-img-span {
   color: hsl(348, 100%, 61%);
   font-size: 2rem;
   position: absolute;
+  height: auto;
   top: 2px;
   right: 2px;
+}
+.delete-img {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(255, 255, 255, 0.7);
+  border-radius: 50%;
   cursor: pointer;
 }
 </style>
