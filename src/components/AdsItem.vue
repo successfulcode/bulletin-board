@@ -3,7 +3,16 @@
     <div class="box">
       <article class="media is-flex is-justify-content-center is-flex-wrap-wrap">
         <div class="media-left">
-          <figure>
+          <figure class="image">
+            <div>
+              <span
+                v-if="
+                  $moment(adDate).format('YYYY-MM-DD') === $moment(Date.now()).format('YYYY-MM-DD')
+                "
+                class="image-label mt-2 pr-1 pl-1"
+                >{{ $t('common.new') }}</span
+              >
+            </div>
             <div class="small-image" :style="{ backgroundImage: `url('${image.url}')` }"></div>
           </figure>
         </div>
@@ -101,7 +110,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .ellipsis {
   text-overflow: ellipsis;
   overflow: hidden;
@@ -125,5 +134,17 @@ export default {
 
 .media-content {
   max-width: 85%;
+}
+
+.image-label {
+  color: hsl(141, 53%, 53%);
+  background-color: rgb(255, 255, 255, 0.8);
+  border: 2px solid hsl(141, 53%, 53%);
+  font-size: 0.7rem;
+  font-weight: bold;
+  position: absolute;
+  height: auto;
+  top: 1px;
+  right: 10px;
 }
 </style>
