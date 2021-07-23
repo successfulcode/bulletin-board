@@ -1,17 +1,11 @@
 <template>
   <router-link :to="{ name: 'Ad', params: { id } }">
     <div class="box">
-      <article class="media">
+      <article class="media is-flex is-justify-content-center is-flex-wrap-wrap">
         <div class="media-left">
-          <div class="image-wrapper">
-            <figure class="image is-128x128">
-              <img
-                :src="image ? image.url : `https://bulma.io/images/placeholders/128x128.png`"
-                alt="Image"
-                class="img"
-              />
-            </figure>
-          </div>
+          <figure>
+            <div class="small-image" :style="{ backgroundImage: `url('${image.url}')` }"></div>
+          </figure>
         </div>
         <div class="media-content">
           <div class="content">
@@ -117,12 +111,19 @@ export default {
   white-space: normal;
   word-break: break-word;
 }
-.image-wrapper {
-  width: 128px;
-  height: 128px;
+
+.small-image {
+  float: left;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: 1px solid #ebebeb;
+  margin: 5px;
+  width: 8rem;
+  height: 8rem;
 }
-.img {
-  max-width: 128px;
-  max-height: 128px;
+
+.media-content {
+  max-width: 85%;
 }
 </style>
