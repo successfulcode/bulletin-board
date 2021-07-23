@@ -70,8 +70,8 @@
         </div>
       </div>
 
-      <div class="field is-flex is-justify-content-left">
-        <div class="column is-2 pl-0">
+      <div class="field is-flex is-justify-content-left is-flex-wrap-wrap">
+        <div class="pl-0">
           <input
             v-model="$v.adPrice.$model"
             name="price"
@@ -85,8 +85,8 @@
           />
           <p class="help">{{ $t('components.createAd.aboutPrice') }}</p>
         </div>
-        <label for="price" class="label mt-5 ml-1 mr-5">{{ $t('common.eur') }}</label>
-        <div class="column is-3">
+        <label for="price" class="label mt-4 ml-1 mr-3">{{ $t('common.eur') }}</label>
+        <div class="mr-3">
           <input
             v-model="$v.adEmail.$model"
             class="input mr-4"
@@ -99,7 +99,7 @@
           />
           <p class="help">{{ $t('components.createAd.aboutEmail') }}</p>
         </div>
-        <div class="column is-3">
+        <div>
           <input
             v-model="$v.adTel.$model"
             class="input"
