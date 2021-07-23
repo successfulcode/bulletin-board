@@ -247,7 +247,9 @@ export default {
       this.adCategory = '';
       this.adText = '';
       this.adPrice = '';
-      (this.images = []((this.adEmail = ''))), (this.adTel = ''), (this.consentToTheRules = false);
+      this.adTel = '';
+      this.consentToTheRules = false;
+      this.images = [];
     },
     async handleChange(e) {
       const types = ['image/jpeg', 'image/png'];
