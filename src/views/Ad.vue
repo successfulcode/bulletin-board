@@ -57,6 +57,7 @@
         </div>
       </article>
     </div>
+    <a @click="$router.go(-1)">Atgal>></a>
   </div>
 </template>
 
