@@ -241,6 +241,7 @@ export default {
       this.$emit('addMessage', newMessage);
       this.createAdSuccess = true;
       this.clear();
+      this.images = [];
       this.$router.push('ads');
     },
     clear() {
@@ -249,7 +250,6 @@ export default {
       this.adPrice = '';
       this.adTel = '';
       this.consentToTheRules = false;
-      this.images = [];
     },
     async handleChange(e) {
       const types = ['image/jpeg', 'image/png'];
