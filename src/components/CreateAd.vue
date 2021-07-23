@@ -70,8 +70,8 @@
         </div>
       </div>
 
-      <div class="field is-flex is-justify-content-left">
-        <div class="column is-2 pl-0">
+      <div class="field is-flex is-justify-content-left is-flex-wrap-wrap">
+        <div class="pl-0">
           <input
             v-model="$v.adPrice.$model"
             name="price"
@@ -85,8 +85,8 @@
           />
           <p class="help">{{ $t('components.createAd.aboutPrice') }}</p>
         </div>
-        <label for="price" class="label mt-5 ml-1 mr-5">{{ $t('common.eur') }}</label>
-        <div class="column is-3">
+        <label for="price" class="label mt-4 ml-1 mr-3">{{ $t('common.eur') }}</label>
+        <div class="mr-3">
           <input
             v-model="$v.adEmail.$model"
             class="input mr-4"
@@ -99,7 +99,7 @@
           />
           <p class="help">{{ $t('components.createAd.aboutEmail') }}</p>
         </div>
-        <div class="column is-3">
+        <div>
           <input
             v-model="$v.adTel.$model"
             class="input"
@@ -149,8 +149,11 @@
           <div class="mt-3 is-flex is-justify-content-left is-flex-wrap-wrap">
             <figure v-for="image in images" :key="image.url" class="image is-128x128 mb-1">
               <div>
-                <span class="delete-img" @click.stop="deleteImg(image.url)"
-                  ><font-awesome-icon :icon="['fa', 'times-circle']"
+                <span class="delete-img-span"
+                  ><font-awesome-icon
+                    class="delete-img"
+                    :icon="['fa', 'times-circle']"
+                    @click.stop="deleteImg(image.url)"
                 /></span>
               </div>
               <div class="small-image" :style="{ backgroundImage: `url('${image.url}')` }"></div>
@@ -170,7 +173,14 @@
           </button>
         </div>
         <div class="control">
-          <button class="button is-link is-light" type="reset" @click.prevent="clear">
+          <button
+            class="button is-link is-light"
+            type="reset"
+            @click.prevent="
+              clear();
+              deleteAllImg();
+            "
+          >
             {{ $t('common.cancel') }}
           </button>
         </div>
@@ -187,7 +197,11 @@ import firebase from 'firebase/app';
 export default {
   name: 'CreateAd',
   components: { CreateAdAlert },
-  props: { isLoading: Boolean, currentUser: { type: String, required: true } },
+  props: {
+    isLoading: Boolean,
+    currentUser: { type: String, required: true },
+    userLocalid: { type: String, required: true }
+  },
   data() {
     return {
       adCategory: '',
@@ -201,7 +215,8 @@ export default {
       fileError: false,
       images: [],
       downloadingProgress: null,
-      imageIsloading: false
+      imageIsloading: false,
+      createAdSuccess: false
     };
   },
   validations: {
@@ -224,6 +239,7 @@ export default {
         Images: this.images
       };
       this.$emit('addMessage', newMessage);
+      this.createAdSuccess = true;
       this.clear();
       this.$router.push('ads');
     },
@@ -247,7 +263,10 @@ export default {
     },
     sendImg() {
       this.imageIsloading = true;
-      const uploadTask = firebase.storage().ref(`imges/${this.file.name}`).put(this.file);
+      const uploadTask = firebase
+        .storage()
+        .ref(`imges/${this.userLocalid}/${this.file.name}`)
+        .put(this.file);
       uploadTask.on(
         'state_changed',
         (snapshot) => {
@@ -282,6 +301,20 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+    },
+    deleteAllImg() {
+      console.log('deleteAllImg');
+      if (this.images) {
+        this.images.map((img) => {
+          return this.deleteImg(img.url);
+        });
+      }
+      this.images = [];
+    }
+  },
+  destroyed() {
+    if (!this.createAdSuccess) {
+      return this.deleteAllImg();
     }
   }
 };
@@ -298,12 +331,19 @@ export default {
   width: 8rem;
   height: 8rem;
 }
-.delete-img {
+.delete-img-span {
   color: hsl(348, 100%, 61%);
   font-size: 2rem;
   position: absolute;
+  height: auto;
   top: 2px;
   right: 2px;
+}
+.delete-img {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(255, 255, 255, 0.7);
+  border-radius: 50%;
   cursor: pointer;
 }
 </style>

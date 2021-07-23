@@ -11,6 +11,7 @@
       :message="newMessage"
       :is-loading="isLoading"
       :current-user="currentUser.displayName"
+      :user-localid="currentUser.localId"
       @addMessage="addMessage"
     ></create-ad>
   </div>
