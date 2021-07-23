@@ -126,7 +126,7 @@ export default {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  border: 1px solid #ebebeb;
+  border: 2px solid hsl(141, 53%, 53%);
   margin: 5px;
   width: 8rem;
   height: 8rem;
@@ -146,5 +146,9 @@ export default {
   height: auto;
   top: 1px;
   right: 10px;
+}
+
+.box:hover {
+  background-color: hsla(141, 53%, 53%, 0.048);
 }
 </style>
