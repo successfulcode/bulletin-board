@@ -173,7 +173,14 @@
           </button>
         </div>
         <div class="control">
-          <button class="button is-link is-light" type="reset" @click.prevent="clear">
+          <button
+            class="button is-link is-light"
+            type="reset"
+            @click.prevent="
+              clear();
+              deleteAllImg();
+            "
+          >
             {{ $t('common.cancel') }}
           </button>
         </div>
@@ -292,6 +299,15 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+    },
+    deleteAllImg() {
+      console.log('deleteAllImg');
+      if (this.images) {
+        this.images.map((img) => {
+          return this.deleteImg(img.url);
+        });
+      }
+      this.images = [];
     }
   }
 };
