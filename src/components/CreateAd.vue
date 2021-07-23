@@ -187,7 +187,11 @@ import firebase from 'firebase/app';
 export default {
   name: 'CreateAd',
   components: { CreateAdAlert },
-  props: { isLoading: Boolean, currentUser: { type: String, required: true } },
+  props: {
+    isLoading: Boolean,
+    currentUser: { type: String, required: true },
+    userLocalid: { type: String, required: true }
+  },
   data() {
     return {
       adCategory: '',
@@ -247,7 +251,10 @@ export default {
     },
     sendImg() {
       this.imageIsloading = true;
-      const uploadTask = firebase.storage().ref(`imges/${this.file.name}`).put(this.file);
+      const uploadTask = firebase
+        .storage()
+        .ref(`imges/${this.userLocalid}/${this.file.name}`)
+        .put(this.file);
       uploadTask.on(
         'state_changed',
         (snapshot) => {
