@@ -11,7 +11,8 @@
       "price": "Kaina",
       "eur": "Eur",
       "tel": "Tel",
-      "more": "Daugiau"
+      "more": "Daugiau",
+      "new": "NAUJAS"
     },
     "views": {
       "login": {
@@ -38,7 +39,8 @@
       },
       "ad": {
         "adNr": "Skelbimo Nr.",
-        "category": "Kategorija"
+        "category": "Kategorija",
+        "back": "Atgal"
       }
     },
     "components": {
