@@ -121,7 +121,7 @@
               class="file-input"
               type="file"
               name="resume"
-              :disabled="images.length >= 8"
+              :disabled="images.length >= 9"
               @change="handleChange"
             />
             <span class="file-cta">
@@ -134,6 +134,9 @@
               file ? file.name : $t('components.createAd.adPhotos')
             }}</span>
           </label>
+        </div>
+        <div>
+          <p class="help">{{ $t('components.createAd.maxPhotosItems') }}</p>
         </div>
         <p v-if="fileError" class="help is-danger">
           {{ $t('components.createAd.photoЕxpansionError') }}
