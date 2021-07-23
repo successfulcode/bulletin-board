@@ -241,13 +241,15 @@ export default {
       this.$emit('addMessage', newMessage);
       this.createAdSuccess = true;
       this.clear();
+      this.images = [];
       this.$router.push('ads');
     },
     clear() {
       this.adCategory = '';
       this.adText = '';
       this.adPrice = '';
-      (this.images = []((this.adEmail = ''))), (this.adTel = ''), (this.consentToTheRules = false);
+      this.adTel = '';
+      this.consentToTheRules = false;
     },
     async handleChange(e) {
       const types = ['image/jpeg', 'image/png'];
