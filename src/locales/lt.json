@@ -39,7 +39,8 @@
       },
       "ad": {
         "adNr": "Skelbimo Nr.",
-        "category": "Kategorija"
+        "category": "Kategorija",
+        "back": "Atgal"
       }
     },
     "components": {

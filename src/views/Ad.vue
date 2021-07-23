@@ -57,7 +57,9 @@
         </div>
       </article>
     </div>
-    <a @click="$router.go(-1)">Atgal>></a>
+    <transition name="flip" mode="out-in">
+      <a @click="$router.go(-1)">{{ $t('views.ad.back') }}>></a>
+    </transition>
   </div>
 </template>
 
