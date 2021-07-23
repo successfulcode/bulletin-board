@@ -215,7 +215,8 @@ export default {
       fileError: false,
       images: [],
       downloadingProgress: null,
-      imageIsloading: false
+      imageIsloading: false,
+      createAdSuccess: false
     };
   },
   validations: {
@@ -238,6 +239,7 @@ export default {
         Images: this.images
       };
       this.$emit('addMessage', newMessage);
+      this.createAdSuccess = true;
       this.clear();
       this.$router.push('ads');
     },
@@ -308,6 +310,11 @@ export default {
         });
       }
       this.images = [];
+    }
+  },
+  destroyed() {
+    if (!this.createAdSuccess) {
+      return this.deleteAllImg();
     }
   }
 };
