@@ -57,9 +57,7 @@
         </div>
       </article>
     </div>
-    <transition name="flip" mode="out-in">
-      <a @click="$router.go(-1)">{{ $t('views.ad.back') }}>></a>
-    </transition>
+    <a @click="$router.go(-1)">{{ $t('views.ad.back') }}>></a>
   </div>
 </template>
 

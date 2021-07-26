@@ -51,6 +51,7 @@
         "transport": "Transportas",
         "workBusiness": "Darbas, verslas",
         "homHousehold": "Namai, buitis",
+        "other": "Kita",
         "adText": "Skelbimo tekstas",
         "ad": "Skelbimas",
         "iAgreeWhith": "Sutinku su",
@@ -63,7 +64,9 @@
         "photoЕxpansionError":"Galima įkelti tik *.jpg arba *.png failus",
         "upload": "Įkelti",
         "adPhotos": "skelbimo nuotraukos",
-        "maxPhotosItems": "Daugiausiai galite įkelti 9 nuotraukas"
+        "maxPhotosItems": "Daugiausiai galite įkelti 9 nuotraukas",
+        "suggest": "Siūlau",
+        "lookingFor": "Ieškau"
       },
       "theNavbar": {
         "logout": "Atsijungti",

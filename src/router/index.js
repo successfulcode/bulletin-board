@@ -5,6 +5,7 @@ import SignUp from '@/views/SignUp.vue';
 import Dashboard from '@/views/Dashboard.vue';
 import Ads from '@/views/Ads.vue';
 import Ad from '@/views/Ad.vue';
+import Rules from '@/views/Rules.vue';
 import CurrentUserAds from '@/views/CurrentUserAds.vue';
 import NotFound from '@/views/NotFound.vue';
 import store from '@/store';
@@ -57,6 +58,14 @@ const routes = [
     path: '/ad/:id',
     name: 'Ad',
     component: Ad,
+    meta: {
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/rules',
+    name: 'Rules',
+    component: Rules,
     meta: {
       requiresAuth: false
     }
