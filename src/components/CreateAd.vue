@@ -86,7 +86,7 @@
           <label class="checkbox">
             <input v-model="consentToTheRules" type="checkbox" />
             {{ $t('components.createAd.iAgreeWhith') }}
-            {{ ' ' }}<a href="#">{{ $t('components.createAd.rules') }}</a>
+            {{ ' ' }}<router-link to="/rules">{{ $t('components.createAd.rules') }}</router-link>
           </label>
         </div>
       </div>
