@@ -120,7 +120,7 @@
           />
           <p class="help">{{ $t('components.createAd.aboutEmail') }}</p>
         </div>
-        <div>
+        <div class="mr-3">
           <input
             v-model="$v.adTel.$model"
             class="input"
@@ -133,6 +133,10 @@
             :placeholder="$t('common.tel')"
           />
           <p class="help">{{ $t('components.createAd.aboutTel') }}</p>
+        </div>
+        <div>
+          <CreateAdCities @setCity="addCity" />
+          <p class="help">{{ $t('components.createAd.aboutCity') }}</p>
         </div>
       </div>
       <div class="mb-5">
@@ -215,12 +219,13 @@
 
 <script>
 import CreateAdAlert from './CreateAdAlert.vue';
+import CreateAdCities from './CreateAdCities.vue';
 import { required, minLength, email } from 'vuelidate/lib/validators';
 import firebase from 'firebase/app';
 
 export default {
   name: 'CreateAd',
-  components: { CreateAdAlert },
+  components: { CreateAdAlert, CreateAdCities },
   props: {
     isLoading: Boolean,
     currentUser: { type: String, required: true },
@@ -239,6 +244,7 @@ export default {
       fileError: false,
       images: [],
       suggest: true,
+      city: 'allCities',
       downloadingProgress: null,
       imageIsloading: false,
       createAdSuccess: false
@@ -262,7 +268,8 @@ export default {
         Date: this.adDate,
         Name: this.currentUser,
         Images: this.images,
-        Suggest: this.suggest
+        Suggest: this.suggest,
+        City: this.city
       };
       this.$emit('addMessage', newMessage);
       this.createAdSuccess = true;
@@ -341,6 +348,9 @@ export default {
     },
     toggleSuggest() {
       this.suggest = !this.suggest;
+    },
+    addCity(city) {
+      this.city = city;
     }
   },
   destroyed() {
