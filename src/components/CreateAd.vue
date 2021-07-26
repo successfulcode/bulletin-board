@@ -40,9 +40,30 @@
               <option :value="$t('components.createAd.homHousehold')">
                 {{ $t('components.createAd.homHousehold') }}
               </option>
+              <option :value="$t('components.createAd.other')">
+                {{ $t('components.createAd.other') }}
+              </option>
             </select>
           </div>
         </div>
+      </div>
+
+      <div class="is-flex mb-2">
+        <button class="button is-success" v-if="suggest" @click.prevent="toggleSuggest">
+          {{ $t('components.createAd.suggest') }}
+          <font-awesome-icon :icon="['fa', 'check-circle']" class="ml-1" />
+        </button>
+        <button class="button is-light px-5" @click.prevent="toggleSuggest" v-else>
+          {{ $t('components.createAd.suggest') }}
+        </button>
+        <div class="pt-2 mx-1">arba</div>
+        <button class="button is-warning" v-if="!suggest" @click.prevent="toggleSuggest">
+          {{ $t('components.createAd.lookingFor') }}
+          <font-awesome-icon :icon="['fa', 'check-circle']" class="ml-1" />
+        </button>
+        <button class="button is-light px-5" v-else @click.prevent="toggleSuggest">
+          {{ $t('components.createAd.lookingFor') }}
+        </button>
       </div>
 
       <div class="field">
@@ -217,6 +238,7 @@ export default {
       file: null,
       fileError: false,
       images: [],
+      suggest: true,
       downloadingProgress: null,
       imageIsloading: false,
       createAdSuccess: false
@@ -239,7 +261,8 @@ export default {
         Tel: this.adTel,
         Date: this.adDate,
         Name: this.currentUser,
-        Images: this.images
+        Images: this.images,
+        Suggest: this.suggest
       };
       this.$emit('addMessage', newMessage);
       this.createAdSuccess = true;
@@ -315,6 +338,9 @@ export default {
         });
       }
       this.images = [];
+    },
+    toggleSuggest() {
+      this.suggest = !this.suggest;
     }
   },
   destroyed() {
