@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+// import firebase from 'firebase';
 // import 'firebase/firestore';
 
 export const firebaseConfig = {
@@ -12,8 +12,8 @@ export const firebaseConfig = {
   measurementId: process.env.VUE_APP_FIREBASE_MEASUREMENTID
 };
 
-firebase.initializeApp(firebaseConfig);
+// firebase.initializeApp(firebaseConfig);
 
 // const firebaseDb = firebase.firestore();
 
-export default firebase;
+// export default firebase;

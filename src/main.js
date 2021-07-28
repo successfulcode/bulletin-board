@@ -17,6 +17,10 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import Vuelidate from 'vuelidate';
 import VueMoment from 'vue-moment';
+import firebase from 'firebase';
+import { firebaseConfig } from './utils/firebaseConfig';
+
+firebase.initializeApp(firebaseConfig);
 
 library.add(
   faLock,
