@@ -10,18 +10,20 @@
       <spinner></spinner>
     </div>
     <div v-if="ads.length > 0">
-      <div v-for="ad in ads" :key="ad.id" class="mt-4 mb-4 px-4">
-        <ads-item
-          :id="ad.id"
-          :category="ad.Category"
-          :text="ad.Text"
-          :price="ad.Price"
-          :email="ad.Email"
-          :tel="ad.Tel"
-          :ad-date="ad.Date"
-          :name="ad.Name"
-          :image="ad.Images && ad.Images[0]"
-        ></ads-item>
+      <div>
+        <div v-for="ad in ads" :key="ad.id" class="mt-4 mb-4 px-4">
+          <ads-item
+            :id="ad.id"
+            :category="ad.Category"
+            :text="ad.Text"
+            :price="ad.Price"
+            :email="ad.Email"
+            :tel="ad.Tel"
+            :ad-date="ad.Date"
+            :name="ad.Name"
+            :image="ad.Images && ad.Images[0]"
+          ></ads-item>
+        </div>
       </div>
     </div>
     <div v-else-if="ads.length <= 0 && !isLoading">
@@ -31,6 +33,7 @@
       <button class="button is-info mb-6" @click="getMoreAds">MORE</button>
       <button class="button is-info mb-6" @click="getShallow">GET_SHALLOW</button>
     </div>
+    <div v-observe-visibility="test"></div>
   </div>
 </template>
 
@@ -67,6 +70,12 @@ export default {
       console.log('getMoreAds ads data', this.ads);
       this.$store.dispatch(GET_MORE_ADS, this.ads[this.ads.length - 1].Date);
       console.log('numberId', this.ads[this.ads.length - 1].Date);
+    },
+    test(isVisible) {
+      if (!isVisible) {
+        return;
+      }
+      this.getMoreAds();
     },
     getShallow() {
       this.$store.dispatch(GET_SHALLOW);

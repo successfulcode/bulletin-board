@@ -19,6 +19,7 @@ import Vuelidate from 'vuelidate';
 import VueMoment from 'vue-moment';
 import firebase from 'firebase';
 import { firebaseConfig } from './utils/firebaseConfig';
+import VueObserveVisibility from 'vue-observe-visibility';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -37,6 +38,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.config.productionTip = false;
 
+Vue.use(VueObserveVisibility);
 Vue.use(Vuelidate);
 Vue.use(VueMoment);
 
