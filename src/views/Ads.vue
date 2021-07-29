@@ -45,6 +45,11 @@ import TheNotification from '@/components/TheNotification.vue';
 export default {
   name: 'Ads',
   components: { Spinner, AdsItem, TheNotification },
+  data() {
+    return {
+      loadMore: true
+    };
+  },
   computed: {
     ...mapState({
       isLoading: (state) => state.auth.isLoading
