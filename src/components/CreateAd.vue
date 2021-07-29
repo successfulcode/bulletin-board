@@ -49,19 +49,19 @@
       </div>
 
       <div class="is-flex mb-2">
-        <button class="button is-success" v-if="suggest" @click.prevent="toggleSuggest">
+        <button v-if="suggest" class="button is-success" @click.prevent="toggleSuggest">
           {{ $t('components.createAd.suggest') }}
           <font-awesome-icon :icon="['fa', 'check-circle']" class="ml-1" />
         </button>
-        <button class="button is-light px-5" @click.prevent="toggleSuggest" v-else>
+        <button v-else class="button is-light px-5" @click.prevent="toggleSuggest">
           {{ $t('components.createAd.suggest') }}
         </button>
         <div class="pt-2 mx-1">arba</div>
-        <button class="button is-warning" v-if="!suggest" @click.prevent="toggleSuggest">
+        <button v-if="!suggest" class="button is-warning" @click.prevent="toggleSuggest">
           {{ $t('components.createAd.lookingFor') }}
           <font-awesome-icon :icon="['fa', 'check-circle']" class="ml-1" />
         </button>
-        <button class="button is-light px-5" v-else @click.prevent="toggleSuggest">
+        <button v-else class="button is-light px-5" @click.prevent="toggleSuggest">
           {{ $t('components.createAd.lookingFor') }}
         </button>
       </div>
@@ -257,6 +257,11 @@ export default {
     adEmail: { required, email },
     adTel: { required, minLength: minLength(9) }
   },
+  destroyed() {
+    if (!this.createAdSuccess) {
+      return this.deleteAllImg();
+    }
+  },
   methods: {
     onSubmit() {
       const newMessage = {
@@ -351,11 +356,6 @@ export default {
     },
     addCity(city) {
       this.city = city;
-    }
-  },
-  destroyed() {
-    if (!this.createAdSuccess) {
-      return this.deleteAllImg();
     }
   }
 };

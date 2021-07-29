@@ -17,7 +17,17 @@ const ApiService = {
     return axios.post(`${authUrl}:signInWithCustomToken?key=${process.env.VUE_APP_API_KEY}`, token);
   },
   getAds() {
-    return axios.get(`${dataUrl}.json`);
+    // return axios.get(`${dataUrl}.json`);
+    return axios.get(`${dataUrl}.json?orderBy="Date"&limitToFirst=3&print=pretty`);
+  },
+  getMoreAds(lastItem) {
+    // return axios.get(`${dataUrl}.json`);
+    return axios.get(
+      `${dataUrl}.json?orderBy="Date"&limitToFirst=3&startAt=${lastItem}&print=pretty`
+    );
+  },
+  getShallowData() {
+    return axios.get(`${dataUrl}.json?shallow=true&print=pretty`);
   },
   getAd(id) {
     return axios.get(`${dataUrl}/${id}.json`);

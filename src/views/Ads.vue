@@ -27,12 +27,16 @@
     <div v-else-if="ads.length <= 0 && !isLoading">
       {{ $t('views.ads.noAds') }}
     </div>
+    <div>
+      <button class="button is-info mb-6" @click="getMoreAds">MORE</button>
+      <button class="button is-info mb-6" @click="getShallow">GET_SHALLOW</button>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters } from 'vuex';
-import { GET_ADS } from '@/store/actions.types';
+import { GET_ADS, GET_MORE_ADS, GET_SHALLOW } from '@/store/actions.types';
 import Spinner from '@/assets/Spinner.vue';
 import AdsItem from '@/components/AdsItem.vue';
 import { CLOSE_NOTIFICATION } from '@/store/mutations.types';
@@ -53,6 +57,14 @@ export default {
   methods: {
     getAds() {
       this.$store.dispatch(GET_ADS);
+    },
+    getMoreAds() {
+      console.log('getMoreAds ads data', this.ads);
+      this.$store.dispatch(GET_MORE_ADS, this.ads[this.ads.length - 1].Date);
+      console.log('numberId', this.ads[this.ads.length - 1].Date);
+    },
+    getShallow() {
+      this.$store.dispatch(GET_SHALLOW);
     },
     closeNotification() {
       this.$store.commit(CLOSE_NOTIFICATION);

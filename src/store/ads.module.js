@@ -1,5 +1,5 @@
 import ApiService from '@/api';
-import { ADD_MESSAGE, GET_ADS, GET_AD } from './actions.types';
+import { ADD_MESSAGE, GET_ADS, GET_AD, GET_MORE_ADS, GET_SHALLOW } from './actions.types';
 import {
   SET_NEW_MESSAGE,
   SET_MESSAGES,
@@ -7,14 +7,17 @@ import {
   ISLOADING,
   ISLOADING_FALSE,
   SET_ERROR,
-  OPEN_NOTIFICATION
+  OPEN_NOTIFICATION,
+  SET_MORE_MESSAGES,
+  SET_SHALLOWS
 } from './mutations.types';
 import i18n from '@/i18n';
 
 const state = {
   newMessage: {},
   messages: [],
-  currentMessage: {}
+  currentMessage: {},
+  shallows: {}
 };
 
 const getters = {
@@ -90,6 +93,44 @@ const actions = {
       commit(ISLOADING_FALSE);
     }
   },
+  async [GET_MORE_ADS]({ commit }, lastItem) {
+    try {
+      commit(ISLOADING);
+      const { data, status } = await ApiService.getMoreAds(lastItem);
+      if (status === 200) {
+        commit(SET_MORE_MESSAGES, data);
+        commit(ISLOADING_FALSE);
+      }
+    } catch (error) {
+      const notificationRules = {
+        status: 'is-danger',
+        timeout: 5000,
+        message: i18n.t('store.adsModule.invalidMessage')
+      };
+      commit(OPEN_NOTIFICATION, notificationRules);
+      commit(SET_ERROR, error.message);
+      commit(ISLOADING_FALSE);
+    }
+  },
+  async [GET_SHALLOW]({ commit }) {
+    try {
+      commit(ISLOADING);
+      const { data, status } = await ApiService.getShallowData();
+      if (status === 200) {
+        commit(SET_SHALLOWS, data);
+        commit(ISLOADING_FALSE);
+      }
+    } catch (error) {
+      const notificationRules = {
+        status: 'is-danger',
+        timeout: 5000,
+        message: i18n.t('store.adsModule.invalidMessage')
+      };
+      commit(OPEN_NOTIFICATION, notificationRules);
+      commit(SET_ERROR, error.message);
+      commit(ISLOADING_FALSE);
+    }
+  },
   async [GET_AD]({ commit }, id) {
     try {
       commit(ISLOADING);
@@ -117,13 +158,24 @@ const mutations = {
     state.messages = [newMessage, ...state.messages];
   },
   [SET_MESSAGES](state, messages) {
-    const newMessages = Object.keys(messages)
-      .map((id) => ({ ...messages[id], id }))
-      .reverse();
+    const newMessages = Object.keys(messages).map((id) => ({ ...messages[id], id }));
+    // .reverse();
     state.messages = newMessages;
+  },
+  [SET_MORE_MESSAGES](state, messages) {
+    const moreMessages = Object.keys(messages).map((id) => ({ ...messages[id], id }));
+    // .reverse();
+    moreMessages.shift();
+    console.log('moreMessages', moreMessages);
+    state.messages = [...state.messages, ...moreMessages];
   },
   [SET_CURRENT_MESSAGE](state, currentMessage) {
     state.currentMessage = currentMessage;
+  },
+  [SET_SHALLOWS](state, shallows) {
+    const shallowsItems = Object.keys(shallows).map((item) => ({ adId: item }));
+    state.shallows = [...shallowsItems];
+    console.log('SET_SHALLOWS', state.shallows);
   }
 };
 
