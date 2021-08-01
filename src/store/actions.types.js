@@ -6,3 +6,5 @@ export const AUTO_LOGOUT = 'store/actionstypes/AUTO_LOGOUT';
 export const AUTO_LOGIN = 'store/actionstypes/AUTO_LOGIN';
 export const GET_ADS = 'store/actionstypes/GET_ADS';
 export const GET_AD = 'store/actionstypes/GET_AD';
+export const GET_MORE_ADS = 'store/actionstypes/GET_MORE_ADS';
+export const GET_SHALLOW = 'store/actionstypes/GET_SHALLOW';
