@@ -133,7 +133,7 @@ export default {
 }
 
 .media-content {
-  max-width: 85%;
+  width: 85%;
 }
 
 .image-label {
