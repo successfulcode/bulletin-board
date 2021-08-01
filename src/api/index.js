@@ -18,7 +18,7 @@ const ApiService = {
   },
   getAds() {
     // return axios.get(`${dataUrl}.json`);
-    return axios.get(`${dataUrl}.json?orderBy="Date"&limitToFirst=3&print=pretty`);
+    return axios.get(`${dataUrl}.json?orderBy="Date"&limitToFirst=6&print=pretty`);
   },
   getMoreAds(lastItem) {
     // return axios.get(`${dataUrl}.json`);
