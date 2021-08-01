@@ -32,7 +32,7 @@
     <div v-show="isLoading && isObserveLoading" class="has-text-centered mb-4">
       <spinner></spinner>
     </div>
-    <div v-observe-visibility="test"></div>
+    <div v-observe-visibility="getMoreAdsHandler"></div>
   </div>
 </template>
 
@@ -70,7 +70,7 @@ export default {
     async getMoreAds() {
       try {
         this.isObserveLoading = true;
-        if (this.adIndex != this.ads.length - 1 || !this.isLoading) {
+        if (this.adIndex != this.ads.length - 1 && !this.isLoading) {
           this.adIndex = this.ads.length - 1;
           await this.$store.dispatch(GET_MORE_ADS, this.ads[this.adIndex].Date);
           this.isObserveLoading = false;
@@ -80,7 +80,7 @@ export default {
         console.log(error);
       }
     },
-    test(isVisible) {
+    getMoreAdsHandler(isVisible) {
       if (!isVisible) {
         return;
       }
