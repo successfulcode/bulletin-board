@@ -86,9 +86,6 @@ export default {
       }
       this.getMoreAds();
     },
-    // getShallow() {
-    //   this.$store.dispatch(GET_SHALLOW);
-    // },
     closeNotification() {
       this.$store.commit(CLOSE_NOTIFICATION);
     }

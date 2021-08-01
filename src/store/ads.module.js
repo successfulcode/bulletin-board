@@ -158,13 +158,15 @@ const mutations = {
     state.messages = [newMessage, ...state.messages];
   },
   [SET_MESSAGES](state, messages) {
-    const newMessages = Object.keys(messages).map((id) => ({ ...messages[id], id }));
-    // .reverse();
+    const newMessages = Object.keys(messages)
+      .map((id) => ({ ...messages[id], id }))
+      .reverse();
     state.messages = newMessages;
   },
   [SET_MORE_MESSAGES](state, messages) {
-    const moreMessages = Object.keys(messages).map((id) => ({ ...messages[id], id }));
-    // .reverse();
+    const moreMessages = Object.keys(messages)
+      .map((id) => ({ ...messages[id], id }))
+      .reverse();
     moreMessages.shift();
     console.log('moreMessages', moreMessages);
     state.messages = [...state.messages, ...moreMessages];
