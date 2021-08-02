@@ -7,6 +7,7 @@ export const SET_NEW_AD = 'store/mutationstypes/SET_NEW_AD';
 export const SET_ADS = 'store/mutationstypes/SET_ADS';
 export const SET_MORE_ADS = 'store/mutationstypes/SET_MORE_ADS';
 export const SET_CURRENT_AD = 'store/mutationstypes/SET_CURRENT_AD';
+export const SET_CURRENT_USER_ADS = 'store/mutationstypes/SET_CURRENT_USER_ADS';
 export const OPEN_NOTIFICATION = 'store/mutationstypes/OPEN_NOTIFICATION';
 export const CLOSE_NOTIFICATION = 'store/mutationstypes/CLOSE_NOTIFICATION';
 export const SET_SHALLOWS = 'store/mutationstypes/SET_SHALLOWS';

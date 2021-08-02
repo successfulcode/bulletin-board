@@ -4,7 +4,7 @@ import {
   GET_ADS,
   GET_AD,
   GET_MORE_ADS,
-  GET_GURRENT_USER_ADS
+  GET_CURRENT_USER_ADS
   // GET_SHALLOW
 } from './actions.types';
 import {
@@ -15,7 +15,8 @@ import {
   ISLOADING_FALSE,
   SET_ERROR,
   OPEN_NOTIFICATION,
-  SET_MORE_ADS
+  SET_MORE_ADS,
+  SET_CURRENT_USER_ADS
   // SET_SHALLOWS
 } from './mutations.types';
 import i18n from '@/i18n';
@@ -23,6 +24,7 @@ import i18n from '@/i18n';
 const state = {
   newAd: {},
   ads: [],
+  currentUserAds: [],
   currentAd: {},
   shallows: {}
 };
@@ -37,8 +39,8 @@ const getters = {
   currentAd(state) {
     return state.currentAd;
   },
-  currentUserAds(state, rootState) {
-    return state.ads.filter((ad) => ad.userLocalId === rootState.currentUser.localId);
+  currentUserAds(state) {
+    return state.currentUserAds;
   }
 };
 
@@ -119,13 +121,13 @@ const actions = {
       commit(ISLOADING_FALSE);
     }
   },
-  async [GET_GURRENT_USER_ADS]({ commit }) {
-    const currentUser = 'T7S03oq49iYVvhYWmQMQDZ830Um1';
+  async [GET_CURRENT_USER_ADS]({ commit, rootState }) {
     try {
+      const userLocalId = rootState.auth.user.localId;
       commit(ISLOADING);
-      const { data, status } = await ApiService.getCurrentUserAds(currentUser);
+      const { data, status } = await ApiService.getCurrentUserAds(userLocalId);
       if (status === 200) {
-        commit(SET_ADS, data);
+        commit(SET_CURRENT_USER_ADS, data);
         commit(ISLOADING_FALSE);
       }
     } catch (error) {
@@ -190,6 +192,12 @@ const mutations = {
       .map((id) => ({ ...ads[id], id }))
       .reverse();
     state.ads = newads;
+  },
+  [SET_CURRENT_USER_ADS](state, ads) {
+    const newAds = Object.keys(ads)
+      .map((id) => ({ ...ads[id], id }))
+      .sort((a, b) => b.Date - a.Date);
+    state.currentUserAds = newAds;
   },
   [SET_MORE_ADS](state, ads) {
     const moreads = Object.keys(ads)
