@@ -10,7 +10,7 @@
       <spinner></spinner>
     </div>
     <div v-if="currentUserAds.length > 0">
-      <div v-for="ad in currentUserAds" :key="ad.id" class="mt-4 px-4">
+      <div v-for="ad in currentUserAds" :key="ad.id" class="mt-4 mb-4 px-4">
         <ads-item
           :id="ad.id"
           :category="ad.Category"
@@ -34,7 +34,7 @@
 import { mapGetters, mapState } from 'vuex';
 import AdsItem from '@/components/AdsItem.vue';
 import Spinner from '@/assets/Spinner.vue';
-import { GET_ADS } from '@/store/actions.types';
+import { GET_CURRENT_USER_ADS } from '@/store/actions.types';
 import { CLOSE_NOTIFICATION } from '@/store/mutations.types';
 import TheNotification from '@/components/TheNotification.vue';
 
@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     getAds() {
-      this.$store.dispatch(GET_ADS);
+      this.$store.dispatch(GET_CURRENT_USER_ADS);
     },
     closeNotification() {
       this.$store.commit(CLOSE_NOTIFICATION);

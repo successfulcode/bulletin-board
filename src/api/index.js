@@ -27,6 +27,9 @@ const ApiService = {
   },
   getAd(id) {
     return axios.get(`${dataUrl}/${id}.json`);
+  },
+  getCurrentUserAds(userLocalId) {
+    return axios.get(`${dataUrl}.json?orderBy="userLocalId"&equalTo="${userLocalId}"&print=pretty`);
   }
 };
 

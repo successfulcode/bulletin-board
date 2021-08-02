@@ -1,52 +1,55 @@
 import ApiService from '@/api';
 import {
-  ADD_MESSAGE,
+  ADD_AD,
   GET_ADS,
   GET_AD,
-  GET_MORE_ADS
+  GET_MORE_ADS,
+  GET_CURRENT_USER_ADS
   // GET_SHALLOW
 } from './actions.types';
 import {
-  SET_NEW_MESSAGE,
-  SET_MESSAGES,
-  SET_CURRENT_MESSAGE,
+  SET_NEW_AD,
+  SET_ADS,
+  SET_CURRENT_AD,
   ISLOADING,
   ISLOADING_FALSE,
   SET_ERROR,
   OPEN_NOTIFICATION,
-  SET_MORE_MESSAGES
+  SET_MORE_ADS,
+  SET_CURRENT_USER_ADS
   // SET_SHALLOWS
 } from './mutations.types';
 import i18n from '@/i18n';
 
 const state = {
-  newMessage: {},
-  messages: [],
-  currentMessage: {},
+  newAd: {},
+  ads: [],
+  currentUserAds: [],
+  currentAd: {},
   shallows: {}
 };
 
 const getters = {
   newAd(state) {
-    return state.newMessage;
+    return state.newAd;
   },
   ads(state) {
-    return state.messages;
+    return state.ads;
   },
   currentAd(state) {
-    return state.currentMessage;
+    return state.currentAd;
   },
-  currentUserAds(state, rootState) {
-    return state.messages.filter((ad) => ad.userLocalId === rootState.currentUser.localId);
+  currentUserAds(state) {
+    return state.currentUserAds;
   }
 };
 
 const actions = {
-  async [ADD_MESSAGE]({ commit, rootState }, message) {
+  async [ADD_AD]({ commit, rootState }, ad) {
     try {
       const userId = { userLocalId: rootState.auth.user.localId };
       const adsMessage = {
-        ...message,
+        ...ad,
         ...userId
       };
       commit(ISLOADING);
@@ -62,11 +65,11 @@ const actions = {
         };
         commit(OPEN_NOTIFICATION, notificationRules);
         const id = { id: name };
-        const newMessage = {
-          ...message,
+        const newAd = {
+          ...ad,
           ...id
         };
-        commit(SET_NEW_MESSAGE, newMessage);
+        commit(SET_NEW_AD, newAd);
         commit(ISLOADING_FALSE);
       }
     } catch (error) {
@@ -85,7 +88,7 @@ const actions = {
       commit(ISLOADING);
       const { data, status } = await ApiService.getAds();
       if (status === 200) {
-        commit(SET_MESSAGES, data);
+        commit(SET_ADS, data);
         commit(ISLOADING_FALSE);
       }
     } catch (error) {
@@ -104,7 +107,7 @@ const actions = {
       commit(ISLOADING);
       const { data, status } = await ApiService.getMoreAds(lastItem);
       if (status === 200) {
-        commit(SET_MORE_MESSAGES, data);
+        commit(SET_MORE_ADS, data);
         commit(ISLOADING_FALSE);
       }
     } catch (error) {
@@ -118,6 +121,27 @@ const actions = {
       commit(ISLOADING_FALSE);
     }
   },
+  async [GET_CURRENT_USER_ADS]({ commit, rootState }) {
+    try {
+      const userLocalId = rootState.auth.user.localId;
+      commit(ISLOADING);
+      const { data, status } = await ApiService.getCurrentUserAds(userLocalId);
+      if (status === 200) {
+        commit(SET_CURRENT_USER_ADS, data);
+        commit(ISLOADING_FALSE);
+      }
+    } catch (error) {
+      const notificationRules = {
+        status: 'is-danger',
+        timeout: 5000,
+        message: i18n.t('store.adsModule.invalidMessage')
+      };
+      commit(OPEN_NOTIFICATION, notificationRules);
+      commit(SET_ERROR, error.message);
+      commit(ISLOADING_FALSE);
+    }
+  },
+
   // async [GET_SHALLOW]({ commit }) {
   //   try {
   //     commit(ISLOADING);
@@ -142,7 +166,7 @@ const actions = {
       commit(ISLOADING);
       const { data, status } = await ApiService.getAd(id);
       if (status === 200) {
-        commit(SET_CURRENT_MESSAGE, data);
+        commit(SET_CURRENT_AD, data);
         commit(ISLOADING_FALSE);
       }
     } catch (error) {
@@ -159,26 +183,32 @@ const actions = {
 };
 
 const mutations = {
-  [SET_NEW_MESSAGE](state, newMessage) {
-    state.newMessage = newMessage;
-    state.messages = [newMessage, ...state.messages];
+  [SET_NEW_AD](state, newAd) {
+    state.newAd = newAd;
+    state.ads = [newAd, ...state.ads];
   },
-  [SET_MESSAGES](state, messages) {
-    const newMessages = Object.keys(messages)
-      .map((id) => ({ ...messages[id], id }))
+  [SET_ADS](state, ads) {
+    const newads = Object.keys(ads)
+      .map((id) => ({ ...ads[id], id }))
       .reverse();
-    state.messages = newMessages;
+    state.ads = newads;
   },
-  [SET_MORE_MESSAGES](state, messages) {
-    const moreMessages = Object.keys(messages)
-      .map((id) => ({ ...messages[id], id }))
+  [SET_CURRENT_USER_ADS](state, ads) {
+    const newAds = Object.keys(ads)
+      .map((id) => ({ ...ads[id], id }))
+      .sort((a, b) => b.Date - a.Date);
+    state.currentUserAds = newAds;
+  },
+  [SET_MORE_ADS](state, ads) {
+    const moreads = Object.keys(ads)
+      .map((id) => ({ ...ads[id], id }))
       .reverse();
-    moreMessages.shift();
-    console.log('moreMessages', moreMessages);
-    state.messages = [...state.messages, ...moreMessages];
+    moreads.shift();
+    console.log('moreads', moreads);
+    state.ads = [...state.ads, ...moreads];
   },
-  [SET_CURRENT_MESSAGE](state, currentMessage) {
-    state.currentMessage = currentMessage;
+  [SET_CURRENT_AD](state, currentAd) {
+    state.currentAd = currentAd;
   }
   // [SET_SHALLOWS](state, shallows) {
   //   const shallowsItems = Object.keys(shallows).map((item) => ({ adId: item }));
