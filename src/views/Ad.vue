@@ -18,7 +18,6 @@
         <div class="media-content">
           <div class="content">
             <strong>{{ $t('views.ad.adNr') }}:</strong>{{ ' ' }}{{ $route.params.id }}
-
             <strong>{{ currentAd.Name }}{{ ' ' }} </strong>
             <strong>{{ $t('views.ad.category') }}: {{ currentAd.Category }}{{ ' ' }}</strong>
             <small>{{ $t('common.email') }}.:{{ ' ' }}{{ currentAd.Email }}{{ ' ' }}</small>
