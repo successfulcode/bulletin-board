@@ -3,7 +3,7 @@
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">Redaguoti skelbimą</p>
+        <p class="modal-card-title">Skelbimo redagavimas</p>
         <button class="delete" aria-label="close" @click="$emit('toggleShowModal')"></button>
       </header>
       <section class="modal-card-body">
@@ -32,21 +32,76 @@
               </option>
             </select>
           </div>
-          <input type="text" class="input mt-4" value="El. paštas" />
-          <input type="text" class="input mt-2" value="Tel." />
-          <input type="text" class="input mt-2" />
+          <input type="text" class="input mt-4" v-model="adEmail" />
+          <input type="text" class="input mt-2" v-model="adTel" />
+          <CreateAdCities @setCity="addCity" class="mt-2" :currentCity="city" />
+          <input type="text" class="input mt-2" v-model="adPrice" />
+          <textarea type="text" class="input mt-2" v-model="adText" />
         </div>
       </section>
       <footer class="modal-card-foot">
-        <button class="button is-success" @click="$emit('toggleShowModal')">Save changes</button>
-        <button class="button">Cancel</button>
+        <button class="button is-success" @click="onUpdateAd">Save changes</button>
+        <button class="button" @click="$emit('toggleShowModal')">Cancel</button>
       </footer>
     </div>
   </div>
 </template>
 
 <script>
+import CreateAdCities from '@/components/CreateAdCities';
+import { UPDATE_AD } from '@/store/actions.types';
 export default {
-  name: 'EditAd'
+  name: 'EditAd',
+  components: { CreateAdCities },
+  props: {
+    currentAd: {
+      type: Object,
+      required: true
+    },
+    adId: {
+      type: String,
+      required: true
+    }
+  },
+  data() {
+    return {
+      adCategory: this.currentAd.Category,
+      adText: this.currentAd.Text,
+      adPrice: this.currentAd.Price,
+      adEmail: this.currentAd.Email,
+      adTel: this.currentAd.Tel,
+      dateOfAdjustment: Date.now(),
+      file: null,
+      fileError: false,
+      images: [],
+      city: this.currentAd.City,
+      createAdSuccess: false
+    };
+  },
+  computed: {
+    price() {
+      return this.currentAd.Price;
+    }
+  },
+  methods: {
+    addCity(city) {
+      this.city = city;
+    },
+    onUpdateAd() {
+      const updatedAd = {
+        Category: this.adCategory,
+        Text: this.adText,
+        Price: this.adPrice,
+        Email: this.adEmail,
+        Tel: this.adTel,
+        DateOfAdjustment: this.dateOfAdjustment,
+        City: this.city
+      };
+      const adId = this.adId;
+      this.$store.dispatch(UPDATE_AD, { adId, updatedAd });
+      this.createAdSuccess = true;
+      this.$emit('toggleShowModal');
+    }
+  }
 };
 </script>

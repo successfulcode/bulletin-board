@@ -4,7 +4,8 @@ import {
   GET_ADS,
   GET_AD,
   GET_MORE_ADS,
-  GET_CURRENT_USER_ADS
+  GET_CURRENT_USER_ADS,
+  UPDATE_AD
   // GET_SHALLOW
 } from './actions.types';
 import {
@@ -16,7 +17,8 @@ import {
   SET_ERROR,
   OPEN_NOTIFICATION,
   SET_MORE_ADS,
-  SET_CURRENT_USER_ADS
+  SET_CURRENT_USER_ADS,
+  SET_UPDATED_CURRENT_AD
   // SET_SHALLOWS
 } from './mutations.types';
 import i18n from '@/i18n';
@@ -77,6 +79,33 @@ const actions = {
         status: 'is-danger',
         timeout: 5000,
         message: i18n.t('store.adsModule.invalidMessage')
+      };
+      commit(OPEN_NOTIFICATION, notificationRules);
+      commit(SET_ERROR, error.message);
+      commit(ISLOADING_FALSE);
+    }
+  },
+  async [UPDATE_AD]({ commit }, { adId, updatedAd }) {
+    console.log('UPDATE_AD id', adId);
+    console.log('UPDATE_AD updatedAd', updatedAd);
+    try {
+      commit(ISLOADING);
+      const { status } = await ApiService.updateAd(adId, updatedAd);
+      if (status === 200) {
+        const notificationRules = {
+          status: 'is-success',
+          timeout: 3000,
+          message: i18n.t('store.adsModule.successUpdateMessage')
+        };
+        commit(SET_UPDATED_CURRENT_AD, updatedAd);
+        commit(OPEN_NOTIFICATION, notificationRules);
+        commit(ISLOADING_FALSE);
+      }
+    } catch (error) {
+      const notificationRules = {
+        status: 'is-danger',
+        timeout: 5000,
+        message: i18n.t('store.adsModule.invalidUpdateMessage')
       };
       commit(OPEN_NOTIFICATION, notificationRules);
       commit(SET_ERROR, error.message);
@@ -204,11 +233,13 @@ const mutations = {
       .map((id) => ({ ...ads[id], id }))
       .reverse();
     moreads.shift();
-    console.log('moreads', moreads);
     state.ads = [...state.ads, ...moreads];
   },
   [SET_CURRENT_AD](state, currentAd) {
     state.currentAd = currentAd;
+  },
+  [SET_UPDATED_CURRENT_AD](state, updatedAd) {
+    state.currentAd = { ...state.currentAd, ...updatedAd };
   }
   // [SET_SHALLOWS](state, shallows) {
   //   const shallowsItems = Object.keys(shallows).map((item) => ({ adId: item }));

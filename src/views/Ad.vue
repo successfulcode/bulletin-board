@@ -18,7 +18,11 @@
         </span>
       </div>
       <div class="modal" :class="{ 'is-active': isModalOpen }">
-        <edit-ad @toggleShowModal="toggleModal"></edit-ad>
+        <edit-ad
+          @toggleShowModal="toggleModal"
+          :currentAd="currentAd"
+          :adId="$route.params.id"
+        ></edit-ad>
       </div>
       <div class="is-flex is-justify-content-center mb-4">
         <ad-images :pictures="currentAd.Images"></ad-images>
@@ -33,7 +37,7 @@
             <small>{{ $t('common.tel') }}.:{{ ' ' }}{{ currentAd.Tel }}</small>
             <small>{{ ' ' }}{{ $moment(currentAd.AdDate).format('YYYY-MM-DD') }}</small>
             <br />
-            <div class="wrap mb-2">
+            <div class="wrap mb-5">
               <p>
                 {{ currentAd.Text }}
               </p>

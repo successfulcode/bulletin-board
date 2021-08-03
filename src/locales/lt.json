@@ -88,7 +88,9 @@
       "adsModule": {
         "successMessage": "Skelbimas sėkmingai sukurtas!",
         "invalidMessage": "Nepavyko sukurti skelbimo! Patikrinkite įvedamus duomenys!",
-        "invalidGetMessage": "Kažkas ne taip! Nepavyko įkelti naujausiu skelbimų!"
+        "invalidGetMessage": "Kažkas ne taip! Nepavyko įkelti naujausiu skelbimų!",
+        "successUpdateMessage": "Skelbimas sėkmingai atnaujintas!",
+        "invalidUpdateMessage": "Nepavyko atnaujinti skelbimo! Patikrinkite įvedamus duomenys!"
       }
     },
     "cities": {
