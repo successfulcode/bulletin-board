@@ -12,7 +12,7 @@
       :is-loading="isLoading"
       :current-user="currentUser.displayName"
       :user-localid="currentUser.localId"
-      @addMessage="addMessage"
+      @addAd="addNewAd"
     ></create-ad>
   </div>
 </template>
@@ -20,7 +20,7 @@
 <script>
 import CreateAd from '@/components/CreateAd.vue';
 import { mapState, mapGetters } from 'vuex';
-import { ADD_MESSAGE } from '@/store/actions.types';
+import { ADD_AD } from '@/store/actions.types';
 import TheNotification from '../components/TheNotification.vue';
 import { CLOSE_NOTIFICATION } from '@/store/mutations.types';
 export default {
@@ -40,8 +40,8 @@ export default {
     ])
   },
   methods: {
-    addMessage(message) {
-      this.$store.dispatch(ADD_MESSAGE, message);
+    addNewAd(newAd) {
+      this.$store.dispatch(ADD_AD, newAd);
     },
     closeNotification() {
       this.$store.commit(CLOSE_NOTIFICATION);
