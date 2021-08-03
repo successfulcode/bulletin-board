@@ -305,7 +305,7 @@ export default {
       this.imageIsloading = true;
       const uploadTask = firebase
         .storage()
-        .ref(`imges/${this.userLocalid}/${this.file.name}`)
+        .ref(`imges/${this.userLocalid}/${Date.now()}${this.file.name}`)
         .put(this.file);
       uploadTask.on(
         'state_changed',
