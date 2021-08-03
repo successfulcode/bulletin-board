@@ -264,7 +264,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      const newMessage = {
+      const newAd = {
         Category: this.adCategory,
         Text: this.adText,
         Price: this.adPrice,
@@ -276,7 +276,7 @@ export default {
         Suggest: this.suggest,
         City: this.city
       };
-      this.$emit('addMessage', newMessage);
+      this.$emit('addAd', newAd);
       this.createAdSuccess = true;
       this.clear();
       this.images = [];
@@ -305,7 +305,7 @@ export default {
       this.imageIsloading = true;
       const uploadTask = firebase
         .storage()
-        .ref(`imges/${this.userLocalid}/${this.file.name}`)
+        .ref(`imges/${this.userLocalid}/${Date.now()}${this.file.name}`)
         .put(this.file);
       uploadTask.on(
         'state_changed',
