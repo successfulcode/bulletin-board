@@ -11,11 +11,14 @@
       <spinner></spinner>
     </div>
     <div v-else class="box mt-4">
-      <div class="has-text-right" v-if="currentAd.userLocalId === currentUser.localId">
-        <span class="button is-ghost">
+      <div v-if="currentAd.userLocalId === currentUser.localId" class="has-text-right">
+        <span class="button is-ghost" @click="toggleModal">
           <p>{{ $t('views.ad.edit') }}</p>
           <font-awesome-icon :icon="['fa', 'edit']" class="ml-1" />
         </span>
+      </div>
+      <div class="modal" :class="{ 'is-active': isModalOpen }">
+        <edit-ad @toggleShowModal="toggleModal"></edit-ad>
       </div>
       <div class="is-flex is-justify-content-center mb-4">
         <ad-images :pictures="currentAd.Images"></ad-images>
@@ -24,7 +27,7 @@
         <div class="media-content">
           <div class="content">
             <strong>{{ $t('views.ad.adNr') }}:</strong>{{ ' ' }}{{ $route.params.id }}
-            <strong>{{ currentAd.Name }}{{ ' ' }} </strong>
+
             <strong>{{ $t('views.ad.category') }}: {{ currentAd.Category }}{{ ' ' }}</strong>
             <small>{{ $t('common.email') }}.:{{ ' ' }}{{ currentAd.Email }}{{ ' ' }}</small>
             <small>{{ $t('common.tel') }}.:{{ ' ' }}{{ currentAd.Tel }}</small>
@@ -35,10 +38,16 @@
                 {{ currentAd.Text }}
               </p>
             </div>
-            <strong
-              >{{ $t('common.price') }}:{{ ' ' }}{{ currentAd.Price }}{{ ' '
-              }}{{ $t('common.eur') }}</strong
-            >
+            <div>
+              <strong
+                >{{ $t('common.price') }}:{{ ' ' }}{{ currentAd.Price }}{{ ' '
+                }}{{ $t('common.eur') }}</strong
+              >
+            </div>
+            <div>
+              <strong>{{ currentAd.Name }}{{ ' ' }} </strong> |
+              <strong>{{ currentAd.City }}{{ ' ' }} </strong>
+            </div>
           </div>
           <nav class="level is-mobile">
             <div class="level-left">
@@ -73,10 +82,16 @@ import Spinner from '@/assets/Spinner.vue';
 import TheNotification from '@/components/TheNotification.vue';
 import { CLOSE_NOTIFICATION } from '@/store/mutations.types';
 import AdImages from '../components/AdImages.vue';
+import EditAd from '../components/EditAd.vue';
 
 export default {
   name: 'Ad',
-  components: { Spinner, TheNotification, AdImages },
+  components: { Spinner, TheNotification, AdImages, EditAd },
+  data() {
+    return {
+      isModalOpen: false
+    };
+  },
   computed: {
     ...mapState({
       isLoading: (state) => state.auth.isLoading
@@ -98,6 +113,9 @@ export default {
     },
     closeNotification() {
       this.$store.commit(CLOSE_NOTIFICATION);
+    },
+    toggleModal() {
+      this.isModalOpen = !this.isModalOpen;
     }
   }
 };
