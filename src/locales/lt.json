@@ -40,7 +40,8 @@
       "ad": {
         "adNr": "Skelbimo Nr.",
         "category": "Kategorija",
-        "back": "Atgal"
+        "back": "Atgal",
+        "edit": "Redaguoti"
       }
     },
     "components": {

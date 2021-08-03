@@ -11,6 +11,12 @@
       <spinner></spinner>
     </div>
     <div v-else class="box mt-4">
+      <div class="has-text-right" v-if="currentAd.userLocalId === currentUser.localId">
+        <span class="button is-ghost">
+          <p>{{ $t('views.ad.edit') }}</p>
+          <font-awesome-icon :icon="['fa', 'edit']" class="ml-1" />
+        </span>
+      </div>
       <div class="is-flex is-justify-content-center mb-4">
         <ad-images :pictures="currentAd.Images"></ad-images>
       </div>
@@ -75,7 +81,13 @@ export default {
     ...mapState({
       isLoading: (state) => state.auth.isLoading
     }),
-    ...mapGetters(['currentAd', 'notificationIsOpen', 'notificationStatus', 'notificationMessage'])
+    ...mapGetters([
+      'currentUser',
+      'currentAd',
+      'notificationIsOpen',
+      'notificationStatus',
+      'notificationMessage'
+    ])
   },
   created() {
     this.getAd();
