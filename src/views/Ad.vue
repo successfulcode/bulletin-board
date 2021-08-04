@@ -19,9 +19,9 @@
       </div>
       <div class="modal" :class="{ 'is-active': isModalOpen }">
         <edit-ad
+          :current-ad="currentAd"
+          :ad-id="$route.params.id"
           @toggleShowModal="toggleModal"
-          :currentAd="currentAd"
-          :adId="$route.params.id"
         ></edit-ad>
       </div>
       <div class="is-flex is-justify-content-center mb-4">

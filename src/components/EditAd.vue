@@ -32,11 +32,11 @@
               </option>
             </select>
           </div>
-          <input type="text" class="input mt-4" v-model="adEmail" />
-          <input type="text" class="input mt-2" v-model="adTel" />
-          <CreateAdCities @setCity="addCity" class="mt-2" :currentCity="city" />
-          <input type="text" class="input mt-2" v-model="adPrice" />
-          <textarea type="text" class="input mt-2" v-model="adText" />
+          <input v-model="adEmail" type="text" class="input mt-4" />
+          <input v-model="adTel" type="text" class="input mt-2" />
+          <CreateAdCities class="mt-2" :current-city="city" @setCity="addCity" />
+          <input v-model="adPrice" type="text" class="input mt-2" />
+          <textarea v-model="adText" type="text" class="input mt-2" />
         </div>
       </section>
       <footer class="modal-card-foot">

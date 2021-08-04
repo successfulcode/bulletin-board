@@ -86,8 +86,6 @@ const actions = {
     }
   },
   async [UPDATE_AD]({ commit }, { adId, updatedAd }) {
-    console.log('UPDATE_AD id', adId);
-    console.log('UPDATE_AD updatedAd', updatedAd);
     try {
       commit(ISLOADING);
       const { status } = await ApiService.updateAd(adId, updatedAd);
