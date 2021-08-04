@@ -9,7 +9,7 @@
     ></div>
 
     <br />
-    <div v-if="images.length > 1">
+    <div v-if="images.length > 1" class="is-flex is-flex-wrap-wrap">
       <div
         v-for="(image, imageIndex) in images"
         :key="imageIndex"
