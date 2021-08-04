@@ -6,7 +6,7 @@
       @close="closeNotification"
       >{{ notificationMessage }}</the-notification
     >
-    <div class="columns is-flex is-justify-content-center mt-5">
+    <div class="columns is-flex is-justify-content-center mt-5 px-2">
       <form
         class="column is-5 mt-5 box"
         @submit.prevent="
