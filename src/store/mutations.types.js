@@ -12,3 +12,4 @@ export const OPEN_NOTIFICATION = 'store/mutationstypes/OPEN_NOTIFICATION';
 export const CLOSE_NOTIFICATION = 'store/mutationstypes/CLOSE_NOTIFICATION';
 // export const SET_SHALLOWS = 'store/mutationstypes/SET_SHALLOWS';
 export const SET_UPDATED_CURRENT_AD = 'store/mutationstypes/SET_UPDATED_CURRENT_AD';
+export const DELETE_AD_FROM_STATE = 'store/mutationstypes/DELETE_AD_FROM_STATE';

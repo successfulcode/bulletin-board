@@ -5,7 +5,8 @@ import {
   GET_AD,
   GET_MORE_ADS,
   GET_CURRENT_USER_ADS,
-  UPDATE_AD
+  UPDATE_AD,
+  DELETE_AD
   // GET_SHALLOW
 } from './actions.types';
 import {
@@ -18,7 +19,8 @@ import {
   OPEN_NOTIFICATION,
   SET_MORE_ADS,
   SET_CURRENT_USER_ADS,
-  SET_UPDATED_CURRENT_AD
+  SET_UPDATED_CURRENT_AD,
+  DELETE_AD_FROM_STATE
   // SET_SHALLOWS
 } from './mutations.types';
 import i18n from '@/i18n';
@@ -206,6 +208,31 @@ const actions = {
       commit(SET_ERROR, error.message);
       commit(ISLOADING_FALSE);
     }
+  },
+  async [DELETE_AD]({ commit }, id) {
+    try {
+      commit(ISLOADING);
+      const { status } = await ApiService.deleteAd(id);
+      if (status === 200) {
+        const notificationRules = {
+          status: 'is-success',
+          timeout: 3000,
+          message: i18n.t('store.adsModule.successDeleteMessage')
+        };
+        commit(OPEN_NOTIFICATION, notificationRules);
+        commit(ISLOADING_FALSE);
+        commit(DELETE_AD_FROM_STATE, id);
+      }
+    } catch (error) {
+      const notificationRules = {
+        status: 'is-danger',
+        timeout: 5000,
+        message: i18n.t('store.adsModule.invalidDeleteMessage')
+      };
+      commit(OPEN_NOTIFICATION, notificationRules);
+      commit(SET_ERROR, error.message);
+      commit(ISLOADING_FALSE);
+    }
   }
 };
 
@@ -238,6 +265,9 @@ const mutations = {
   },
   [SET_UPDATED_CURRENT_AD](state, updatedAd) {
     state.currentAd = { ...state.currentAd, ...updatedAd };
+  },
+  [DELETE_AD_FROM_STATE](state, id) {
+    state.ads = state.ads.filter((ad) => ad.id != id);
   }
   // [SET_SHALLOWS](state, shallows) {
   //   const shallowsItems = Object.keys(shallows).map((item) => ({ adId: item }));

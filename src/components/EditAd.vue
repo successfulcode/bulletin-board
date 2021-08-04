@@ -42,6 +42,7 @@
       <footer class="modal-card-foot">
         <button class="button is-success" @click="onUpdateAd">Save changes</button>
         <button class="button" @click="$emit('toggleShowModal')">Cancel</button>
+        <button class="button is-danger" @click="onAdDelete">Delete</button>
       </footer>
     </div>
   </div>
@@ -49,7 +50,7 @@
 
 <script>
 import CreateAdCities from '@/components/CreateAdCities';
-import { UPDATE_AD } from '@/store/actions.types';
+import { UPDATE_AD, DELETE_AD } from '@/store/actions.types';
 export default {
   name: 'EditAd',
   components: { CreateAdCities },
@@ -101,6 +102,10 @@ export default {
       this.$store.dispatch(UPDATE_AD, { adId, updatedAd });
       this.createAdSuccess = true;
       this.$emit('toggleShowModal');
+    },
+    onAdDelete() {
+      this.$store.dispatch(DELETE_AD, this.adId);
+      this.$emit('toggleDeletedAd');
     }
   }
 };

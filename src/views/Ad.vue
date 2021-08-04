@@ -22,6 +22,7 @@
           :current-ad="currentAd"
           :ad-id="$route.params.id"
           @toggleShowModal="toggleModal"
+          @toggleDeletedAd="redirectToAds"
         ></edit-ad>
       </div>
       <div class="is-flex is-justify-content-center mb-4">
@@ -75,7 +76,7 @@
         </div>
       </article>
     </div>
-    <a @click="$router.go(-1)">{{ $t('views.ad.back') }}>></a>
+    <button class="button is-ghost" @click="$router.go(-1)">{{ $t('views.ad.back') }}>></button>
   </div>
 </template>
 
@@ -120,6 +121,10 @@ export default {
     },
     toggleModal() {
       this.isModalOpen = !this.isModalOpen;
+    },
+    redirectToAds() {
+      console.log('redirectToAds');
+      this.$router.go(-1);
     }
   }
 };

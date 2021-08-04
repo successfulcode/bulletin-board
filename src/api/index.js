@@ -33,6 +33,9 @@ const ApiService = {
   },
   getCurrentUserAds(userLocalId) {
     return axios.get(`${dataUrl}.json?orderBy="userLocalId"&equalTo="${userLocalId}"&print=pretty`);
+  },
+  deleteAd(id) {
+    return axios.delete(`${dataUrl}/${id}.json`);
   }
 };
 
