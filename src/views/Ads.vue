@@ -74,7 +74,6 @@ export default {
           this.adIndex = this.ads.length - 1;
           await this.$store.dispatch(GET_MORE_ADS, this.ads[this.adIndex].Date);
           this.isObserveLoading = false;
-          console.log('ads', this.ads);
         }
       } catch (error) {
         console.log(error);
