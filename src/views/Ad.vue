@@ -123,7 +123,6 @@ export default {
       this.isModalOpen = !this.isModalOpen;
     },
     redirectToAds() {
-      console.log('redirectToAds');
       this.$router.go(-1);
     }
   }
