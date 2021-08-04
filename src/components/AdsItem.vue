@@ -19,7 +19,7 @@
         <div class="media-content">
           <div class="content">
             <strong>{{ name }}{{ ' ' }}</strong>
-            <strong>Kategorija: {{ category }}{{ ' ' }}</strong>
+            <strong>{{ $t('views.ad.category') }}:{{ ' ' }}{{ category }}{{ ' ' }}</strong>
             <small>{{ $t('common.email') }}.:{{ ' ' }}{{ email }}{{ ' ' }}</small>
             <small>{{ $t('common.tel') }}.:{{ ' ' }}{{ tel }}</small>
             <small>{{ ' ' }}{{ $moment(adDate).format('YYYY-MM-DD') }}</small>
