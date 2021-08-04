@@ -17,12 +17,37 @@
       <article>
         <div class="media-content">
           <div class="content">
-            <strong>{{ $t('views.ad.adNr') }}:</strong>{{ ' ' }}{{ $route.params.id }}
-            <strong>{{ currentAd.Name }}{{ ' ' }} </strong>
-            <strong>{{ $t('views.ad.category') }}: {{ currentAd.Category }}{{ ' ' }}</strong>
-            <small>{{ $t('common.email') }}.:{{ ' ' }}{{ currentAd.Email }}{{ ' ' }}</small>
-            <small>{{ $t('common.tel') }}.:{{ ' ' }}{{ currentAd.Tel }}</small>
-            <small>{{ ' ' }}{{ $moment(currentAd.AdDate).format('YYYY-MM-DD') }}</small>
+            <div class="is-flex is-flex-wrap-wrap">
+              <div class="mr-1">
+                <span class="mr-1">
+                  <strong>{{ $t('views.ad.adNr') }}:</strong>
+                </span>
+                <span>{{ $route.params.id }}</span>
+              </div>
+              <div class="mr-1">
+                <strong>{{ currentAd.Name }}</strong>
+              </div>
+              <div class="mr-1">
+                <strong>{{ $t('views.ad.category') }}: {{ currentAd.Category }}</strong>
+              </div>
+              <div class="mr-1">
+                <span>{{ $t('common.email') }}.:</span>
+                <span>
+                  {{ currentAd.Email }}
+                </span>
+              </div>
+              <div class="mr-1">
+                <span class="mr-1">
+                  <small>{{ $t('common.tel') }}.:</small>
+                </span>
+                <span>
+                  <small>{{ currentAd.Tel }}</small>
+                </span>
+              </div>
+              <div>
+                <small>{{ $moment(currentAd.AdDate).format('YYYY-MM-DD') }}</small>
+              </div>
+            </div>
             <br />
             <div class="wrap mb-2">
               <p>
