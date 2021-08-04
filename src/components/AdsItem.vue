@@ -17,12 +17,22 @@
           </figure>
         </div>
         <div class="media-content">
-          <div class="content">
-            <strong>{{ name }}{{ ' ' }}</strong>
-            <strong>Kategorija: {{ category }}{{ ' ' }}</strong>
-            <small>{{ $t('common.email') }}.:{{ ' ' }}{{ email }}{{ ' ' }}</small>
-            <small>{{ $t('common.tel') }}.:{{ ' ' }}{{ tel }}</small>
-            <small>{{ ' ' }}{{ $moment(adDate).format('YYYY-MM-DD') }}</small>
+          <div class="content is-flex is-flex-wrap-wrap">
+            <div>
+              <strong>{{ name }}{{ ' ' }}</strong>
+            </div>
+            <div>
+              <strong>Kategorija: {{ category }}{{ ' ' }}</strong>
+            </div>
+            <div>
+              <small>{{ $t('common.email') }}.:{{ ' ' }}{{ email }}{{ ' ' }}</small>
+            </div>
+            <div>
+              <small>{{ $t('common.tel') }}.:{{ ' ' }}{{ tel }}</small>
+            </div>
+            <div>
+              <small>{{ ' ' }}{{ $moment(adDate).format('YYYY-MM-DD') }}</small>
+            </div>
             <br />
             <div class="ellipsis mb-2">
               <p>
