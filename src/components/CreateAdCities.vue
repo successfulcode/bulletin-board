@@ -44,3 +44,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.input {
+  min-width: 17rem;
+}
+</style>
