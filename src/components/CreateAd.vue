@@ -192,13 +192,9 @@ export default {
       adEmail: '',
       adTel: '',
       adDate: Date.now(),
-      file: null,
-      fileError: false,
       images: [],
       suggest: true,
       city: 'allCities',
-      downloadingProgress: null,
-      imageIsloading: false,
       createAdSuccess: false
     };
   },
