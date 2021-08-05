@@ -37,7 +37,17 @@
           <CreateAdCities class="mt-2" :current-city="city" @setCity="addCity" />
           <input v-model="adPrice" type="text" class="input mt-2" />
           <textarea v-model="adText" type="text" class="input mt-2" />
+          <div class="mt-4">
+            <create-images
+              :create-ad-success="createAdSuccess"
+              :ad-images="adImages"
+              :ad-edit-mode="adEditMode"
+              @addImages="addImages"
+              ref="imagesComponent"
+            ></create-images>
+          </div>
         </div>
+        <button @click="updateAdSuccess = !updateAdSuccess">updateAdSuccess</button>
       </section>
       <footer class="modal-card-foot">
         <button class="button is-success" @click="onUpdateAd">Save changes</button>
@@ -51,9 +61,10 @@
 <script>
 import CreateAdCities from '@/components/CreateAdCities';
 import { UPDATE_AD, DELETE_AD } from '@/store/actions.types';
+import CreateImages from './CreateImages.vue';
 export default {
   name: 'EditAd',
-  components: { CreateAdCities },
+  components: { CreateAdCities, CreateImages },
   props: {
     currentAd: {
       type: Object,
@@ -72,11 +83,10 @@ export default {
       adEmail: this.currentAd.Email,
       adTel: this.currentAd.Tel,
       dateOfAdjustment: Date.now(),
-      file: null,
-      fileError: false,
-      images: [],
+      adImages: this.currentAd.Images,
       city: this.currentAd.City,
-      createAdSuccess: false
+      createAdSuccess: true,
+      adEditMode: true
     };
   },
   computed: {
@@ -96,17 +106,29 @@ export default {
         Email: this.adEmail,
         Tel: this.adTel,
         DateOfAdjustment: this.dateOfAdjustment,
-        City: this.city
+        City: this.city,
+        Images: this.adImages
       };
+      this.$refs.imagesComponent.deleteImagesFromEditMode();
       const adId = this.adId;
       this.$store.dispatch(UPDATE_AD, { adId, updatedAd });
-      this.createAdSuccess = true;
       this.$emit('toggleShowModal');
     },
     onAdDelete() {
       this.$store.dispatch(DELETE_AD, this.adId);
       this.$emit('toggleDeletedAd');
+    },
+    addImages(images) {
+      this.adImages = images;
     }
   }
 };
 </script>
+<style scoped>
+.input {
+  width: 100%;
+}
+.select {
+  width: 100%;
+}
+</style>

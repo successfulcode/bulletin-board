@@ -34,6 +34,12 @@ export default {
       default: function () {
         return [{ url: 'https://bulma.io/images/placeholders/128x128.png' }];
       }
+    },
+    adImages: {
+      type: Array,
+      default: function () {
+        return [];
+      }
     }
   },
   data() {

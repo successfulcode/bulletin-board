@@ -140,7 +140,7 @@
           <p class="help">{{ $t('components.createAd.aboutCity') }}</p>
         </div>
       </div>
-      <create-images @addImages="addImages" :createAdSuccess="createAdSuccess"></create-images>
+      <create-images :create-ad-success="createAdSuccess" @addImages="addImages"></create-images>
       <div class="field is-grouped mb-4">
         <div class="control">
           <button

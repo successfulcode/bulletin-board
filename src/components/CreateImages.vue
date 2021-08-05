@@ -46,6 +46,7 @@
         </figure>
       </div>
     </div>
+    <pre>{{ imagesDeletedInEditMode }}</pre>
   </div>
 </template>
 
@@ -57,15 +58,27 @@ export default {
     createAdSuccess: {
       type: Boolean,
       default: false
+    },
+    adImages: {
+      type: Array,
+      default: function () {
+        return [];
+      }
+    },
+    adEditMode: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
     return {
-      images: [],
+      images: this.adImages,
       imageIsloading: false,
       downloadingProgress: null,
       file: null,
-      fileError: null
+      fileError: null,
+      editMode: this.adEditMode,
+      imagesDeletedInEditMode: []
     };
   },
   watch: {
@@ -121,16 +134,26 @@ export default {
       );
     },
     deleteImg(img) {
-      const desertRef = firebase.storage().refFromURL(img);
-      desertRef
-        .delete()
-        .then(() => {
-          console.log('img deleted success', this.images);
-          this.images = this.images.filter((image) => image.url !== img);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (!this.editMode) {
+        const desertRef = firebase.storage().refFromURL(img);
+        desertRef
+          .delete()
+          .then(() => {
+            console.log('img deleted success', this.images);
+            this.images = this.images.filter((image) => image.url !== img);
+            console.log(img);
+          })
+          .catch((error) => {
+            console.log(error);
+            const newError = { error };
+            if (newError.error.code === 'storage/object-not-found') {
+              this.images = this.images.filter((image) => image.url !== img);
+            }
+          });
+      } else {
+        this.images = this.images.filter((image) => image.url !== img);
+        this.imagesDeletedInEditMode.push({ url: img });
+      }
     },
     deleteAllImg() {
       console.log('deleteAllImg');
@@ -140,6 +163,16 @@ export default {
         });
       }
       this.images = [];
+    },
+    deleteImagesFromEditMode() {
+      console.log('deleteImagesFromEditmode');
+      if (this.imagesDeletedInEditMode) {
+        this.editMode = false;
+        this.imagesDeletedInEditMode.map((img) => {
+          return this.deleteImg(img.url);
+        });
+      }
+      this.imagesDeletedInEditMode = [];
     }
   }
 };

@@ -49,4 +49,7 @@ export default {
 .input {
   min-width: 17rem;
 }
+.select {
+  width: 100%;
+}
 </style>
