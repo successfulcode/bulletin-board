@@ -75,6 +75,12 @@
         "allAds": "Visi skelbimai",
         "createAd": "Įdėti skelbimą",
         "currentuserads": "Mano skelbimai"
+      },
+      "editAd": {
+        "editMode": "Skelbimo redagavimas",
+        "deleteAd": "Ištrinti visą skelbimą",
+        "save": "Išsaugoti",
+        "cancel": "Atšaukti"
       }
     },
     "store": {

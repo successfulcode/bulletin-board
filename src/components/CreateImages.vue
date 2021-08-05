@@ -46,7 +46,6 @@
         </figure>
       </div>
     </div>
-    <pre>{{ imagesDeletedInEditMode }}</pre>
   </div>
 </template>
 

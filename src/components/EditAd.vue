@@ -3,12 +3,12 @@
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">Skelbimo redagavimas</p>
+        <p class="modal-card-title">{{ $t('components.editAd.editMode') }}</p>
         <button class="delete" aria-label="close" @click="$emit('toggleShowModal')"></button>
       </header>
       <section class="modal-card-body">
-        <p>Skelbimo Nr.: -MfIrAJ7u10eUcVuETLF</p>
-        <p>Firstname Lastname</p>
+        <p>Skelbimo Nr.: {{ currentAd.id }}</p>
+        <p>{{ currentAd.Name }}</p>
         <div class="control">
           <div class="select">
             <select class="input mt-2">
@@ -36,7 +36,7 @@
           <input v-model="adTel" type="text" class="input mt-2" />
           <CreateAdCities class="mt-2" :current-city="city" @setCity="addCity" />
           <input v-model="adPrice" type="text" class="input mt-2" />
-          <textarea v-model="adText" type="text" class="input mt-2" />
+          <textarea v-model="adText" type="text" class="textarea mt-2" />
           <div class="mt-4">
             <create-images
               :create-ad-success="createAdSuccess"
@@ -47,12 +47,19 @@
             ></create-images>
           </div>
         </div>
-        <button @click="updateAdSuccess = !updateAdSuccess">updateAdSuccess</button>
+        <div>
+          <button class="button is-danger" @click="onAdDelete">
+            {{ $t('components.editAd.deleteAd') }}
+          </button>
+        </div>
       </section>
       <footer class="modal-card-foot">
-        <button class="button is-success" @click="onUpdateAd">Save changes</button>
-        <button class="button" @click="$emit('toggleShowModal')">Cancel</button>
-        <button class="button is-danger" @click="onAdDelete">Delete</button>
+        <button class="button is-success" @click="onUpdateAd">
+          {{ $t('components.editAd.save') }}
+        </button>
+        <button class="button" @click="$emit('toggleShowModal')">
+          {{ $t('components.editAd.cancel') }}
+        </button>
       </footer>
     </div>
   </div>
