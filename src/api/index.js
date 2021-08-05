@@ -10,8 +10,8 @@ const ApiService = {
   signUpUser(newUser) {
     return axios.post(`${authUrl}:signUp?key=${process.env.VUE_APP_API_KEY}`, newUser);
   },
-  createAd(message) {
-    return axios.post(`${dataUrl}.json`, message);
+  createAd(newAd) {
+    return axios.post(`${dataUrl}.json`, newAd);
   },
   authWhithToken(token) {
     return axios.post(`${authUrl}:signInWithCustomToken?key=${process.env.VUE_APP_API_KEY}`, token);
@@ -28,8 +28,14 @@ const ApiService = {
   getAd(id) {
     return axios.get(`${dataUrl}/${id}.json`);
   },
+  updateAd(id, updatedAd) {
+    return axios.patch(`${dataUrl}/${id}.json`, updatedAd);
+  },
   getCurrentUserAds(userLocalId) {
     return axios.get(`${dataUrl}.json?orderBy="userLocalId"&equalTo="${userLocalId}"&print=pretty`);
+  },
+  deleteAd(id) {
+    return axios.delete(`${dataUrl}/${id}.json`);
   }
 };
 

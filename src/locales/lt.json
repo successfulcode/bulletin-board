@@ -40,7 +40,8 @@
       "ad": {
         "adNr": "Skelbimo Nr.",
         "category": "Kategorija",
-        "back": "Atgal"
+        "back": "Atgal",
+        "edit": "Redaguoti"
       }
     },
     "components": {
@@ -74,6 +75,12 @@
         "allAds": "Visi skelbimai",
         "createAd": "Įdėti skelbimą",
         "currentuserads": "Mano skelbimai"
+      },
+      "editAd": {
+        "editMode": "Skelbimo redagavimas",
+        "deleteAd": "Ištrinti visą skelbimą",
+        "save": "Išsaugoti",
+        "cancel": "Atšaukti"
       }
     },
     "store": {
@@ -87,7 +94,11 @@
       "adsModule": {
         "successMessage": "Skelbimas sėkmingai sukurtas!",
         "invalidMessage": "Nepavyko sukurti skelbimo! Patikrinkite įvedamus duomenys!",
-        "invalidGetMessage": "Kažkas ne taip! Nepavyko įkelti naujausiu skelbimų!"
+        "invalidGetMessage": "Kažkas ne taip! Nepavyko įkelti naujausiu skelbimų!",
+        "successUpdateMessage": "Skelbimas sėkmingai atnaujintas!",
+        "invalidUpdateMessage": "Nepavyko atnaujinti skelbimo! Patikrinkite įvedamus duomenys!",
+        "successDeleteMessage": "Skelbimas sėkmingai ištrintas!",
+        "invalidDeleteMessage": "Kažkas ne taip! Nepavyko ištrinti skelbimo"
       }
     },
     "cities": {

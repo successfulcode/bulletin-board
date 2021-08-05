@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="select">
-      <select class="input" @change="$emit('setCity', $event.target.value)">
+      <select class="input" :value="currentCity" @change="$emit('setCity', $event.target.value)">
         <option :value="$t('cities.allCities')">{{ $t('cities.allCities') }}</option>
         <optgroup :label="$t('cities.bigCities')">
           <option v-for="cityItem in bigCities" :key="cityItem.city" :value="cityItem.city">
@@ -24,8 +24,17 @@
 </template>
 
 <script>
-import { bigCities, otherCities, other } from '../assets/cities';
+import { bigCities, otherCities, other } from '@/assets/cities';
+import i18n from '../i18n';
 export default {
+  name: 'CreateAdCities',
+  props: {
+    currentCity: {
+      type: String,
+      required: false,
+      default: i18n.t('cities.allLithuania')
+    }
+  },
   data() {
     return {
       bigCities: bigCities,
@@ -35,3 +44,12 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.input {
+  min-width: 17rem;
+}
+.select {
+  width: 100%;
+}
+</style>

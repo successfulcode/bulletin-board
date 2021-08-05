@@ -90,8 +90,7 @@
           </label>
         </div>
       </div>
-
-      <div class="field is-flex is-justify-content-left is-flex-wrap-wrap">
+      <div class="field is-flex">
         <div class="pl-0">
           <input
             v-model="$v.adPrice.$model"
@@ -106,11 +105,13 @@
           />
           <p class="help">{{ $t('components.createAd.aboutPrice') }}</p>
         </div>
-        <label for="price" class="label mt-4 ml-1 mr-3">{{ $t('common.eur') }}</label>
+        <label for="price" class="label mt-4 ml-1 mr-2">{{ $t('common.eur') }}</label>
+      </div>
+      <div class="field is-flex is-justify-content-left is-flex-wrap-wrap">
         <div class="mr-3">
           <input
             v-model="$v.adEmail.$model"
-            class="input mr-4"
+            class="input mr-1"
             :class="{
               'is-danger': $v.adEmail.$error,
               'is-success': !$v.adEmail.$invalid
@@ -139,56 +140,7 @@
           <p class="help">{{ $t('components.createAd.aboutCity') }}</p>
         </div>
       </div>
-      <div class="mb-5">
-        <div class="file is-link has-name">
-          <label class="file-label">
-            <input
-              class="file-input"
-              type="file"
-              name="resume"
-              :disabled="images.length >= 9"
-              @change="handleChange"
-            />
-            <span class="file-cta">
-              <span class="file-icon">
-                <font-awesome-icon :icon="['fa', 'upload']" />
-              </span>
-              <span class="file-label"> {{ $t('components.createAd.upload') }}</span>
-            </span>
-            <span class="file-name">{{
-              file ? file.name : $t('components.createAd.adPhotos')
-            }}</span>
-          </label>
-        </div>
-        <div>
-          <p class="help">{{ $t('components.createAd.maxPhotosItems') }}</p>
-        </div>
-        <p v-if="fileError" class="help is-danger">
-          {{ $t('components.createAd.photoЕxpansionError') }}
-        </p>
-        <div v-if="imageIsloading">
-          <progress
-            class="progress is-small is-primary mt-4"
-            :value="downloadingProgress"
-            max="100"
-          ></progress>
-        </div>
-        <div v-if="images">
-          <div class="mt-3 is-flex is-justify-content-left is-flex-wrap-wrap">
-            <figure v-for="image in images" :key="image.url" class="image is-128x128 mb-1">
-              <div>
-                <span class="delete-img-span"
-                  ><font-awesome-icon
-                    class="delete-img"
-                    :icon="['fa', 'times-circle']"
-                    @click.stop="deleteImg(image.url)"
-                /></span>
-              </div>
-              <div class="small-image" :style="{ backgroundImage: `url('${image.url}')` }"></div>
-            </figure>
-          </div>
-        </div>
-      </div>
+      <create-images :create-ad-success="createAdSuccess" @addImages="addImages"></create-images>
       <div class="field is-grouped mb-4">
         <div class="control">
           <button
@@ -221,15 +173,15 @@
 import CreateAdAlert from './CreateAdAlert.vue';
 import CreateAdCities from './CreateAdCities.vue';
 import { required, minLength, email } from 'vuelidate/lib/validators';
-import firebase from 'firebase/app';
+import CreateImages from './CreateImages.vue';
 
 export default {
   name: 'CreateAd',
-  components: { CreateAdAlert, CreateAdCities },
+  components: { CreateAdAlert, CreateAdCities, CreateImages },
   props: {
     isLoading: Boolean,
-    currentUser: { type: String, required: true },
-    userLocalid: { type: String, required: true }
+    currentUser: { type: String },
+    userLocalid: { type: String }
   },
   data() {
     return {
@@ -240,13 +192,9 @@ export default {
       adEmail: '',
       adTel: '',
       adDate: Date.now(),
-      file: null,
-      fileError: false,
       images: [],
       suggest: true,
       city: 'allCities',
-      downloadingProgress: null,
-      imageIsloading: false,
       createAdSuccess: false
     };
   },
@@ -256,11 +204,6 @@ export default {
     adPrice: { required },
     adEmail: { required, email },
     adTel: { required, minLength: minLength(9) }
-  },
-  destroyed() {
-    if (!this.createAdSuccess) {
-      return this.deleteAllImg();
-    }
   },
   methods: {
     onSubmit() {
@@ -289,102 +232,22 @@ export default {
       this.adTel = '';
       this.consentToTheRules = false;
     },
-    async handleChange(e) {
-      const types = ['image/jpeg', 'image/png'];
-      const selectedFile = e.target.files[0];
-      if (selectedFile && types.includes(selectedFile.type)) {
-        this.file = selectedFile;
-        this.fileError = false;
-        await this.sendImg();
-      } else {
-        this.file = null;
-        this.fileError = true;
-      }
-    },
-    sendImg() {
-      this.imageIsloading = true;
-      const uploadTask = firebase
-        .storage()
-        .ref(`imges/${this.userLocalid}/${Date.now()}${this.file.name}`)
-        .put(this.file);
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {
-          let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          this.downloadingProgress = progress;
-          console.log('Upload is ' + progress + '% done');
-          if (snapshot.state === 100) {
-            this.downloadingProgress = null;
-          }
-        },
-        (error) => {
-          console.log(error);
-          this.imageIsloading = false;
-        },
-        () => {
-          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-            this.images.push({ url: downloadURL });
-            this.imageIsloading = false;
-            console.log('File available at', this.images);
-          });
-        }
-      );
-    },
-    deleteImg(img) {
-      const desertRef = firebase.storage().refFromURL(img);
-      desertRef
-        .delete()
-        .then(() => {
-          console.log('img deleted success', this.images);
-          this.images = this.images.filter((image) => image.url !== img);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-    deleteAllImg() {
-      console.log('deleteAllImg');
-      if (this.images) {
-        this.images.map((img) => {
-          return this.deleteImg(img.url);
-        });
-      }
-      this.images = [];
-    },
+
     toggleSuggest() {
       this.suggest = !this.suggest;
     },
     addCity(city) {
       this.city = city;
+    },
+    addImages(images) {
+      this.images = images;
     }
   }
 };
 </script>
 
 <style scoped>
-.small-image {
-  float: left;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  border: 1px solid #ebebeb;
-  margin: 5px;
-  width: 8rem;
-  height: 8rem;
-}
-.delete-img-span {
-  color: hsl(348, 100%, 61%);
-  font-size: 2rem;
-  position: absolute;
-  height: auto;
-  top: 2px;
-  right: 2px;
-}
-.delete-img {
-  margin: 0;
-  padding: 0;
-  background-color: rgb(255, 255, 255, 0.7);
-  border-radius: 50%;
-  cursor: pointer;
+.input {
+  width: 17rem;
 }
 </style>
