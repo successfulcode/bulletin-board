@@ -1,14 +1,11 @@
 <template>
-  <div class="is-flex is-flex-wrap-wrap is-justify-content-center">
+  <div class="is-flex is-flex-direction-column is-align-items-center">
     <gallery :images="images" :index="index" @close="index = null"></gallery>
-
     <div
       class="image-main"
       :style="{ backgroundImage: `url('${images[0]}')` }"
       @click="index = 0"
     ></div>
-
-    <br />
     <div v-if="images.length > 1" class="is-flex is-flex-wrap-wrap is-justify-content-center">
       <div
         v-for="(image, imageIndex) in images"

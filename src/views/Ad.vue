@@ -25,7 +25,7 @@
           @toggleDeletedAd="redirectToAds"
         ></edit-ad>
       </div>
-      <div class="is-flex is-justify-content-center mb-4">
+      <div class="is-flex is-justify-content-center is-flex-wrap-wrap mb-4">
         <ad-images :pictures="currentAd.Images"></ad-images>
       </div>
       <article>
