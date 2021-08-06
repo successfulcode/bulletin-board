@@ -140,7 +140,11 @@
           <p class="help">{{ $t('components.createAd.aboutCity') }}</p>
         </div>
       </div>
-      <create-images :create-ad-success="createAdSuccess" @addImages="addImages"></create-images>
+      <create-images
+        :createAdSuccess="createAdSuccess"
+        @addImages="addImages"
+        ref="imagesComponent"
+      ></create-images>
       <div class="field is-grouped mb-4">
         <div class="control">
           <button
@@ -219,8 +223,9 @@ export default {
         Suggest: this.suggest,
         City: this.city
       };
-      this.$emit('addAd', newAd);
       this.createAdSuccess = true;
+      this.$emit('addAd', newAd);
+      this.$refs.imagesComponent.clearImages();
       this.clear();
       this.images = [];
       this.$router.push('ads');

@@ -55,8 +55,7 @@ export default {
   name: 'CreateAd',
   props: {
     createAdSuccess: {
-      type: Boolean,
-      default: false
+      type: Boolean
     },
     adImages: {
       type: Array,
@@ -89,8 +88,7 @@ export default {
     if (!this.createAdSuccess) {
       return this.deleteAllImg();
     }
-
-    this.images = [];
+    this.clearImages();
   },
   methods: {
     async handleChange(e) {
@@ -174,6 +172,9 @@ export default {
         });
       }
       this.imagesDeletedInEditMode = [];
+    },
+    clearImages() {
+      this.images = [];
     }
   }
 };
