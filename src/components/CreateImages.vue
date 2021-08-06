@@ -89,6 +89,8 @@ export default {
     if (!this.createAdSuccess) {
       return this.deleteAllImg();
     }
+
+    this.images = [];
   },
   methods: {
     async handleChange(e) {
