@@ -122,6 +122,8 @@ export default {
       this.$emit('toggleShowModal');
     },
     onAdDelete() {
+      this.adEditMode = false;
+      this.$refs.imagesComponent.deleteAllImg();
       this.$store.dispatch(DELETE_AD, this.adId);
       this.$emit('toggleDeletedAd');
     },
