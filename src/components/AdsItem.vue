@@ -1,6 +1,23 @@
 <template>
-  <router-link :to="{ name: 'Ad', params: { id } }">
-    <div class="box">
+  <div>
+    <div class="modal" :class="{ 'is-active': isModalOpen }">
+      <edit-ad
+        :current-ad="allAd"
+        :ad-id="id"
+        @toggleShowModal="toggleModal"
+        @toggleDeletedAd="returnNull"
+      ></edit-ad>
+    </div>
+    <div class="box" @click="routeToCurrentAd">
+      <div>
+        <div v-if="showEditMode" class="is-flex is-justify-content-space-between is-flex-wrap-wrap">
+          <span class="mt-2 ml-4">Tavo skelbimas</span>
+          <span class="button is-ghost" @click.stop="toggleModal">
+            <p>{{ $t('views.ad.edit') }}</p>
+            <font-awesome-icon :icon="['fa', 'edit']" class="ml-1" />
+          </span>
+        </div>
+      </div>
       <article class="media is-flex is-justify-content-center is-flex-wrap-wrap">
         <div class="media-left">
           <figure class="image">
@@ -60,12 +77,14 @@
         </div>
       </article>
     </div>
-  </router-link>
+  </div>
 </template>
 
 <script>
+import EditAd from '@/components/EditAd';
 export default {
   name: 'AdsItem',
+  components: { EditAd },
   props: {
     category: {
       type: String,
@@ -105,6 +124,31 @@ export default {
         return { url: 'https://bulma.io/images/placeholders/128x128.png' };
       },
       required: false
+    },
+    showEditMode: {
+      type: Boolean,
+      required: true
+    },
+    allAd: {
+      type: Object,
+      required: true
+    }
+  },
+  data() {
+    return {
+      isModalOpen: false
+    };
+  },
+  methods: {
+    routeToCurrentAd() {
+      const id = this.id;
+      this.$router.push({ name: 'Ad', params: { id } });
+    },
+    toggleModal() {
+      this.isModalOpen = !this.isModalOpen;
+    },
+    returnNull() {
+      return;
     }
   }
 };
@@ -150,5 +194,9 @@ export default {
 
 .box:hover {
   background-color: hsla(141, 53%, 53%, 0.048);
+}
+
+.box {
+  cursor: pointer;
 }
 </style>

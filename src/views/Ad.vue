@@ -22,7 +22,7 @@
           :current-ad="currentAd"
           :ad-id="$route.params.id"
           @toggleShowModal="toggleModal"
-          @toggleDeletedAd="redirectToAds"
+          @toggleDeletedAd="redirectPreviewRoute"
         ></edit-ad>
       </div>
       <div class="is-flex is-justify-content-center is-flex-wrap-wrap mb-4">
@@ -147,7 +147,7 @@ export default {
     toggleModal() {
       this.isModalOpen = !this.isModalOpen;
     },
-    redirectToAds() {
+    redirectPreviewRoute() {
       this.$router.go(-1);
     }
   }
