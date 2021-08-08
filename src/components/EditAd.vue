@@ -7,43 +7,114 @@
         <button class="delete" aria-label="close" @click="$emit('toggleShowModal')"></button>
       </header>
       <section class="modal-card-body">
-        <p>Skelbimo Nr.: {{ currentAd.id }}</p>
+        <p>
+          <span class="mr-1">{{ $t('components.editAd.adNr') }}</span>
+          <span>{{ adId }} </span>
+        </p>
         <p>{{ currentAd.Name }}</p>
-        <div class="control">
-          <div class="select">
-            <select class="input mt-2">
-              <option value="" disabled>
-                ---{{ $t('components.createAd.selectCategory') }}---
-              </option>
-              <option :value="$t('components.createAd.realEstate')">
-                {{ $t('components.createAd.realEstate') }}
-              </option>
-              <option :value="$t('components.createAd.transport')">
-                {{ $t('components.createAd.transport') }}
-              </option>
-              <option :value="$t('components.createAd.workBusiness')">
-                {{ $t('components.createAd.workBusiness') }}
-              </option>
-              <option :value="$t('components.createAd.homHousehold')">
-                {{ $t('components.createAd.homHousehold') }}
-              </option>
-              <option :value="$t('components.createAd.other')">
-                {{ $t('components.createAd.other') }}
-              </option>
-            </select>
+        <div class="field">
+          <label class="label" for="category">{{ $t('components.createAd.category') }}</label>
+          <div class="control">
+            <div class="select">
+              <select
+                v-model="$v.adCategory.$model"
+                class="input"
+                :class="{
+                  'is-danger': $v.adCategory.$error,
+                  'is-success': !$v.adCategory.$invalid
+                }"
+                name="category"
+              >
+                <option value="" disabled>
+                  ---{{ $t('components.createAd.selectCategory') }}---
+                </option>
+                <option :value="$t('components.createAd.realEstate')">
+                  {{ $t('components.createAd.realEstate') }}
+                </option>
+                <option :value="$t('components.createAd.transport')">
+                  {{ $t('components.createAd.transport') }}
+                </option>
+                <option :value="$t('components.createAd.workBusiness')">
+                  {{ $t('components.createAd.workBusiness') }}
+                </option>
+                <option :value="$t('components.createAd.homHousehold')">
+                  {{ $t('components.createAd.homHousehold') }}
+                </option>
+                <option :value="$t('components.createAd.other')">
+                  {{ $t('components.createAd.other') }}
+                </option>
+              </select>
+            </div>
           </div>
-          <input v-model="adEmail" type="text" class="input mt-4" />
-          <input v-model="adTel" type="text" class="input mt-2" />
-          <CreateAdCities class="mt-2" :current-city="city" @setCity="addCity" />
-          <input v-model="adPrice" type="text" class="input mt-2" />
-          <textarea v-model="adText" type="text" class="textarea mt-2" />
+          <div class="mt-2">
+            <label class="label" for="email">{{ $t('common.email') }}</label>
+            <input
+              v-model="$v.adEmail.$model"
+              class="input"
+              :class="{
+                'is-danger': $v.adEmail.$error,
+                'is-success': !$v.adEmail.$invalid
+              }"
+              type="text"
+              :placeholder="$t('common.email')"
+              name="email"
+            />
+          </div>
+          <div class="mt-2">
+            <label class="label" for="email">{{ $t('common.tel') }}</label>
+            <input
+              v-model="$v.adTel.$model"
+              class="input"
+              maxlength="12"
+              :class="{
+                'is-danger': $v.adTel.$error,
+                'is-success': !$v.adTel.$invalid
+              }"
+              type="tel"
+              :placeholder="$t('common.tel')"
+            />
+          </div>
+          <div class="mt-2">
+            <label class="label" for="city">{{ $t('components.editAd.city') }}</label>
+            <CreateAdCities name="city" :current-city="city" @setCity="addCity" />
+          </div>
+          <div class="mt-2">
+            <label class="label" for="price">
+              <span class="mr-1">{{ $t('common.price') }}</span>
+              <span>{{ $t('common.eur') }}</span>
+            </label>
+            <input
+              v-model="$v.adPrice.$model"
+              name="price"
+              class="input"
+              :class="{
+                'is-danger': $v.adPrice.$error,
+                'is-success': !$v.adPrice.$invalid
+              }"
+              type="number"
+              :placeholder="$t('common.price')"
+            />
+          </div>
+          <div class="mt-2">
+            <label class="label" for="adtext">{{ $t('components.editAd.adtext') }}</label>
+            <textarea
+              v-model="$v.adText.$model"
+              name="adtext"
+              class="textarea"
+              :class="{
+                'is-danger': $v.adText.$error,
+                'is-success': !$v.adText.$invalid
+              }"
+              :placeholder="$t('components.createAd.adText')"
+            ></textarea>
+          </div>
           <div class="mt-4">
             <create-images
+              ref="imagesComponent"
               :create-ad-success="createAdSuccess"
               :ad-images="adImages"
               :ad-edit-mode="adEditMode"
               @addImages="addImages"
-              ref="imagesComponent"
             ></create-images>
           </div>
         </div>
@@ -54,7 +125,7 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-        <button class="button is-success" @click="onUpdateAd">
+        <button class="button is-success" :disabled="$v.$invalid || isLoading" @click="onUpdateAd">
           {{ $t('components.editAd.save') }}
         </button>
         <button class="button" @click="$emit('toggleShowModal')">
@@ -69,6 +140,7 @@
 import CreateAdCities from '@/components/CreateAdCities';
 import { UPDATE_AD, DELETE_AD } from '@/store/actions.types';
 import CreateImages from './CreateImages.vue';
+import { required, minLength, email } from 'vuelidate/lib/validators';
 export default {
   name: 'EditAd',
   components: { CreateAdCities, CreateImages },
@@ -95,6 +167,13 @@ export default {
       createAdSuccess: true,
       adEditMode: true
     };
+  },
+  validations: {
+    adCategory: { required },
+    adText: { required },
+    adPrice: { required },
+    adEmail: { required, email },
+    adTel: { required, minLength: minLength(9) }
   },
   computed: {
     price() {
