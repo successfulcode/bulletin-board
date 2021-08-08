@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="modal-background"></div>
+    <div class="modal-background" @click="$emit('toggleShowModal')"></div>
     <div class="modal-card">
       <header class="modal-card-head">
         <p class="modal-card-title">{{ $t('components.editAd.editMode') }}</p>
@@ -9,7 +9,7 @@
       <section class="modal-card-body">
         <p>
           <span class="mr-1">{{ $t('components.editAd.adNr') }}</span>
-          <span>{{ adId }} </span>
+          <span>{{ adId }}</span>
         </p>
         <p>{{ currentAd.Name }}</p>
         <div class="field">
@@ -125,7 +125,7 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-        <button class="button is-success" :disabled="$v.$invalid || isLoading" @click="onUpdateAd">
+        <button class="button is-success" :disabled="$v.$invalid" @click="onUpdateAd">
           {{ $t('components.editAd.save') }}
         </button>
         <button class="button" @click="$emit('toggleShowModal')">
@@ -139,7 +139,7 @@
 <script>
 import CreateAdCities from '@/components/CreateAdCities';
 import { UPDATE_AD, DELETE_AD } from '@/store/actions.types';
-import CreateImages from './CreateImages.vue';
+import CreateImages from './CreateImages';
 import { required, minLength, email } from 'vuelidate/lib/validators';
 export default {
   name: 'EditAd',
@@ -197,6 +197,7 @@ export default {
       };
       this.$refs.imagesComponent.deleteImagesFromEditMode();
       const adId = this.adId;
+      updatedAd.id = this.adId;
       this.$store.dispatch(UPDATE_AD, { adId, updatedAd });
       this.$emit('toggleShowModal');
     },

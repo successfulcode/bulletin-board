@@ -265,6 +265,12 @@ const mutations = {
   },
   [SET_UPDATED_CURRENT_AD](state, updatedAd) {
     state.currentAd = { ...state.currentAd, ...updatedAd };
+    state.ads = state.ads.map((ad) => {
+      if (ad.id === updatedAd.id) {
+        return (ad = { ...ad, ...updatedAd });
+      }
+      return ad;
+    });
   },
   [DELETE_AD_FROM_STATE](state, id) {
     state.ads = state.ads.filter((ad) => ad.id != id);

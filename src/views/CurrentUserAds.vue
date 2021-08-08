@@ -21,6 +21,8 @@
           :ad-date="ad.Date"
           :name="ad.Name"
           :image="ad.Images && ad.Images[0]"
+          :show-edit-mode="ad.userLocalId === currentUser.localId"
+          :all-ad="ad"
         ></ads-item>
       </div>
     </div>
@@ -43,6 +45,7 @@ export default {
   components: { Spinner, AdsItem, TheNotification },
   computed: {
     ...mapGetters([
+      'currentUser',
       'currentUserAds',
       'notificationIsOpen',
       'notificationStatus',
