@@ -80,7 +80,10 @@
         "editMode": "Skelbimo redagavimas",
         "deleteAd": "Ištrinti visą skelbimą",
         "save": "Išsaugoti",
-        "cancel": "Atšaukti"
+        "cancel": "Atšaukti",
+        "adNr": "Skelbimo Nr.",
+        "city": "Miestas",
+        "adtext": "Skelbimo tekstas"
       }
     },
     "store": {

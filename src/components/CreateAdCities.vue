@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="select">
-      <select class="input" :value="currentCity" @change="$emit('setCity', $event.target.value)">
+      <select
+        class="input is-success"
+        :value="currentCity"
+        @change="$emit('setCity', $event.target.value)"
+      >
         <option :value="$t('cities.allCities')">{{ $t('cities.allCities') }}</option>
         <optgroup :label="$t('cities.bigCities')">
           <option v-for="cityItem in bigCities" :key="cityItem.city" :value="cityItem.city">

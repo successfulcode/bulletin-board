@@ -14,7 +14,7 @@
       "
     >
       <div class="field">
-        <label class="label">{{ $t('components.createAd.category') }}</label>
+        <label class="label" for="category">{{ $t('components.createAd.category') }}</label>
         <div class="control">
           <div class="select">
             <select
@@ -24,6 +24,7 @@
                 'is-danger': $v.adCategory.$error,
                 'is-success': !$v.adCategory.$invalid
               }"
+              name="category"
             >
               <option value="" disabled>
                 ---{{ $t('components.createAd.selectCategory') }}---
@@ -71,6 +72,7 @@
         <div class="control">
           <textarea
             v-model="$v.adText.$model"
+            name="adtext"
             class="textarea"
             :class="{
               'is-danger': $v.adText.$error,
@@ -141,9 +143,9 @@
         </div>
       </div>
       <create-images
-        :createAdSuccess="createAdSuccess"
-        @addImages="addImages"
         ref="imagesComponent"
+        :create-ad-success="createAdSuccess"
+        @addImages="addImages"
       ></create-images>
       <div class="field is-grouped mb-4">
         <div class="control">
