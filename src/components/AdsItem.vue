@@ -48,7 +48,7 @@
               <small>
                 <span class="mr-1">{{ $t('common.email') }}.:</span>
                 <span>
-                  <a :href="`mailto:${email}`">
+                  <a :href="`mailto:${email}`" @click.stop>
                     {{ email }}
                   </a>
                 </span>
@@ -57,9 +57,9 @@
             <div class="mr-2">
               <small>
                 <span class="mr-1">{{ $t('common.tel') }}.:</span>
-                <span
-                  ><a :href="`tel:${tel}`">{{ tel }}</a></span
-                >
+                <span>
+                  <a :href="`tel:${tel}`" @click.stop>{{ tel }}</a>
+                </span>
               </small>
             </div>
             <div>
