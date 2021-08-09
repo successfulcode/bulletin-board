@@ -34,40 +34,42 @@
           </figure>
         </div>
         <div class="media-content">
-          <div class="content is-flex is-flex-wrap-wrap">
-            <div class="mr-2">
-              <strong>{{ name }}</strong>
-            </div>
-            <div class="mr-2">
-              <strong>
-                <span class="mr-1">{{ $t('views.ad.category') }}:</span>
-                <span>{{ category }}</span>
-              </strong>
-            </div>
-            <div class="mr-2">
-              <small>
-                <span class="mr-1">{{ $t('common.email') }}.:</span>
-                <span>
-                  <a :href="`mailto:${email}`" @click.stop>
-                    {{ email }}
-                  </a>
-                </span>
-              </small>
-            </div>
-            <div class="mr-2">
-              <small>
-                <span class="mr-1">{{ $t('common.tel') }}.:</span>
-                <span>
-                  <a :href="`tel:${tel}`" @click.stop>{{ tel }}</a>
-                </span>
-              </small>
-            </div>
-            <div>
-              <small>
-                <span>
-                  {{ $moment(adDate).format('YYYY-MM-DD') }}
-                </span>
-              </small>
+          <div class="content">
+            <div class="is-flex is-flex-wrap-wrap">
+              <div class="mr-2">
+                <strong>{{ name }}</strong>
+              </div>
+              <div class="mr-2">
+                <strong>
+                  <span class="mr-1">{{ $t('views.ad.category') }}:</span>
+                  <span>{{ category }}</span>
+                </strong>
+              </div>
+              <div class="mr-2">
+                <small>
+                  <span class="mr-1">{{ $t('common.email') }}.:</span>
+                  <span>
+                    <a :href="`mailto:${email}`" @click.stop>
+                      {{ email }}
+                    </a>
+                  </span>
+                </small>
+              </div>
+              <div class="mr-2">
+                <small>
+                  <span class="mr-1">{{ $t('common.tel') }}.:</span>
+                  <span>
+                    <a :href="`tel:${tel}`" @click.stop>{{ tel }}</a>
+                  </span>
+                </small>
+              </div>
+              <div>
+                <small>
+                  <span>
+                    {{ $moment(adDate).format('YYYY-MM-DD') }}
+                  </span>
+                </small>
+              </div>
             </div>
             <br />
             <div class="ellipsis">
@@ -76,18 +78,16 @@
               </p>
             </div>
             <div>
-              <div>
-                <router-link :to="{ name: 'Ad', params: { id } }"
-                  >{{ $t('common.more') }}...</router-link
-                >
-              </div>
-              <div>
-                <strong>
-                  <span class="mr-1">{{ $t('common.price') }}:</span>
-                  <span class="mr-1">{{ price }}</span>
-                  <span>{{ $t('common.eur') }}</span>
-                </strong>
-              </div>
+              <router-link :to="{ name: 'Ad', params: { id } }"
+                >{{ $t('common.more') }}...</router-link
+              >
+            </div>
+            <div>
+              <strong>
+                <span class="mr-1">{{ $t('common.price') }}:</span>
+                <span class="mr-1">{{ price }}</span>
+                <span>{{ $t('common.eur') }}</span>
+              </strong>
             </div>
           </div>
           <nav class="level is-mobile">
