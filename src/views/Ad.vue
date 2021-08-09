@@ -32,30 +32,34 @@
         <div class="media-content">
           <div class="content">
             <div class="is-flex is-flex-wrap-wrap">
-              <div class="mr-1">
+              <div class="mr-2">
                 <span class="mr-1">
                   <strong>{{ $t('views.ad.adNr') }}:</strong>
                 </span>
                 <span>{{ $route.params.id }}</span>
               </div>
-              <div class="mr-1">
+              <div class="mr-2">
                 <strong>{{ currentAd.Name }}</strong>
               </div>
-              <div class="mr-1">
+              <div class="mr-2">
                 <strong>{{ $t('views.ad.category') }}: {{ currentAd.Category }}</strong>
               </div>
-              <div class="mr-1">
+              <div class="mr-2">
                 <span>{{ $t('common.email') }}.:</span>
                 <span>
-                  {{ currentAd.Email }}
+                  <a :href="`mailto:${currentAd.Email}`">
+                    {{ currentAd.Email }}
+                  </a>
                 </span>
               </div>
-              <div class="mr-1">
+              <div class="mr-2">
                 <span class="mr-1">
                   <small>{{ $t('common.tel') }}.:</small>
                 </span>
                 <span>
-                  <small>{{ currentAd.Tel }}</small>
+                  <small>
+                    <a :href="`tel:${currentAd.Tel}`">{{ currentAd.Tel }}</a>
+                  </small>
                 </span>
               </div>
               <div>

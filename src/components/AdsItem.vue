@@ -34,26 +34,61 @@
           </figure>
         </div>
         <div class="media-content">
-          <div class="content">
-            <strong>{{ name }}{{ ' ' }}</strong>
-            <strong>{{ $t('views.ad.category') }}:{{ ' ' }}{{ category }}{{ ' ' }}</strong>
-            <small>{{ $t('common.email') }}.:{{ ' ' }}{{ email }}{{ ' ' }}</small>
-            <small>{{ $t('common.tel') }}.:{{ ' ' }}{{ tel }}</small>
-            <small>{{ ' ' }}{{ $moment(adDate).format('YYYY-MM-DD') }}</small>
+          <div class="content is-flex is-flex-wrap-wrap">
+            <div class="mr-2">
+              <strong>{{ name }}</strong>
+            </div>
+            <div class="mr-2">
+              <strong>
+                <span class="mr-1">{{ $t('views.ad.category') }}:</span>
+                <span>{{ category }}</span>
+              </strong>
+            </div>
+            <div class="mr-2">
+              <small>
+                <span class="mr-1">{{ $t('common.email') }}.:</span>
+                <span>
+                  <a :href="`mailto:${email}`">
+                    {{ email }}
+                  </a>
+                </span>
+              </small>
+            </div>
+            <div class="mr-2">
+              <small>
+                <span class="mr-1">{{ $t('common.tel') }}.:</span>
+                <span
+                  ><a :href="`tel:${tel}`">{{ tel }}</a></span
+                >
+              </small>
+            </div>
+            <div>
+              <small>
+                <span>
+                  {{ $moment(adDate).format('YYYY-MM-DD') }}
+                </span>
+              </small>
+            </div>
             <br />
-            <div class="ellipsis mb-2">
+            <div class="ellipsis">
               <p>
                 {{ text }}
               </p>
             </div>
             <div>
-              <router-link :to="{ name: 'Ad', params: { id } }"
-                >{{ $t('common.more') }}...</router-link
-              >
+              <div>
+                <router-link :to="{ name: 'Ad', params: { id } }"
+                  >{{ $t('common.more') }}...</router-link
+                >
+              </div>
+              <div>
+                <strong>
+                  <span class="mr-1">{{ $t('common.price') }}:</span>
+                  <span class="mr-1">{{ price }}</span>
+                  <span>{{ $t('common.eur') }}</span>
+                </strong>
+              </div>
             </div>
-            <strong
-              >{{ $t('common.price') }}:{{ ' ' }}{{ price }}{{ ' ' }}{{ $t('common.eur') }}</strong
-            >
           </div>
           <nav class="level is-mobile">
             <div class="level-left">
