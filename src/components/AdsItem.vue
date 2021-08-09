@@ -70,17 +70,17 @@
                   </span>
                 </small>
               </div>
-            </div>
-            <br />
-            <div class="ellipsis">
-              <p>
-                {{ text }}
-              </p>
-            </div>
-            <div>
-              <router-link :to="{ name: 'Ad', params: { id } }"
-                >{{ $t('common.more') }}...</router-link
-              >
+              <br />
+              <div class="ellipsis">
+                <p>
+                  {{ text }}
+                </p>
+              </div>
+              <div>
+                <router-link :to="{ name: 'Ad', params: { id } }">
+                  {{ $t('common.more') }}...
+                </router-link>
+              </div>
             </div>
             <div>
               <strong>
