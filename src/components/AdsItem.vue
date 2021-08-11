@@ -11,7 +11,7 @@
     <div class="box" @click="routeToCurrentAd">
       <div>
         <div v-if="showEditMode" class="is-flex is-justify-content-space-between is-flex-wrap-wrap">
-          <span class="mt-2 ml-4">Tavo skelbimas</span>
+          <span class="mt-2 ml-4">{{ $t('views.ad.yourAd') }}</span>
           <span class="button is-ghost" @click.stop="toggleModal">
             <p>{{ $t('views.ad.edit') }}</p>
             <font-awesome-icon :icon="['fa', 'edit']" class="ml-1" />

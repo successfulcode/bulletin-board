@@ -41,7 +41,8 @@
         "adNr": "Skelbimo Nr.",
         "category": "Kategorija",
         "back": "Atgal",
-        "edit": "Redaguoti"
+        "edit": "Redaguoti",
+        "yourAd": "Tavo skelbimas"
       }
     },
     "components": {
@@ -101,7 +102,7 @@
         "successUpdateMessage": "Skelbimas sėkmingai atnaujintas!",
         "invalidUpdateMessage": "Nepavyko atnaujinti skelbimo! Patikrinkite įvedamus duomenys!",
         "successDeleteMessage": "Skelbimas sėkmingai ištrintas!",
-        "invalidDeleteMessage": "Kažkas ne taip! Nepavyko ištrinti skelbimo"
+        "invalidDeleteMessage": "Kažkas ne taip! Nepavyko ištrinti skelbimo!"
       }
     },
     "cities": {
