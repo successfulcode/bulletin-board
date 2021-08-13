@@ -73,10 +73,12 @@
               </p>
             </div>
             <div>
-              <strong
-                >{{ $t('common.price') }}:{{ ' ' }}{{ currentAd.Price }}{{ ' '
-                }}{{ $t('common.eur') }}</strong
-              >
+              <strong>
+                <span class="mr-1"> {{ $t('common.price') }}: </span>
+                <span>
+                  <span class="mr-1"> {{ currentAd.Price }} </span>{{ $t('common.eur') }}
+                </span>
+              </strong>
             </div>
             <div>
               <strong>{{ currentAd.Name }}{{ ' ' }} </strong> |
