@@ -36,7 +36,7 @@ export default {
     currentCity: {
       type: String,
       required: false,
-      default: i18n.t('cities.allLithuania')
+      default: i18n.t('cities.allCities')
     }
   },
   data() {
