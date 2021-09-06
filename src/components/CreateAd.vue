@@ -180,6 +180,7 @@ import CreateAdAlert from './CreateAdAlert.vue';
 import CreateAdCities from './CreateAdCities.vue';
 import { required, minLength, email } from 'vuelidate/lib/validators';
 import CreateImages from './CreateImages.vue';
+import i18n from '../i18n';
 
 export default {
   name: 'CreateAd',
@@ -200,7 +201,7 @@ export default {
       adDate: Date.now(),
       images: [],
       suggest: true,
-      city: 'allCities',
+      city: i18n.t('cities.allCities'),
       createAdSuccess: false
     };
   },
