@@ -70,17 +70,22 @@
                   </span>
                 </small>
               </div>
-              <br />
-              <div class="ellipsis">
-                <p>
-                  {{ text }}
-                </p>
-              </div>
+            </div>
+            <br />
+            <div class="is-flex mt-0">
               <div>
-                <router-link :to="{ name: 'Ad', params: { id } }">
-                  {{ $t('common.more') }}...
-                </router-link>
+                <div>
+                  <p class="ellipsis mr-1">
+                    {{ text }}
+                  </p>
+                </div>
+                <div>
+                  <router-link :to="{ name: 'Ad', params: { id } }">
+                    {{ $t('common.more') }}...
+                  </router-link>
+                </div>
               </div>
+              <span> </span>
             </div>
             <div>
               <strong>
