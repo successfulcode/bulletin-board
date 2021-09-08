@@ -13,7 +13,8 @@ import {
   faUpload,
   faTimesCircle,
   faCheckCircle,
-  faEdit
+  faEdit,
+  faCog
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import Vuelidate from 'vuelidate';
@@ -33,7 +34,8 @@ library.add(
   faUpload,
   faTimesCircle,
   faCheckCircle,
-  faEdit
+  faEdit,
+  faCog
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

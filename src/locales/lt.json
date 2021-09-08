@@ -75,7 +75,8 @@
         "logout": "Atsijungti",
         "allAds": "Visi skelbimai",
         "createAd": "Įdėti skelbimą",
-        "currentuserads": "Mano skelbimai"
+        "currentuserads": "Mano skelbimai",
+        "editProfile": "Redaguoti Profilį"
       },
       "editAd": {
         "editMode": "Skelbimo redagavimas",
