@@ -12,7 +12,9 @@
       "eur": "Eur",
       "tel": "Tel",
       "more": "Daugiau",
-      "new": "NAUJAS"
+      "new": "NAUJAS",
+      "name": "Vardas Pavardė",
+      "about": "Apie save"
     },
     "views": {
       "login": {
