@@ -5,16 +5,17 @@
       @submit.prevent="
         onSubmit();
         $v.$reset();
+        $router.go(-1);
       "
     >
       <div class="field">
         <label class="label">{{ $t('common.name') }}</label>
         <input
-          v-model="$v.name.$model"
+          v-model="$v.displayName.$model"
           class="input mr-1"
           :class="{
-            'is-danger': $v.name.$error,
-            'is-success': !$v.name.$invalid
+            'is-danger': $v.displayName.$error,
+            'is-success': !$v.displayName.$invalid
           }"
           type="text"
           :placeholder="$t('common.name')"
@@ -67,7 +68,7 @@
           </button>
         </div>
         <div class="control">
-          <button class="button is-link is-light" type="reset">
+          <button class="button is-link is-light" type="reset" @click.stop="$router.go(-1)">
             {{ $t('common.cancel') }}
           </button>
         </div>
@@ -84,7 +85,7 @@ export default {
   name: 'EditProfile',
   data() {
     return {
-      name: '',
+      displayName: '',
       email: '',
       photo: null,
       tel: null,
@@ -93,7 +94,7 @@ export default {
     };
   },
   validations: {
-    name: { required, minLength: minLength(1) },
+    displayName: { required, minLength: minLength(1) },
     email: { required, email },
     tel: { required, minLength: minLength(9) }
   },
@@ -101,21 +102,25 @@ export default {
     ...mapGetters(['currentUser', 'isAuthenticated'])
   },
   mounted() {
-    this.name = this.currentUser.displayName;
+    this.displayName = this.currentUser.displayName;
     this.email = this.currentUser.email;
     this.idToken = localStorage.getItem('idToken');
   },
   methods: {
     onSubmit() {
       const newItem = {
-        name: this.name,
+        displayName: this.displayName,
         email: this.email,
         photo: this.photo,
         tel: this.tel,
         about: this.about
       };
       console.log('submit', newItem);
-      this.$store.dispatch(UPDATE, { idToken: this.idToken, email: this.email });
+      this.$store.dispatch(UPDATE, {
+        idToken: this.idToken,
+        displayName: this.displayName,
+        email: this.email
+      });
     }
   }
 };

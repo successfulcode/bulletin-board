@@ -6,7 +6,8 @@ import {
   ISLOADING,
   ISLOADING_FALSE,
   OPEN_NOTIFICATION,
-  CLOSE_NOTIFICATION
+  CLOSE_NOTIFICATION,
+  UPDATE_AUTH
 } from './mutations.types';
 import ApiService from '@/api';
 import i18n from '@/i18n';
@@ -122,22 +123,20 @@ const actions = {
       }
     }
   },
-  async [UPDATE]({ commit, dispatch }, { idToken, email }) {
+  async [UPDATE]({ commit }, { idToken, displayName, email }) {
     try {
       const updatedProfile = {
         idToken,
+        displayName,
         email,
         returnSecureToken: true
       };
       commit(ISLOADING);
       const { data, status } = await ApiService.updateProfile(updatedProfile);
-      const loggedUser = {
+      const updatedUser = {
         displayName: data.displayName,
         email: data.email,
-        localId: data.localId,
-        idToken: data.idToken,
-        refreshToken: data.refreshToken,
-        expiresIn: data.expiresIn
+        localId: data.localId
       };
 
       if (status === 200) {
@@ -147,15 +146,14 @@ const actions = {
           message: i18n.t('store.authModule.successUpdate')
         };
         commit(OPEN_NOTIFICATION, notificationRules);
-        commit(SET_AUTH, loggedUser);
+        commit(UPDATE_AUTH, updatedUser);
         commit(ISLOADING_FALSE);
-        dispatch(AUTO_LOGOUT, data.expiresIn);
       }
     } catch (error) {
       const notificationRules = {
         status: 'is-danger',
         timeout: 5000,
-        message: i18n.t('store.authModule.invalidLoginMessage')
+        message: i18n.t('store.authModule.invalidUpdateMessage')
       };
       commit(OPEN_NOTIFICATION, notificationRules);
       commit(SET_ERROR, error.message);
@@ -211,6 +209,13 @@ const mutations = {
     localStorage.setItem('idToken', idToken);
     localStorage.setItem('refreshToken', refreshToken);
     localStorage.setItem('expirationDate', expirationDate);
+  },
+  [UPDATE_AUTH](state, { displayName, email, localId }) {
+    const loggedUser = { displayName, email, localId };
+    state.user = loggedUser;
+    localStorage.setItem('displayName', displayName);
+    localStorage.setItem('email', email);
+    localStorage.setItem('localId', localId);
   },
   [PURGE_AUTH](state) {
     state.isAuthenticated = false;
