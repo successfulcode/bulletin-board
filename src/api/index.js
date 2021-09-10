@@ -10,11 +10,11 @@ const ApiService = {
   signUpUser(newUser) {
     return axios.post(`${authUrl}:signUp?key=${process.env.VUE_APP_API_KEY}`, newUser);
   },
+  updateProfile(updatedProfile) {
+    return axios.post(`${authUrl}:update?key=${process.env.VUE_APP_API_KEY}`, updatedProfile);
+  },
   createAd(newAd) {
     return axios.post(`${dataUrl}.json`, newAd);
-  },
-  authWhithToken(token) {
-    return axios.post(`${authUrl}:signInWithCustomToken?key=${process.env.VUE_APP_API_KEY}`, token);
   },
   getAds() {
     return axios.get(`${dataUrl}.json?orderBy="Date"&limitToLast=6&print=pretty`);

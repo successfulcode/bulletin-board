@@ -96,7 +96,8 @@
         "invalidLoginMessage": "Kažkas ne taip! Patikrinkite elektroninį paštą arba slaptažodį!",
         "successSignUpMessage": "Sveiki! Jūs sėkmingai užsiregistravote!",
         "invalidSignUpMessage": "Kažkas ne taip! Patikrinkite įvedamus duomenys!",
-        "invalidUserExist": "Toks vartotojas jau yra! Patikrinkite įvedamus duomenys!"
+        "invalidUserExist": "Toks vartotojas jau yra! Patikrinkite įvedamus duomenys!",
+        "successUpdate": "Profilis sėkmingai atnaujintas!"
       },
       "adsModule": {
         "successMessage": "Skelbimas sėkmingai sukurtas!",

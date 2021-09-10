@@ -78,6 +78,8 @@
 
 <script>
 import { required, minLength, email } from 'vuelidate/lib/validators';
+import { UPDATE } from '@/store/actions.types';
+import { mapGetters } from 'vuex';
 export default {
   name: 'EditProfile',
   data() {
@@ -86,13 +88,22 @@ export default {
       email: '',
       photo: null,
       tel: null,
-      about: ''
+      about: '',
+      idToken: null
     };
   },
   validations: {
     name: { required, minLength: minLength(1) },
     email: { required, email },
     tel: { required, minLength: minLength(9) }
+  },
+  computed: {
+    ...mapGetters(['currentUser', 'isAuthenticated'])
+  },
+  mounted() {
+    this.name = this.currentUser.displayName;
+    this.email = this.currentUser.email;
+    this.idToken = localStorage.getItem('idToken');
   },
   methods: {
     onSubmit() {
@@ -104,6 +115,7 @@ export default {
         about: this.about
       };
       console.log('submit', newItem);
+      this.$store.dispatch(UPDATE, { idToken: this.idToken, email: this.email });
     }
   }
 };

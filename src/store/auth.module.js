@@ -1,4 +1,4 @@
-import { LOGIN, SIGN_UP, LOGOUT, AUTO_LOGOUT, AUTO_LOGIN } from './actions.types';
+import { LOGIN, SIGN_UP, LOGOUT, AUTO_LOGOUT, AUTO_LOGIN, UPDATE } from './actions.types';
 import {
   SET_AUTH,
   PURGE_AUTH,
@@ -120,6 +120,46 @@ const actions = {
         commit(SET_ERROR, error.message);
         commit(ISLOADING_FALSE);
       }
+    }
+  },
+  async [UPDATE]({ commit, dispatch }, { idToken, email }) {
+    try {
+      const updatedProfile = {
+        idToken,
+        email,
+        returnSecureToken: true
+      };
+      commit(ISLOADING);
+      const { data, status } = await ApiService.updateProfile(updatedProfile);
+      const loggedUser = {
+        displayName: data.displayName,
+        email: data.email,
+        localId: data.localId,
+        idToken: data.idToken,
+        refreshToken: data.refreshToken,
+        expiresIn: data.expiresIn
+      };
+
+      if (status === 200) {
+        const notificationRules = {
+          status: 'is-success',
+          timeout: 3000,
+          message: i18n.t('store.authModule.successUpdate')
+        };
+        commit(OPEN_NOTIFICATION, notificationRules);
+        commit(SET_AUTH, loggedUser);
+        commit(ISLOADING_FALSE);
+        dispatch(AUTO_LOGOUT, data.expiresIn);
+      }
+    } catch (error) {
+      const notificationRules = {
+        status: 'is-danger',
+        timeout: 5000,
+        message: i18n.t('store.authModule.invalidLoginMessage')
+      };
+      commit(OPEN_NOTIFICATION, notificationRules);
+      commit(SET_ERROR, error.message);
+      commit(ISLOADING_FALSE);
     }
   },
   [AUTO_LOGOUT]({ commit }, expiresIn) {
