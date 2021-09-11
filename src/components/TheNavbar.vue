@@ -41,7 +41,7 @@
             <strong class="mr-3 name" @click="toggleProfileModal">{{
               currentUser.displayName
             }}</strong>
-            <div class="navbar-dropdown is-boxed mt-1 is-flex is-justify-content-center">
+            <div class="edit-container navbar-dropdown is-boxed mt-1">
               <router-link to="/editprofile">
                 <span class="edit">
                   {{ $t('components.theNavbar.editProfile') }}
@@ -101,6 +101,14 @@ export default {
 }
 .edit {
   cursor: pointer;
+}
+.edit-container {
+  text-align: center;
+}
+@media only screen and (max-width: 1020px) {
+  .edit-container {
+    text-align: left;
+  }
 }
 .edit:hover {
   color: rgb(133, 133, 133);
