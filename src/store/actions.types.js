@@ -11,3 +11,4 @@ export const GET_CURRENT_USER_ADS = 'store/actionstypes/GET_CURRENT_USER_ADS';
 // export const GET_SHALLOW = 'store/actionstypes/GET_SHALLOW';
 export const UPDATE_AD = 'store/actionstypes/UPDATE_AD';
 export const DELETE_AD = 'store/actionstypes/DELETE_AD';
+export const UPDATE = 'store/actionstypes/UPDATE ';

@@ -187,8 +187,8 @@ export default {
   components: { CreateAdAlert, CreateAdCities, CreateImages },
   props: {
     isLoading: Boolean,
-    currentUser: { type: String },
-    userLocalid: { type: String }
+    currentUser: { type: String, required: true },
+    userLocalid: { type: String, required: true }
   },
   data() {
     return {

@@ -7,6 +7,7 @@ import Ads from '@/views/Ads.vue';
 import Ad from '@/views/Ad.vue';
 import Rules from '@/views/Rules.vue';
 import CurrentUserAds from '@/views/CurrentUserAds.vue';
+import EditProfile from '@/views/EditProfile.vue';
 import NotFound from '@/views/NotFound.vue';
 import store from '@/store';
 
@@ -42,6 +43,14 @@ const routes = [
     path: '/currentuserads',
     name: 'CurrentUserAds',
     component: CurrentUserAds,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/editprofile',
+    name: 'EditProfile',
+    component: EditProfile,
     meta: {
       requiresAuth: true
     }
@@ -90,9 +99,6 @@ router.beforeEach((to, from, next) => {
     } else {
       next({
         path: '/login'
-        // query: {
-        //   errorMessage: 'Unauthorized'
-        // }
       });
     }
   } else {
