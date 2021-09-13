@@ -8,6 +8,11 @@
         $router.go(-1);
       "
     >
+      <div class="field is-flex is-justify-content-center">
+        <figure class="image is-128x128">
+          <img class="is-rounded" :src="defaultProfilePicture" alt="profile" />
+        </figure>
+      </div>
       <div class="field">
         <label class="label">{{ $t('common.name') }}</label>
         <input
@@ -34,33 +39,6 @@
           :placeholder="$t('common.email')"
         />
       </div>
-      <div class="field">
-        <label class="label">{{ $t('common.tel') }}</label>
-        <input
-          v-model="$v.tel.$model"
-          class="input"
-          maxlength="12"
-          :class="{
-            'is-danger': $v.tel.$error,
-            'is-success': !$v.tel.$invalid
-          }"
-          type="tel"
-          :placeholder="$t('common.tel')"
-        />
-      </div>
-      <div class="field">
-        <label class="label">{{ $t('common.about') }}</label>
-        <textarea
-          v-model="about"
-          class="textarea"
-          maxlength="12"
-          :class="{
-            'is-success': about
-          }"
-          type="textbox"
-          :placeholder="$t('common.about')"
-        />
-      </div>
       <div class="field is-grouped mb-4">
         <div class="control">
           <button class="button is-link" type="submit" :disabled="$v.$invalid">
@@ -78,9 +56,11 @@
 </template>
 
 <script>
+import profile from '@/assets/pictures/profile.png';
 import { required, minLength, email } from 'vuelidate/lib/validators';
 import { UPDATE } from '@/store/actions.types';
 import { mapGetters } from 'vuex';
+
 export default {
   name: 'EditProfile',
   data() {
@@ -90,13 +70,13 @@ export default {
       photo: null,
       tel: null,
       about: '',
-      idToken: null
+      idToken: null,
+      defaultProfilePicture: profile
     };
   },
   validations: {
     displayName: { required, minLength: minLength(1) },
-    email: { required, email },
-    tel: { required, minLength: minLength(9) }
+    email: { required, email }
   },
   computed: {
     ...mapGetters(['currentUser', 'isAuthenticated'])
@@ -110,16 +90,15 @@ export default {
     onSubmit() {
       const newItem = {
         displayName: this.displayName,
-        email: this.email,
-        photo: this.photo,
-        tel: this.tel,
-        about: this.about
+        email: this.email
       };
       console.log('submit', newItem);
       this.$store.dispatch(UPDATE, {
         idToken: this.idToken,
         displayName: this.displayName,
-        email: this.email
+        email: this.email,
+        photoUrl:
+          'https://firebasestorage.googleapis.com/v0/b/bulletin-board-sm.appspot.com/o/imges%2Fundefined%2F1630958154553house.jpg?alt=media&amp;token=f5af5931-bed4-4e7a-83b7-1c58e8a743e6&quot;'
       });
     }
   }
@@ -130,5 +109,8 @@ export default {
 .edit-form {
   max-width: 35rem;
   width: 100%;
+}
+.is-rounded {
+  border: 1px solid #00d1b2;
 }
 </style>

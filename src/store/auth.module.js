@@ -46,6 +46,7 @@ const actions = {
         email: data.email,
         localId: data.localId,
         idToken: data.idToken,
+        photoUrl: data.photoUrl,
         refreshToken: data.refreshToken,
         expiresIn: data.expiresIn
       };
@@ -123,12 +124,13 @@ const actions = {
       }
     }
   },
-  async [UPDATE]({ commit }, { idToken, displayName, email }) {
+  async [UPDATE]({ commit }, { idToken, displayName, email, photoUrl }) {
     try {
       const updatedProfile = {
         idToken,
         displayName,
         email,
+        photoUrl,
         returnSecureToken: true
       };
       commit(ISLOADING);
@@ -136,7 +138,8 @@ const actions = {
       const updatedUser = {
         displayName: data.displayName,
         email: data.email,
-        localId: data.localId
+        localId: data.localId,
+        photoUrl: data.photoUrl
       };
 
       if (status === 200) {
@@ -175,6 +178,7 @@ const actions = {
     const localId = localStorage.getItem('localId');
     const displayName = localStorage.getItem('displayName');
     const email = localStorage.getItem('email');
+    const photoUrl = localStorage.getItem('photoUrl');
     const expirationDate = new Date(localStorage.getItem('expirationDate'));
 
     try {
@@ -184,7 +188,15 @@ const actions = {
         dispatch(LOGOUT);
       } else {
         const expiresIn = (expirationDate.getTime() - new Date().getTime()) / 1000;
-        commit(SET_AUTH, { displayName, email, localId, idToken, refreshToken, expiresIn });
+        commit(SET_AUTH, {
+          displayName,
+          email,
+          localId,
+          idToken,
+          photoUrl,
+          refreshToken,
+          expiresIn
+        });
         dispatch(AUTO_LOGOUT, expiresIn);
       }
     } catch (error) {
@@ -198,8 +210,11 @@ const actions = {
 };
 
 const mutations = {
-  [SET_AUTH](state, { displayName, email, localId, idToken, refreshToken, expiresIn }) {
-    const loggedUser = { displayName, email, localId };
+  [SET_AUTH](
+    state,
+    { displayName, email, localId, idToken, photoUrl = null, refreshToken, expiresIn }
+  ) {
+    const loggedUser = { displayName, email, localId, photoUrl };
     state.user = loggedUser;
     state.isAuthenticated = true;
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
@@ -210,12 +225,13 @@ const mutations = {
     localStorage.setItem('refreshToken', refreshToken);
     localStorage.setItem('expirationDate', expirationDate);
   },
-  [UPDATE_AUTH](state, { displayName, email, localId }) {
+  [UPDATE_AUTH](state, { displayName, email, localId, photoUrl }) {
     const loggedUser = { displayName, email, localId };
     state.user = loggedUser;
     localStorage.setItem('displayName', displayName);
     localStorage.setItem('email', email);
     localStorage.setItem('localId', localId);
+    localStorage.setItem('photoUrl', photoUrl);
   },
   [PURGE_AUTH](state) {
     state.isAuthenticated = false;

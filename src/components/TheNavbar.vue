@@ -38,9 +38,9 @@
       <div class="navbar-end">
         <div v-if="isAuthenticated" class="navbar-item mr-2">
           <div class="navbar-item has-dropdown is-hoverable">
-            <strong class="mr-3 name" @click="toggleProfileModal">{{
-              currentUser.displayName
-            }}</strong>
+            <strong class="mr-2 name" @click="toggleProfileModal"
+              >{{ currentUser.displayName }}
+            </strong>
             <div class="edit-container navbar-dropdown is-boxed mt-1">
               <router-link to="/editprofile">
                 <span class="edit">
@@ -50,6 +50,16 @@
               </router-link>
             </div>
           </div>
+          <div class="mr-2 pb-1">
+            <figure class="image is-24x24">
+              <img
+                class="is-rounded"
+                :src="currentUser.photoUrl ? currentUser.photoUrl : defaultProfilePicture"
+                alt="profile"
+              />
+            </figure>
+          </div>
+
           <div>
             <button class="button is-light" @click="logout">
               {{ $t('components.theNavbar.logout') }}
@@ -70,12 +80,14 @@
 <script>
 import { mapGetters } from 'vuex';
 import { LOGOUT } from '@/store/actions.types';
+import profile from '@/assets/pictures/profile.png';
 export default {
   name: 'TheNavbar',
   data() {
     return {
       burgerIsActive: false,
-      isPorfileModalOpen: false
+      isPorfileModalOpen: false,
+      defaultProfilePicture: profile
     };
   },
   computed: {
