@@ -59,7 +59,6 @@ const actions = {
         };
         commit(OPEN_NOTIFICATION, notificationRules);
         commit(SET_AUTH, loggedUser);
-        commit(ISLOADING_FALSE);
         dispatch(AUTO_LOGOUT, data.expiresIn);
       }
     } catch (error) {
@@ -70,6 +69,7 @@ const actions = {
       };
       commit(OPEN_NOTIFICATION, notificationRules);
       commit(SET_ERROR, error.message);
+    } finally {
       commit(ISLOADING_FALSE);
     }
   },
@@ -99,7 +99,6 @@ const actions = {
         };
         commit(OPEN_NOTIFICATION, notificationRules);
         commit(SET_AUTH, loggedUser);
-        commit(ISLOADING_FALSE);
         dispatch(AUTO_LOGOUT, data.expiresIn);
       }
     } catch (error) {
@@ -111,7 +110,6 @@ const actions = {
         };
         commit(OPEN_NOTIFICATION, notificationRules);
         commit(SET_ERROR, error.message);
-        commit(ISLOADING_FALSE);
       } else {
         const notificationRules = {
           status: 'is-danger',
@@ -120,8 +118,9 @@ const actions = {
         };
         commit(OPEN_NOTIFICATION, notificationRules);
         commit(SET_ERROR, error.message);
-        commit(ISLOADING_FALSE);
       }
+    } finally {
+      commit(ISLOADING_FALSE);
     }
   },
   async [UPDATE]({ commit }, { idToken, displayName, email, photoUrl }) {
@@ -150,7 +149,6 @@ const actions = {
         };
         commit(OPEN_NOTIFICATION, notificationRules);
         commit(UPDATE_AUTH, updatedUser);
-        commit(ISLOADING_FALSE);
       }
     } catch (error) {
       const notificationRules = {
@@ -160,6 +158,7 @@ const actions = {
       };
       commit(OPEN_NOTIFICATION, notificationRules);
       commit(SET_ERROR, error.message);
+    } finally {
       commit(ISLOADING_FALSE);
     }
   },
@@ -173,21 +172,17 @@ const actions = {
     }
   },
   [AUTO_LOGIN]({ dispatch, commit }) {
-    const idToken = localStorage.getItem('idToken');
-    const refreshToken = localStorage.getItem('refreshToken');
-    const localId = localStorage.getItem('localId');
-    const displayName = localStorage.getItem('displayName');
-    const email = localStorage.getItem('email');
-    const photoUrl = localStorage.getItem('photoUrl');
-    const expirationDate = new Date(localStorage.getItem('expirationDate'));
+    const { idToken, refreshToken, expirationDate } = JSON.parse(localStorage.getItem('tokens'));
+
+    const { localId, displayName, email, photoUrl } = JSON.parse(localStorage.getItem('user'));
 
     try {
       if (!idToken || !refreshToken || !displayName || !email || !expirationDate) {
         dispatch(LOGOUT);
-      } else if (expirationDate <= new Date()) {
+      } else if (new Date(expirationDate) <= new Date()) {
         dispatch(LOGOUT);
       } else {
-        const expiresIn = (expirationDate.getTime() - new Date().getTime()) / 1000;
+        const expiresIn = (new Date(expirationDate).getTime() - new Date().getTime()) / 1000;
         commit(SET_AUTH, {
           displayName,
           email,
@@ -218,31 +213,24 @@ const mutations = {
     state.user = loggedUser;
     state.isAuthenticated = true;
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-    localStorage.setItem('displayName', displayName);
-    localStorage.setItem('email', email);
-    localStorage.setItem('localId', localId);
-    localStorage.setItem('idToken', idToken);
-    localStorage.setItem('refreshToken', refreshToken);
-    localStorage.setItem('expirationDate', expirationDate);
+
+    localStorage.setItem('tokens', JSON.stringify({ idToken, refreshToken, expirationDate }));
+
+    localStorage.setItem('user', JSON.stringify({ displayName, email, localId, photoUrl }));
   },
   [UPDATE_AUTH](state, { displayName, email, localId, photoUrl }) {
     const loggedUser = { displayName, email, localId };
     state.user = loggedUser;
-    localStorage.setItem('displayName', displayName);
-    localStorage.setItem('email', email);
-    localStorage.setItem('localId', localId);
-    localStorage.setItem('photoUrl', photoUrl);
+    localStorage.setItem('user', JSON.stringify({ displayName, email, localId, photoUrl }));
   },
   [PURGE_AUTH](state) {
     state.isAuthenticated = false;
     state.errors = null;
     state.user = {};
-    localStorage.removeItem('displayName');
-    localStorage.removeItem('email');
-    localStorage.removeItem('localId');
-    localStorage.removeItem('idToken');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('expirationDate');
+
+    localStorage.removeItem('tokens');
+
+    localStorage.removeItem('user');
   },
   [SET_ERROR](state, error) {
     state.errors = error;
