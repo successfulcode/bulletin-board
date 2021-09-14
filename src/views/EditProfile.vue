@@ -111,6 +111,6 @@ export default {
   width: 100%;
 }
 .is-rounded {
-  border: 1px solid #00d1b2;
+  border: 1px solid #48c774;
 }
 </style>
