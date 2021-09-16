@@ -1,64 +1,131 @@
 <template>
-  <div class="is-flex is-justify-content-center">
-    <form
-      class="edit-form mt-6"
-      @submit.prevent="
-        onSubmit();
-        $v.$reset();
-        $router.go(-1);
-      "
-    >
-      <div class="field is-flex is-justify-content-center">
-        <figure class="image is-128x128">
-          <img class="is-rounded" :src="defaultProfilePicture" alt="profile" />
-        </figure>
+  <div class="edit-container is-flex is-justify-content-center mt-4">
+    <div class="edit-form mt-6">
+      <div class="tabs is-boxed">
+        <ul>
+          <li :class="[currentTab === 'profile' && 'is-active']">
+            <span @click="toggleTabHandler('profile')">
+              <a>
+                <span class="icon is-small">
+                  <font-awesome-icon :icon="['fa', 'id-badge']" />
+                </span>
+                <span>
+                  {{ $t('views.editProfile.profile') }}
+                </span>
+              </a>
+            </span>
+          </li>
+          <li :class="[currentTab === 'passwords' && 'is-active']">
+            <span @click="toggleTabHandler('passwords')">
+              <a>
+                <span class="icon is-small">
+                  <font-awesome-icon :icon="['fa', 'unlock-alt']" />
+                </span>
+                <span> {{ $t('views.editProfile.passwords') }}</span>
+              </a>
+            </span>
+          </li>
+        </ul>
       </div>
-      <div class="field">
-        <label class="label">{{ $t('common.name') }}</label>
-        <input
-          v-model="$v.displayName.$model"
-          class="input mr-1"
-          :class="{
-            'is-danger': $v.displayName.$error,
-            'is-success': !$v.displayName.$invalid
-          }"
-          type="text"
-          :placeholder="$t('common.name')"
-        />
-      </div>
-      <div class="field">
-        <label class="label">{{ $t('common.email') }}</label>
-        <input
-          v-model="$v.email.$model"
-          class="input mr-1"
-          :class="{
-            'is-danger': $v.email.$error,
-            'is-success': !$v.email.$invalid
-          }"
-          type="text"
-          :placeholder="$t('common.email')"
-        />
-      </div>
-      <div class="field is-grouped mb-4">
-        <div class="control">
-          <button
-            class="button is-link"
-            type="submit"
-            :disabled="
-              $v.$invalid ||
-              (displayName === currentUser.displayName && email === currentUser.email)
-            "
-          >
-            {{ $t('common.confirm') }}
-          </button>
+      <form
+        v-if="currentTab === 'profile'"
+        class="edit-form mt-6"
+        @submit.prevent="
+          onSubmit();
+          $v.$reset();
+          $router.go(-1);
+        "
+      >
+        <div class="field is-flex is-justify-content-center">
+          <figure class="image is-128x128">
+            <img class="is-rounded" :src="defaultProfilePicture" alt="profile" />
+          </figure>
         </div>
-        <div class="control">
-          <button class="button is-link is-light" type="reset" @click.stop="$router.go(-1)">
-            {{ $t('common.cancel') }}
-          </button>
+        <div class="field">
+          <label class="label">{{ $t('common.name') }}</label>
+          <input
+            v-model="$v.displayName.$model"
+            class="input mr-1"
+            :class="{
+              'is-danger': $v.displayName.$error,
+              'is-success': !$v.displayName.$invalid
+            }"
+            type="text"
+            :placeholder="$t('common.name')"
+          />
         </div>
-      </div>
-    </form>
+        <div class="field">
+          <label class="label">{{ $t('common.email') }}</label>
+          <input
+            v-model="$v.email.$model"
+            class="input mr-1"
+            :class="{
+              'is-danger': $v.email.$error,
+              'is-success': !$v.email.$invalid
+            }"
+            type="text"
+            :placeholder="$t('common.email')"
+          />
+        </div>
+        <div class="field is-grouped mb-4">
+          <div class="control">
+            <button
+              class="button is-link"
+              type="submit"
+              :disabled="
+                $v.$invalid ||
+                (displayName === currentUser.displayName && email === currentUser.email)
+              "
+            >
+              {{ $t('common.confirm') }}
+            </button>
+          </div>
+          <div class="control">
+            <button class="button is-link is-light" type="reset" @click.stop="$router.go(-1)">
+              {{ $t('common.cancel') }}
+            </button>
+          </div>
+        </div>
+      </form>
+      <form v-else-if="currentTab === 'passwords'" action="">
+        <div class="field">
+          <label class="label">{{ $t('views.editProfile.oldPassword') }}</label>
+          <input
+            v-model="$v.displayName.$model"
+            class="input mr-1"
+            :class="{
+              'is-danger': $v.displayName.$error,
+              'is-success': !$v.displayName.$invalid
+            }"
+            type="text"
+          />
+        </div>
+        <div class="field">
+          <label class="label">{{ $t('views.editProfile.newPassword') }}</label>
+          <input
+            v-model="$v.email.$model"
+            class="input mr-1"
+            :class="{
+              'is-danger': $v.email.$error,
+              'is-success': !$v.email.$invalid
+            }"
+            type="text"
+          />
+        </div>
+        <div class="field">
+          <label class="label">{{ $t('views.editProfile.confirNewPassword') }}</label>
+          <input
+            v-model="$v.email.$model"
+            class="input mr-1"
+            :class="{
+              'is-danger': $v.email.$error,
+              'is-success': !$v.email.$invalid
+            }"
+            type="text"
+          />
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -78,7 +145,8 @@ export default {
       tel: null,
       about: '',
       idToken: null,
-      defaultProfilePicture: profile
+      defaultProfilePicture: profile,
+      currentTab: 'profile'
     };
   },
   validations: {
@@ -95,6 +163,9 @@ export default {
     this.idToken = idToken;
   },
   methods: {
+    toggleTabHandler(tabName) {
+      this.currentTab = tabName;
+    },
     onSubmit() {
       const newItem = {
         displayName: this.displayName,
@@ -114,9 +185,11 @@ export default {
 </script>
 
 <style scoped>
+.edit-container {
+  min-height: 100vh;
+}
 .edit-form {
-  max-width: 35rem;
-  width: 100%;
+  min-width: 35rem;
 }
 .is-rounded {
   border: 1px solid #48c774;

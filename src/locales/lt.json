@@ -45,6 +45,13 @@
         "back": "Atgal",
         "edit": "Redaguoti",
         "yourAd": "Tavo skelbimas"
+      },
+      "editProfile": {
+        "profile": "Profilis",
+        "passwords": "Slapdažodžiai",
+        "oldPassword": "Senas slaptažodis",
+        "newPassword": "Naujas slaptažodis",
+        "confirNewPassword": "Patvirtinti naują slaptažodį"  
       }
     },
     "components": {
