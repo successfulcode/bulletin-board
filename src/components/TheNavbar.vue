@@ -66,7 +66,7 @@
             </button>
           </div>
         </div>
-        <div v-else class="buttons">
+        <div v-else class="buttons px-2">
           <router-link to="/signup" class="button is-info">
             <strong>{{ $t('common.signUp') }}</strong>
           </router-link>
