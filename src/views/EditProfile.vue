@@ -41,7 +41,14 @@
       </div>
       <div class="field is-grouped mb-4">
         <div class="control">
-          <button class="button is-link" type="submit" :disabled="$v.$invalid">
+          <button
+            class="button is-link"
+            type="submit"
+            :disabled="
+              $v.$invalid ||
+              (displayName === currentUser.displayName && email === currentUser.email)
+            "
+          >
             {{ $t('common.confirm') }}
           </button>
         </div>
@@ -84,7 +91,8 @@ export default {
   mounted() {
     this.displayName = this.currentUser.displayName;
     this.email = this.currentUser.email;
-    this.idToken = localStorage.getItem('idToken');
+    const { idToken } = JSON.parse(localStorage.getItem('tokens'));
+    this.idToken = idToken;
   },
   methods: {
     onSubmit() {
