@@ -31,7 +31,7 @@
         v-if="currentTab === 'profile'"
         class="edit-form mt-6"
         @submit.prevent="
-          onSubmit();
+          onSumbmitChangedProfile();
           $v.$reset();
           $router.go(-1);
         "
@@ -87,15 +87,22 @@
           </div>
         </div>
       </form>
-      <form v-else-if="currentTab === 'passwords'" action="">
+      <form
+        v-else-if="currentTab === 'passwords'"
+        @submit.prevent="
+          onSumbmitChangedPassword();
+          $v.$reset();
+          $router.go(-1);
+        "
+      >
         <div class="field">
           <label class="label">{{ $t('views.editProfile.oldPassword') }}</label>
           <input
-            v-model="$v.displayName.$model"
+            v-model="$v.oldPassword.$model"
             class="input mr-1"
             :class="{
-              'is-danger': $v.displayName.$error,
-              'is-success': !$v.displayName.$invalid
+              'is-danger': $v.oldPassword.$error,
+              'is-success': !$v.oldPassword.$invalid
             }"
             type="text"
           />
@@ -103,11 +110,11 @@
         <div class="field">
           <label class="label">{{ $t('views.editProfile.newPassword') }}</label>
           <input
-            v-model="$v.email.$model"
+            v-model="$v.newPassword.$model"
             class="input mr-1"
             :class="{
-              'is-danger': $v.email.$error,
-              'is-success': !$v.email.$invalid
+              'is-danger': $v.newPassword.$error,
+              'is-success': !$v.newPassword.$invalid
             }"
             type="text"
           />
@@ -115,14 +122,26 @@
         <div class="field">
           <label class="label">{{ $t('views.editProfile.confirNewPassword') }}</label>
           <input
-            v-model="$v.email.$model"
+            v-model="$v.confirNewPassword.$model"
             class="input mr-1"
             :class="{
-              'is-danger': $v.email.$error,
-              'is-success': !$v.email.$invalid
+              'is-danger': $v.confirNewPassword.$error,
+              'is-success': !$v.confirNewPassword.$invalid
             }"
             type="text"
           />
+        </div>
+        <div class="field is-grouped mb-4">
+          <div class="control">
+            <button class="button is-link" type="submit" :disabled="$v.$invalid">
+              {{ $t('common.confirm') }}
+            </button>
+          </div>
+          <div class="control">
+            <button class="button is-link is-light" type="reset" @click.stop="$router.go(-1)">
+              {{ $t('common.cancel') }}
+            </button>
+          </div>
         </div>
       </form>
     </div>
@@ -131,7 +150,7 @@
 
 <script>
 import profile from '@/assets/pictures/profile.png';
-import { required, minLength, email } from 'vuelidate/lib/validators';
+import { required, minLength, email, sameAs } from 'vuelidate/lib/validators';
 import { UPDATE } from '@/store/actions.types';
 import { mapGetters } from 'vuex';
 
@@ -146,15 +165,33 @@ export default {
       about: '',
       idToken: null,
       defaultProfilePicture: profile,
-      currentTab: 'profile'
+      currentTab: 'profile',
+      oldPassword: '',
+      newPassword: '',
+      confirNewPassword: ''
     };
   },
   validations: {
     displayName: { required, minLength: minLength(1) },
-    email: { required, email }
+    email: { required, email },
+    oldPassword: {
+      required,
+      minLength: minLength(6)
+    },
+    newPassword: {
+      required,
+      minLength: minLength(6)
+    },
+    confirNewPassword: {
+      required,
+      sameAs: sameAs('comparePasswords')
+    }
   },
   computed: {
-    ...mapGetters(['currentUser', 'isAuthenticated'])
+    ...mapGetters(['currentUser', 'isAuthenticated']),
+    comparePasswords() {
+      return this.newPassword;
+    }
   },
   mounted() {
     this.displayName = this.currentUser.displayName;
@@ -166,12 +203,7 @@ export default {
     toggleTabHandler(tabName) {
       this.currentTab = tabName;
     },
-    onSubmit() {
-      const newItem = {
-        displayName: this.displayName,
-        email: this.email
-      };
-      console.log('submit', newItem);
+    onSumbmitChangedProfile() {
       this.$store.dispatch(UPDATE, {
         idToken: this.idToken,
         displayName: this.displayName,
@@ -179,6 +211,9 @@ export default {
         photoUrl:
           'https://firebasestorage.googleapis.com/v0/b/bulletin-board-sm.appspot.com/o/imges%2Fundefined%2F1630958154553house.jpg?alt=media&amp;token=f5af5931-bed4-4e7a-83b7-1c58e8a743e6&quot;'
       });
+    },
+    onSumbmitChangedPassword() {
+      console.log(this.oldPassword, this.newPassword, this.confirNewPassword);
     }
   }
 };
