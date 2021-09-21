@@ -105,6 +105,7 @@
         "invalidSignUpMessage": "Kažkas ne taip! Patikrinkite įvedamus duomenys!",
         "invalidUserExist": "Toks vartotojas jau yra! Patikrinkite įvedamus duomenys!",
         "successUpdate": "Profilis sėkmingai atnaujintas!",
+        "successPasswordUpdate": "Slaptažodis sėkmingai atnaujintas!",
         "invalidUpdateMessage": "Kažkas ne taip, patikrinkite duomenys..."
       },
       "adsModule": {

@@ -1,4 +1,12 @@
-import { LOGIN, SIGN_UP, LOGOUT, AUTO_LOGOUT, AUTO_LOGIN, UPDATE } from './actions.types';
+import {
+  LOGIN,
+  SIGN_UP,
+  LOGOUT,
+  AUTO_LOGOUT,
+  AUTO_LOGIN,
+  UPDATE,
+  SET_NEW_PASSWORD
+} from './actions.types';
 import {
   SET_AUTH,
   PURGE_AUTH,
@@ -7,7 +15,8 @@ import {
   ISLOADING_FALSE,
   OPEN_NOTIFICATION,
   CLOSE_NOTIFICATION,
-  UPDATE_AUTH
+  UPDATE_AUTH,
+  UPDATE_ID_TOKEN
 } from './mutations.types';
 import ApiService from '@/api';
 import i18n from '@/i18n';
@@ -162,6 +171,39 @@ const actions = {
       commit(ISLOADING_FALSE);
     }
   },
+  async [SET_NEW_PASSWORD]({ commit }, { idToken, email, password }) {
+    try {
+      const updatedPassword = {
+        idToken,
+        email,
+        password,
+        returnSecureToken: true
+      };
+      commit(ISLOADING);
+      const { data, status } = await ApiService.updatePassword(updatedPassword);
+      const idTokenItem = { idToken: data.idToken };
+      console.log('idToken ', idTokenItem);
+      if (status === 200) {
+        const notificationRules = {
+          status: 'is-success',
+          timeout: 3000,
+          message: i18n.t('store.authModule.successPasswordUpdate')
+        };
+        commit(UPDATE_ID_TOKEN, idTokenItem);
+        commit(OPEN_NOTIFICATION, notificationRules);
+      }
+    } catch (error) {
+      const notificationRules = {
+        status: 'is-danger',
+        timeout: 5000,
+        message: i18n.t('store.authModule.invalidUpdateMessage')
+      };
+      commit(OPEN_NOTIFICATION, notificationRules);
+      commit(SET_ERROR, error.message);
+    } finally {
+      commit(ISLOADING_FALSE);
+    }
+  },
   [AUTO_LOGOUT]({ commit }, expiresIn) {
     try {
       setTimeout(() => {
@@ -222,6 +264,10 @@ const mutations = {
     const loggedUser = { displayName, email, localId };
     state.user = loggedUser;
     localStorage.setItem('user', JSON.stringify({ displayName, email, localId, photoUrl }));
+  },
+  [UPDATE_ID_TOKEN](state, { idToken }) {
+    const { refreshToken, expirationDate } = JSON.parse(localStorage.getItem('tokens'));
+    localStorage.setItem('tokens', JSON.stringify({ idToken, refreshToken, expirationDate }));
   },
   [PURGE_AUTH](state) {
     state.isAuthenticated = false;

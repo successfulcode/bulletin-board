@@ -73,7 +73,8 @@
               class="button is-link"
               type="submit"
               :disabled="
-                $v.$invalid ||
+                $v.displayName.$invalid ||
+                $v.email.$invalid ||
                 (displayName === currentUser.displayName && email === currentUser.email)
               "
             >
@@ -96,18 +97,6 @@
         "
       >
         <div class="field">
-          <label class="label">{{ $t('views.editProfile.oldPassword') }}</label>
-          <input
-            v-model="$v.oldPassword.$model"
-            class="input mr-1"
-            :class="{
-              'is-danger': $v.oldPassword.$error,
-              'is-success': !$v.oldPassword.$invalid
-            }"
-            type="text"
-          />
-        </div>
-        <div class="field">
           <label class="label">{{ $t('views.editProfile.newPassword') }}</label>
           <input
             v-model="$v.newPassword.$model"
@@ -116,7 +105,7 @@
               'is-danger': $v.newPassword.$error,
               'is-success': !$v.newPassword.$invalid
             }"
-            type="text"
+            type="password"
           />
         </div>
         <div class="field">
@@ -128,12 +117,16 @@
               'is-danger': $v.confirNewPassword.$error,
               'is-success': !$v.confirNewPassword.$invalid
             }"
-            type="text"
+            type="password"
           />
         </div>
         <div class="field is-grouped mb-4">
           <div class="control">
-            <button class="button is-link" type="submit" :disabled="$v.$invalid">
+            <button
+              class="button is-link"
+              type="submit"
+              :disabled="$v.newPassword.$invalid || $v.confirNewPassword.$invalid"
+            >
               {{ $t('common.confirm') }}
             </button>
           </div>
@@ -151,7 +144,7 @@
 <script>
 import profile from '@/assets/pictures/profile.png';
 import { required, minLength, email, sameAs } from 'vuelidate/lib/validators';
-import { UPDATE } from '@/store/actions.types';
+import { UPDATE, SET_NEW_PASSWORD } from '@/store/actions.types';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -166,7 +159,6 @@ export default {
       idToken: null,
       defaultProfilePicture: profile,
       currentTab: 'profile',
-      oldPassword: '',
       newPassword: '',
       confirNewPassword: ''
     };
@@ -174,10 +166,6 @@ export default {
   validations: {
     displayName: { required, minLength: minLength(1) },
     email: { required, email },
-    oldPassword: {
-      required,
-      minLength: minLength(6)
-    },
     newPassword: {
       required,
       minLength: minLength(6)
@@ -213,6 +201,12 @@ export default {
       });
     },
     onSumbmitChangedPassword() {
+      const { email } = JSON.parse(localStorage.getItem('tokens'));
+      this.$store.dispatch(SET_NEW_PASSWORD, {
+        idToken: this.idToken,
+        email: email,
+        password: this.newPassword
+      });
       console.log(this.oldPassword, this.newPassword, this.confirNewPassword);
     }
   }
