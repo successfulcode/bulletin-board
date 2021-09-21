@@ -13,6 +13,9 @@ const ApiService = {
   updateProfile(updatedProfile) {
     return axios.post(`${authUrl}:update?key=${process.env.VUE_APP_API_KEY}`, updatedProfile);
   },
+  updatePassword(newPassword) {
+    return axios.post(`${authUrl}:update?key=${process.env.VUE_APP_API_KEY}`, newPassword);
+  },
   createAd(newAd) {
     return axios.post(`${dataUrl}.json`, newAd);
   },

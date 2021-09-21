@@ -14,7 +14,9 @@ import {
   faTimesCircle,
   faCheckCircle,
   faEdit,
-  faCog
+  faCog,
+  faIdBadge,
+  faUnlockAlt
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import Vuelidate from 'vuelidate';
@@ -35,7 +37,9 @@ library.add(
   faTimesCircle,
   faCheckCircle,
   faEdit,
-  faCog
+  faCog,
+  faIdBadge,
+  faUnlockAlt
 );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

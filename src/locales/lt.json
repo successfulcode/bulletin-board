@@ -45,6 +45,13 @@
         "back": "Atgal",
         "edit": "Redaguoti",
         "yourAd": "Tavo skelbimas"
+      },
+      "editProfile": {
+        "profile": "Profilis",
+        "passwords": "Slapdažodžiai",
+        "oldPassword": "Senas slaptažodis",
+        "newPassword": "Naujas slaptažodis",
+        "confirNewPassword": "Patvirtinti naują slaptažodį"  
       }
     },
     "components": {
@@ -98,6 +105,7 @@
         "invalidSignUpMessage": "Kažkas ne taip! Patikrinkite įvedamus duomenys!",
         "invalidUserExist": "Toks vartotojas jau yra! Patikrinkite įvedamus duomenys!",
         "successUpdate": "Profilis sėkmingai atnaujintas!",
+        "successPasswordUpdate": "Slaptažodis sėkmingai atnaujintas!",
         "invalidUpdateMessage": "Kažkas ne taip, patikrinkite duomenys..."
       },
       "adsModule": {
