@@ -1,5 +1,5 @@
 <template>
-  <div class="edit-container is-flex is-justify-content-center mt-4">
+  <div class="edit-container is-flex is-justify-content-center mt-4 p-3">
     <div class="edit-form mt-6">
       <div class="tabs is-boxed">
         <ul>
@@ -216,9 +216,11 @@ export default {
 <style scoped>
 .edit-container {
   min-height: 100vh;
+  max-width: 34rem;
+  margin: auto;
 }
 .edit-form {
-  min-width: 35rem;
+  width: 100%;
 }
 .is-rounded {
   border: 1px solid #48c774;
