@@ -37,7 +37,7 @@
         "
       >
         <div class="field is-flex is-justify-content-center">
-          <figure class="image is-128x128">
+          <figure class="image is-128x128" @click="toggleModalProfile">
             <img class="is-rounded" :src="defaultProfilePicture" alt="profile" />
           </figure>
         </div>
@@ -137,6 +137,12 @@
           </div>
         </div>
       </form>
+      <div>
+        <edit-profile-photo
+          :is-modal-open="isPhotoModalOpen"
+          @toggleModal="toggleModalProfile"
+        ></edit-profile-photo>
+      </div>
     </div>
   </div>
 </template>
@@ -146,9 +152,11 @@ import profile from '@/assets/pictures/profile.png';
 import { required, minLength, email, sameAs } from 'vuelidate/lib/validators';
 import { UPDATE, SET_NEW_PASSWORD } from '@/store/actions.types';
 import { mapGetters } from 'vuex';
+import EditProfilePhoto from '../components/EditProfilePhoto.vue';
 
 export default {
   name: 'EditProfile',
+  components: { EditProfilePhoto },
   data() {
     return {
       displayName: '',
@@ -160,7 +168,8 @@ export default {
       defaultProfilePicture: profile,
       currentTab: 'profile',
       newPassword: '',
-      confirNewPassword: ''
+      confirNewPassword: '',
+      isPhotoModalOpen: false
     };
   },
   validations: {
@@ -208,6 +217,9 @@ export default {
         password: this.newPassword
       });
       console.log(this.oldPassword, this.newPassword, this.confirNewPassword);
+    },
+    toggleModalProfile() {
+      this.isPhotoModalOpen = !this.isPhotoModalOpen;
     }
   }
 };
@@ -224,5 +236,8 @@ export default {
 }
 .is-rounded {
   border: 1px solid #48c774;
+}
+.image {
+  cursor: pointer;
 }
 </style>
