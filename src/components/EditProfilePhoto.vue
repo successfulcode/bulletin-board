@@ -3,7 +3,7 @@
     <div class="modal-background" @click="toggleModal"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">Pakeisti profilio nuotrauką</p>
+        <p class="modal-card-title">{{ $t('components.editProfilePhoto.changeProfilePhoto') }}</p>
         <button class="delete" aria-label="close" @click="toggleModal"></button>
       </header>
       <section class="modal-card-body">
@@ -25,12 +25,16 @@
               <span class="file-icon">
                 <font-awesome-icon :icon="['fa', 'upload']" />
               </span>
-              <span class="file-label">Įkelti nuotrauką</span>
+              <span class="file-label">{{ $t('components.editProfilePhoto.addPhoto') }}</span>
             </span>
           </label>
         </div>
-        <button class="button is-danger">Ištrinti nuotrauką</button>
-        <button class="button" @click="toggleModal">Atšaukti</button>
+        <button class="button is-danger">
+          {{ $t('components.editProfilePhoto.deletePhoto') }}
+        </button>
+        <button class="button" @click="toggleModal">
+          {{ $t('components.editProfilePhoto.close') }}
+        </button>
       </footer>
     </div>
   </div>
