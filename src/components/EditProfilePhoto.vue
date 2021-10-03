@@ -11,12 +11,11 @@
           <figure class="image is-128x128">
             <img
               class="is-rounded"
-              :src="image ? image.url : defaultProfilePicture"
+              :src="photo ? photo : image ? image.url : defaultProfilePicture"
               alt="profile"
             />
           </figure>
         </div>
-        <pre>{{ image && image.url }}</pre>
       </section>
       <footer class="modal-card-foot is-flex is-justify-content-center">
         <div class="file is-link mr-2">
@@ -46,6 +45,9 @@ export default {
     isModalOpen: {
       type: Boolean,
       required: true
+    },
+    photo: {
+      type: String
     }
   },
   data() {
@@ -96,6 +98,7 @@ export default {
         () => {
           uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
             this.image = { url: downloadURL };
+            this.$emit('changeProfile', downloadURL);
             this.imageIsloading = false;
           });
         }

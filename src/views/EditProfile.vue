@@ -31,14 +31,14 @@
         v-if="currentTab === 'profile'"
         class="edit-form mt-6"
         @submit.prevent="
-          onSumbmitChangedProfile();
+          onChangedProfile();
           $v.$reset();
           $router.go(-1);
         "
       >
         <div class="field is-flex is-justify-content-center">
           <figure class="image is-128x128" @click="toggleModalProfile">
-            <img class="is-rounded" :src="defaultProfilePicture" alt="profile" />
+            <img class="is-rounded" :src="photo ? photo : defaultProfilePicture" alt="profile" />
           </figure>
         </div>
         <div class="field">
@@ -78,7 +78,7 @@
                 (displayName === currentUser.displayName && email === currentUser.email)
               "
             >
-              {{ $t('common.confirm') }}
+              {{ $t('common.save') }}
             </button>
           </div>
           <div class="control">
@@ -91,7 +91,7 @@
       <form
         v-else-if="currentTab === 'passwords'"
         @submit.prevent="
-          onSumbmitChangedPassword();
+          onChangePassword();
           $v.$reset();
           $router.go(-1);
         "
@@ -105,6 +105,7 @@
               'is-danger': $v.newPassword.$error,
               'is-success': !$v.newPassword.$invalid
             }"
+            autocomplete="off"
             type="password"
           />
         </div>
@@ -117,6 +118,7 @@
               'is-danger': $v.confirNewPassword.$error,
               'is-success': !$v.confirNewPassword.$invalid
             }"
+            autocomplete="off"
             type="password"
           />
         </div>
@@ -127,7 +129,7 @@
               type="submit"
               :disabled="$v.newPassword.$invalid || $v.confirNewPassword.$invalid"
             >
-              {{ $t('common.confirm') }}
+              {{ $t('common.save') }}
             </button>
           </div>
           <div class="control">
@@ -140,7 +142,9 @@
       <div>
         <edit-profile-photo
           :is-modal-open="isPhotoModalOpen"
+          :photo="photo"
           @toggleModal="toggleModalProfile"
+          @changeProfile="onPhotoChange"
         ></edit-profile-photo>
       </div>
     </div>
@@ -193,6 +197,7 @@ export default {
   mounted() {
     this.displayName = this.currentUser.displayName;
     this.email = this.currentUser.email;
+    this.photo = this.currentUser.photoUrl;
     const { idToken } = JSON.parse(localStorage.getItem('tokens'));
     this.idToken = idToken;
   },
@@ -200,23 +205,33 @@ export default {
     toggleTabHandler(tabName) {
       this.currentTab = tabName;
     },
-    onSumbmitChangedProfile() {
+    onChangedProfile() {
       this.$store.dispatch(UPDATE, {
         idToken: this.idToken,
         displayName: this.displayName,
         email: this.email,
-        photoUrl:
-          'https://firebasestorage.googleapis.com/v0/b/bulletin-board-sm.appspot.com/o/imges%2Fundefined%2F1630958154553house.jpg?alt=media&amp;token=f5af5931-bed4-4e7a-83b7-1c58e8a743e6&quot;'
+        photoUrl: this.photo
       });
     },
-    onSumbmitChangedPassword() {
+    onPhotoChange(photo) {
+      if (photo) {
+        this.photo = photo;
+      }
+
+      this.$store.dispatch(UPDATE, {
+        idToken: this.idToken,
+        displayName: this.currentUser.displayName,
+        email: this.currentUser.email,
+        photoUrl: photo
+      });
+    },
+    onChangePassword() {
       const { email } = JSON.parse(localStorage.getItem('tokens'));
       this.$store.dispatch(SET_NEW_PASSWORD, {
         idToken: this.idToken,
         email: email,
         password: this.newPassword
       });
-      console.log(this.oldPassword, this.newPassword, this.confirNewPassword);
     },
     toggleModalProfile() {
       this.isPhotoModalOpen = !this.isPhotoModalOpen;

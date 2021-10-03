@@ -55,7 +55,7 @@ const actions = {
         email: data.email,
         localId: data.localId,
         idToken: data.idToken,
-        photoUrl: data.photoUrl,
+        photoUrl: data.profilePicture,
         refreshToken: data.refreshToken,
         expiresIn: data.expiresIn
       };
@@ -261,7 +261,7 @@ const mutations = {
     localStorage.setItem('user', JSON.stringify({ displayName, email, localId, photoUrl }));
   },
   [UPDATE_AUTH](state, { displayName, email, localId, photoUrl }) {
-    const loggedUser = { displayName, email, localId };
+    const loggedUser = { displayName, email, localId, photoUrl };
     state.user = loggedUser;
     localStorage.setItem('user', JSON.stringify({ displayName, email, localId, photoUrl }));
   },
