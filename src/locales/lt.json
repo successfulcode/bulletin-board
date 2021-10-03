@@ -7,6 +7,7 @@
       "email": "El. paštas",
       "fieldIsrequired": "Šis laukas privalomas",
       "confirm": "Patvirtinti",
+      "save": "Išsaugoti",
       "cancel": "Atšaukti",
       "price": "Kaina",
       "eur": "Eur",
@@ -85,7 +86,7 @@
         "allAds": "Visi skelbimai",
         "createAd": "Įdėti skelbimą",
         "currentuserads": "Mano skelbimai",
-        "editProfile": "Redaguoti Profilį"
+        "editProfile": "Profilis"
       },
       "editAd": {
         "editMode": "Skelbimo redagavimas",
@@ -95,6 +96,12 @@
         "adNr": "Skelbimo Nr.",
         "city": "Miestas",
         "adtext": "Skelbimo tekstas"
+      },
+      "editProfilePhoto": {
+        "changeProfilePhoto": "Pakeisti profilio nuotrauką",
+        "addPhoto": "Įkelti nuotrauką",
+        "deletePhoto": "Ištrinti nuotrauką",
+        "close": "Uždaryti"
       }
     },
     "store": {

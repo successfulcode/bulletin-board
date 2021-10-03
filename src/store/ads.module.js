@@ -7,7 +7,6 @@ import {
   GET_CURRENT_USER_ADS,
   UPDATE_AD,
   DELETE_AD
-  // GET_SHALLOW
 } from './actions.types';
 import {
   SET_NEW_AD,
@@ -21,7 +20,6 @@ import {
   SET_CURRENT_USER_ADS,
   SET_UPDATED_CURRENT_AD,
   DELETE_AD_FROM_STATE
-  // SET_SHALLOWS
 } from './mutations.types';
 import i18n from '@/i18n';
 
