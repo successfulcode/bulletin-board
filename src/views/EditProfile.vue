@@ -251,6 +251,7 @@ export default {
 }
 .is-rounded {
   border: 1px solid #48c774;
+  overflow: hidden;
 }
 .image {
   cursor: pointer;
