@@ -168,26 +168,6 @@ const actions = {
       commit(ISLOADING_FALSE);
     }
   },
-
-  // async [GET_SHALLOW]({ commit }) {
-  //   try {
-  //     commit(ISLOADING);
-  //     const { data, status } = await ApiService.getShallowData();
-  //     if (status === 200) {
-  //       commit(SET_SHALLOWS, data);
-  //       commit(ISLOADING_FALSE);
-  //     }
-  //   } catch (error) {
-  //     const notificationRules = {
-  //       status: 'is-danger',
-  //       timeout: 5000,
-  //       message: i18n.t('store.adsModule.invalidMessage')
-  //     };
-  //     commit(OPEN_NOTIFICATION, notificationRules);
-  //     commit(SET_ERROR, error.message);
-  //     commit(ISLOADING_FALSE);
-  //   }
-  // },
   async [GET_AD]({ commit }, id) {
     try {
       commit(ISLOADING);
@@ -273,11 +253,6 @@ const mutations = {
   [DELETE_AD_FROM_STATE](state, id) {
     state.ads = state.ads.filter((ad) => ad.id != id);
   }
-  // [SET_SHALLOWS](state, shallows) {
-  //   const shallowsItems = Object.keys(shallows).map((item) => ({ adId: item }));
-  //   state.shallows = [...shallowsItems];
-  //   console.log('SET_SHALLOWS', state.shallows);
-  // }
 };
 
 export default {
