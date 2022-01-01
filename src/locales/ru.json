@@ -1,5 +1,22 @@
 {
   "ru":{
-    
+      "common": {
+        "login": "Prisijungti",
+        "signUp": "Registruotis",
+        "password": "Slaptažodis",
+        "email": "El. paštas",
+        "fieldIsrequired": "Šis laukas privalomas",
+        "lt": {        "confirm": "Patvirtinti",
+        "save": "Išsaugoti",
+        "cancel": "Atšaukti",
+        "price": "Kaina",
+        "eur": "Eur",
+        "tel": "Tel",
+        "more": "Daugiau",
+        "new": "NAUJAS",
+        "name": "Vardas Pavardė",
+        "about": "Apie save"
+      }
+    }    
   }
 }
