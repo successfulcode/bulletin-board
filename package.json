@@ -2,16 +2,14 @@
   "name": "bulletin-board",
   "version": "0.1.0",
   "private": true,
-  "description": "---",
   "author": " <sergej.mickevic@gmail.com>",
-  "scripts": {
+    "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit --watch",
     "lint": "vue-cli-service lint",
     "start": "vue-cli-service serve --port 8191"
   },
-  "main": "main.js",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-regular-svg-icons": "^5.15.3",
