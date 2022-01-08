@@ -2,12 +2,16 @@
   "name": "bulletin-board",
   "version": "0.1.0",
   "private": true,
+  "description": "---",
+  "author": " <sergej.mickevic@gmail.com>",
   "scripts": {
-    "start": "vue-cli-service serve --port 8191",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "test:unit": "vue-cli-service test:unit --watch",
+    "lint": "vue-cli-service lint",
+    "start": "vue-cli-service serve --port 8191"
   },
+  "main": "main.js",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-regular-svg-icons": "^5.15.3",
@@ -31,13 +35,16 @@
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "^4.5.15",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/eslint-config-prettier": "^6.0.0",
+    "@vue/test-utils": "^1.0.3",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^6.2.2",
+    "flush-promises": "^1.0.2",
     "node-sass": "^4.12.0",
     "prettier": "^2.2.1",
     "sass-loader": "^8.0.2",
@@ -56,29 +63,37 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {},
+    "overrides": [
+      {
+        "files": [
+          "**/__tests__/*.{j,t}s?(x)",
+          "**/tests/unit/**/*.spec.{j,t}s?(x)"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not dead"
   ],
-  "description": "---",
-  "main": "main.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/successfulcode/bulletin-board.git"
+  "bugs": {
+    "url": "https://github.com/successfulcode/bulletin-board/issues"
   },
+  "homepage": "https://github.com/successfulcode/bulletin-board#readme",
   "keywords": [
     "ad",
     "ads",
     "bulletin",
     "board"
   ],
-  "author": " <sergej.mickevic@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/successfulcode/bulletin-board/issues"
-  },
-  "homepage": "https://github.com/successfulcode/bulletin-board#readme"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/successfulcode/bulletin-board.git"
+  }
 }
