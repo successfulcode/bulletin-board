@@ -1,6 +1,6 @@
 # bulletin-board
 
-Created in 2020
+Made in 2020
 
 Live preview: https://bulletin-board-lt.netlify.app/
 
