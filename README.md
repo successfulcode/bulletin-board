@@ -1,5 +1,8 @@
 # bulletin-board
+
+# Live preview
 https://bulletin-board-lt.netlify.app/
+
 ![bulletin_print](https://user-images.githubusercontent.com/56683358/124986148-f8691900-e043-11eb-8bfb-08ccd03e694a.jpg)
 
 ---
